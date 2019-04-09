@@ -1,0 +1,18 @@
+/*
+ * main.c
+ *
+ *  Created on: Mar 28, 2019
+ *      Author: Matt
+ */
+
+#include "system.h"
+#include <stdint.h>
+
+const uint16_t* amp;
+
+
+int main()
+{
+
+	return 0;
+}

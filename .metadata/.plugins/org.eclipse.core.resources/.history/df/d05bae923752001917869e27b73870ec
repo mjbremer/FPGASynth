@@ -1,0 +1,25 @@
+///*
+// * main.c
+// *
+// *  Created on: Mar 28, 2019
+// *      Author: Matt
+// */
+//
+//#include "system.h"
+//#include <stdint.h>
+//#include <stdio.h>
+//
+//const uint16_t* amp = AMP_BASE;
+//const uint32_t* freq = FREQ_BASE;
+//const uint16_t* pll = SAMPLE_CLK_BASE;
+//
+//
+//int main()
+//{
+//	for (;;) {
+//		for (int i = 0; i < 10000000; i++);
+//		printf("%04x\n", *pll);
+//	}
+//
+//	return 0;
+//}
