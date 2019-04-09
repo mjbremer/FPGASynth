@@ -1,12 +1,3 @@
-/************************************************************************
-AES Decryption Core Logic
-
-Dong Kai Wang, Fall 2017
-
-For use with ECE 385 Experiment 9
-University of Illinois ECE Department
-************************************************************************/
-
 module ADSR (
 	input	 logic CLK,
 	input  logic RESET,
@@ -15,7 +6,7 @@ module ADSR (
 	output logic [15:0] out
 );
 
-logic [15:0] state;
+logic [15:0] state, state_next;
 assign out = state;
 
 
@@ -27,19 +18,23 @@ enum logic [2:0] {ResetState, Attack, Decay, Sustain, Release, Done}   Curr_Stat
 			Curr_State <= ResetState;
 		else 
 			Curr_State <= Next_state;
+			
+				state <= state_next;
 		end
+		
+
 	
 	always_comb
 	begin 
 		// Default next state is staying at current state
 		Next_state = Curr_State;
+		state_next = state;
 	
 		// Assign next state
 		unique case (Curr_State)
 			ResetState : 
 			
 			begin
-				state = 0;
 				if (key_in) 
 					Next_state = Attack;
 			end
@@ -48,13 +43,13 @@ enum logic [2:0] {ResetState, Attack, Decay, Sustain, Release, Done}   Curr_Stat
 			begin
 				if (RESET)
 					Next_state = ResetState;
-				else if ((state + A) > 16'h7FFF)
+				else if ((state_next + A) > 16'h7FFF)
 					begin
-						state = 16'h7FFF;
+						state_next = 16'h7FFF;
 						Next_state = Decay;
 					end
-				else if (state < 16'h7FFF)
-					state = state + A;
+				else if (state_next < 16'h7FFF)
+					state_next = state_next + A;
 				else if (~key_in)
 					Next_state = Release;
 				else
@@ -66,13 +61,13 @@ enum logic [2:0] {ResetState, Attack, Decay, Sustain, Release, Done}   Curr_Stat
 			begin
 				if (RESET)
 					Next_state = ResetState;
-				else if ((state - D) < S)
+				else if ((state_next - D) < S)
 					begin
-						state = S;
+						state_next = S;
 						Next_state = Sustain;
 					end
-				else if (state > S)
-					state = state - D;
+				else if (state_next > S)
+					state_next = state - D;
 				else if (~key_in)
 					Next_state = Release;
 				else
@@ -92,13 +87,13 @@ enum logic [2:0] {ResetState, Attack, Decay, Sustain, Release, Done}   Curr_Stat
 			begin
 				if (RESET)
 					Next_state = ResetState;
-				if ($signed(state) < $signed(0))
+				if ($signed(state_next) < $signed(0))
 					begin
-						state = 0;
+						state_next = 0;
 						Next_state = Done;
 					end
-				if (state > 0)
-					state = state - R;
+				if (state_next > 0)
+					state_next = state_next - R;
 				else
 					Next_state = Done;
 			end
