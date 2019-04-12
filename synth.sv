@@ -5,6 +5,9 @@ output [8:0] LEDG,
 output [17:0] LEDR,
 input AUD_BCLK, AUD_ADCDAT, AUD_DACLRCK, AUD_ADCLRCK, CLOCK_50,
 input [3:0] KEY, input [17:0] SW,
+input [7:0] key_on_export, 
+input [15:0] amp_wire_export,
+input [31:0] freq_wire_export,
 output logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7,
 					  output [12:0] DRAM_ADDR,
 					  output [1:0]  DRAM_BA,
@@ -40,14 +43,15 @@ NCO  osc0(.Clk(Clk),
 			.loadF(1'b1),
 			.loadA(1'b1),
 			.F_in(Frequency2),
-			.A_in({SW[17:10], 8'b0}),
-			.out(osc_out)
+			.A_in(amp_wire_export),
+			.out(osc_out),
+			.key_on(key_on_export[0])
 			);
 			
-rom #("D:\\yuh\\ece-385\\synth\\notes.mem",
+rom #("notes.mem",
 		7, 24) notelookup(.Clk(CLOCK_50),
 								.Reset(reset_ah),
-								.addr(SW[6:0]),
+								.addr(freq_wire_export[6:0]),
 								.data(Frequency2));
 //24'b000000100101100010111111
 
