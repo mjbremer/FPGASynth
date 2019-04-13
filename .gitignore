@@ -15,6 +15,7 @@
 
 !*/
 
+**/synth_bsp/
 .metadata/
 soc/
 synthesis/
@@ -22,3 +23,4 @@ submodules/
 db/
 incremental_db/
 simulation/
+output_files/

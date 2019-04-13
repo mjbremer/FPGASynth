@@ -9,27 +9,35 @@
    categories="System" />
  <parameter name="bonusData"><![CDATA[bonusData 
 {
+   element altpll_0
+   {
+      datum _sortIndex
+      {
+         value = "17";
+         type = "int";
+      }
+   }
+   element altpll_0.pll_slave
+   {
+      datum baseAddress
+      {
+         value = "80";
+         type = "String";
+      }
+   }
    element amp
    {
       datum _sortIndex
       {
-         value = "10";
+         value = "15";
          type = "int";
-      }
-   }
-   element amp.external_connection
-   {
-      datum _tags
-      {
-         value = "";
-         type = "String";
       }
    }
    element amp.s1
    {
       datum baseAddress
       {
-         value = "1264";
+         value = "112";
          type = "String";
       }
    }
@@ -45,7 +53,7 @@
    {
       datum _sortIndex
       {
-         value = "9";
+         value = "14";
          type = "int";
       }
    }
@@ -53,7 +61,7 @@
    {
       datum baseAddress
       {
-         value = "1280";
+         value = "128";
          type = "String";
       }
    }
@@ -61,7 +69,7 @@
    {
       datum _sortIndex
       {
-         value = "11";
+         value = "6";
          type = "int";
       }
    }
@@ -69,7 +77,7 @@
    {
       datum baseAddress
       {
-         value = "1352";
+         value = "288";
          type = "String";
       }
    }
@@ -77,7 +85,7 @@
    {
       datum _sortIndex
       {
-         value = "19";
+         value = "16";
          type = "int";
       }
    }
@@ -85,7 +93,7 @@
    {
       datum baseAddress
       {
-         value = "1120";
+         value = "96";
          type = "String";
       }
    }
@@ -93,7 +101,7 @@
    {
       datum _sortIndex
       {
-         value = "12";
+         value = "7";
          type = "int";
       }
    }
@@ -101,23 +109,7 @@
    {
       datum baseAddress
       {
-         value = "1232";
-         type = "String";
-      }
-   }
-   element led
-   {
-      datum _sortIndex
-      {
-         value = "3";
-         type = "int";
-      }
-   }
-   element led.s1
-   {
-      datum baseAddress
-      {
-         value = "1248";
+         value = "240";
          type = "String";
       }
    }
@@ -157,7 +149,7 @@
    {
       datum _sortIndex
       {
-         value = "13";
+         value = "8";
          type = "int";
       }
    }
@@ -165,7 +157,7 @@
    {
       datum baseAddress
       {
-         value = "1216";
+         value = "224";
          type = "String";
       }
    }
@@ -173,7 +165,7 @@
    {
       datum _sortIndex
       {
-         value = "17";
+         value = "12";
          type = "int";
       }
    }
@@ -181,7 +173,7 @@
    {
       datum baseAddress
       {
-         value = "1152";
+         value = "160";
          type = "String";
       }
    }
@@ -189,7 +181,7 @@
    {
       datum _sortIndex
       {
-         value = "14";
+         value = "9";
          type = "int";
       }
    }
@@ -197,7 +189,7 @@
    {
       datum baseAddress
       {
-         value = "1200";
+         value = "208";
          type = "String";
       }
    }
@@ -205,7 +197,7 @@
    {
       datum _sortIndex
       {
-         value = "15";
+         value = "10";
          type = "int";
       }
    }
@@ -213,7 +205,7 @@
    {
       datum baseAddress
       {
-         value = "1184";
+         value = "192";
          type = "String";
       }
    }
@@ -221,7 +213,7 @@
    {
       datum _sortIndex
       {
-         value = "18";
+         value = "13";
          type = "int";
       }
    }
@@ -229,7 +221,7 @@
    {
       datum baseAddress
       {
-         value = "1136";
+         value = "144";
          type = "String";
       }
    }
@@ -237,7 +229,7 @@
    {
       datum _sortIndex
       {
-         value = "16";
+         value = "11";
          type = "int";
       }
    }
@@ -245,23 +237,7 @@
    {
       datum baseAddress
       {
-         value = "1168";
-         type = "String";
-      }
-   }
-   element sample_clk
-   {
-      datum _sortIndex
-      {
-         value = "7";
-         type = "int";
-      }
-   }
-   element sample_clk.pll_slave
-   {
-      datum baseAddress
-      {
-         value = "1328";
+         value = "176";
          type = "String";
       }
    }
@@ -269,7 +245,7 @@
    {
       datum _sortIndex
       {
-         value = "4";
+         value = "3";
          type = "int";
       }
    }
@@ -285,7 +261,7 @@
    {
       datum _sortIndex
       {
-         value = "5";
+         value = "4";
          type = "int";
       }
    }
@@ -293,23 +269,7 @@
    {
       datum baseAddress
       {
-         value = "1312";
-         type = "String";
-      }
-   }
-   element sw
-   {
-      datum _sortIndex
-      {
-         value = "8";
-         type = "int";
-      }
-   }
-   element sw.s1
-   {
-      datum baseAddress
-      {
-         value = "1296";
+         value = "256";
          type = "String";
       }
    }
@@ -317,7 +277,7 @@
    {
       datum _sortIndex
       {
-         value = "6";
+         value = "5";
          type = "int";
       }
    }
@@ -325,7 +285,7 @@
    {
       datum baseAddress
       {
-         value = "1360";
+         value = "280";
          type = "String";
       }
    }
@@ -372,11 +332,6 @@
    type="conduit"
    dir="end" />
  <interface
-   name="led_wire"
-   internal="led.external_connection"
-   type="conduit"
-   dir="end" />
- <interface
    name="otg_hpi_address"
    internal="otg_hpi_address.external_connection"
    type="conduit"
@@ -407,14 +362,176 @@
    type="conduit"
    dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
- <interface name="sdram_pll" internal="sdram_pll.c1" type="clock" dir="start" />
+ <interface name="sdram_clk" internal="sdram_pll.c1" type="clock" dir="start" />
  <interface name="sdram_wire" internal="sdram.wire" type="conduit" dir="end" />
- <interface name="sr" internal="sample_clk.c0" type="clock" dir="start" />
- <interface
-   name="sw_wire"
-   internal="sw.external_connection"
-   type="conduit"
-   dir="end" />
+ <interface name="sr" internal="altpll_0.c0" type="clock" dir="start" />
+ <module name="altpll_0" kind="altpll" version="18.1" enabled="1">
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
+  <parameter name="AUTO_INCLK_INTERFACE_CLOCK_RATE" value="50000000" />
+  <parameter name="AVALON_USE_SEPARATE_SYSCLK" value="NO" />
+  <parameter name="BANDWIDTH" value="" />
+  <parameter name="BANDWIDTH_TYPE" value="AUTO" />
+  <parameter name="CLK0_DIVIDE_BY" value="3125" />
+  <parameter name="CLK0_DUTY_CYCLE" value="50" />
+  <parameter name="CLK0_MULTIPLY_BY" value="3" />
+  <parameter name="CLK0_PHASE_SHIFT" value="0" />
+  <parameter name="CLK1_DIVIDE_BY" value="" />
+  <parameter name="CLK1_DUTY_CYCLE" value="" />
+  <parameter name="CLK1_MULTIPLY_BY" value="" />
+  <parameter name="CLK1_PHASE_SHIFT" value="" />
+  <parameter name="CLK2_DIVIDE_BY" value="" />
+  <parameter name="CLK2_DUTY_CYCLE" value="" />
+  <parameter name="CLK2_MULTIPLY_BY" value="" />
+  <parameter name="CLK2_PHASE_SHIFT" value="" />
+  <parameter name="CLK3_DIVIDE_BY" value="" />
+  <parameter name="CLK3_DUTY_CYCLE" value="" />
+  <parameter name="CLK3_MULTIPLY_BY" value="" />
+  <parameter name="CLK3_PHASE_SHIFT" value="" />
+  <parameter name="CLK4_DIVIDE_BY" value="" />
+  <parameter name="CLK4_DUTY_CYCLE" value="" />
+  <parameter name="CLK4_MULTIPLY_BY" value="" />
+  <parameter name="CLK4_PHASE_SHIFT" value="" />
+  <parameter name="CLK5_DIVIDE_BY" value="" />
+  <parameter name="CLK5_DUTY_CYCLE" value="" />
+  <parameter name="CLK5_MULTIPLY_BY" value="" />
+  <parameter name="CLK5_PHASE_SHIFT" value="" />
+  <parameter name="CLK6_DIVIDE_BY" value="" />
+  <parameter name="CLK6_DUTY_CYCLE" value="" />
+  <parameter name="CLK6_MULTIPLY_BY" value="" />
+  <parameter name="CLK6_PHASE_SHIFT" value="" />
+  <parameter name="CLK7_DIVIDE_BY" value="" />
+  <parameter name="CLK7_DUTY_CYCLE" value="" />
+  <parameter name="CLK7_MULTIPLY_BY" value="" />
+  <parameter name="CLK7_PHASE_SHIFT" value="" />
+  <parameter name="CLK8_DIVIDE_BY" value="" />
+  <parameter name="CLK8_DUTY_CYCLE" value="" />
+  <parameter name="CLK8_MULTIPLY_BY" value="" />
+  <parameter name="CLK8_PHASE_SHIFT" value="" />
+  <parameter name="CLK9_DIVIDE_BY" value="" />
+  <parameter name="CLK9_DUTY_CYCLE" value="" />
+  <parameter name="CLK9_MULTIPLY_BY" value="" />
+  <parameter name="CLK9_PHASE_SHIFT" value="" />
+  <parameter name="COMPENSATE_CLOCK" value="CLK0" />
+  <parameter name="DOWN_SPREAD" value="" />
+  <parameter name="DPA_DIVIDER" value="" />
+  <parameter name="DPA_DIVIDE_BY" value="" />
+  <parameter name="DPA_MULTIPLY_BY" value="" />
+  <parameter name="ENABLE_SWITCH_OVER_COUNTER" value="" />
+  <parameter name="EXTCLK0_DIVIDE_BY" value="" />
+  <parameter name="EXTCLK0_DUTY_CYCLE" value="" />
+  <parameter name="EXTCLK0_MULTIPLY_BY" value="" />
+  <parameter name="EXTCLK0_PHASE_SHIFT" value="" />
+  <parameter name="EXTCLK1_DIVIDE_BY" value="" />
+  <parameter name="EXTCLK1_DUTY_CYCLE" value="" />
+  <parameter name="EXTCLK1_MULTIPLY_BY" value="" />
+  <parameter name="EXTCLK1_PHASE_SHIFT" value="" />
+  <parameter name="EXTCLK2_DIVIDE_BY" value="" />
+  <parameter name="EXTCLK2_DUTY_CYCLE" value="" />
+  <parameter name="EXTCLK2_MULTIPLY_BY" value="" />
+  <parameter name="EXTCLK2_PHASE_SHIFT" value="" />
+  <parameter name="EXTCLK3_DIVIDE_BY" value="" />
+  <parameter name="EXTCLK3_DUTY_CYCLE" value="" />
+  <parameter name="EXTCLK3_MULTIPLY_BY" value="" />
+  <parameter name="EXTCLK3_PHASE_SHIFT" value="" />
+  <parameter name="FEEDBACK_SOURCE" value="" />
+  <parameter name="GATE_LOCK_COUNTER" value="" />
+  <parameter name="GATE_LOCK_SIGNAL" value="" />
+  <parameter name="HIDDEN_CONSTANTS">CT#PORT_clk5 PORT_UNUSED CT#PORT_clk4 PORT_UNUSED CT#PORT_clk3 PORT_UNUSED CT#PORT_clk2 PORT_UNUSED CT#PORT_clk1 PORT_UNUSED CT#PORT_clk0 PORT_USED CT#CLK0_MULTIPLY_BY 3 CT#PORT_SCANWRITE PORT_UNUSED CT#PORT_SCANACLR PORT_UNUSED CT#PORT_PFDENA PORT_UNUSED CT#PORT_PLLENA PORT_UNUSED CT#PORT_SCANDATA PORT_UNUSED CT#PORT_SCANCLKENA PORT_UNUSED CT#WIDTH_CLOCK 5 CT#PORT_SCANDATAOUT PORT_UNUSED CT#LPM_TYPE altpll CT#PLL_TYPE AUTO CT#CLK0_PHASE_SHIFT 0 CT#PORT_PHASEDONE PORT_UNUSED CT#OPERATION_MODE NORMAL CT#PORT_CONFIGUPDATE PORT_UNUSED CT#COMPENSATE_CLOCK CLK0 CT#PORT_CLKSWITCH PORT_UNUSED CT#INCLK0_INPUT_FREQUENCY 20000 CT#PORT_SCANDONE PORT_UNUSED CT#PORT_CLKLOSS PORT_UNUSED CT#PORT_INCLK1 PORT_UNUSED CT#AVALON_USE_SEPARATE_SYSCLK NO CT#PORT_INCLK0 PORT_USED CT#PORT_clkena5 PORT_UNUSED CT#PORT_clkena4 PORT_UNUSED CT#PORT_clkena3 PORT_UNUSED CT#PORT_clkena2 PORT_UNUSED CT#PORT_clkena1 PORT_UNUSED CT#PORT_clkena0 PORT_UNUSED CT#PORT_ARESET PORT_UNUSED CT#BANDWIDTH_TYPE AUTO CT#INTENDED_DEVICE_FAMILY {Cyclone IV E} CT#PORT_SCANREAD PORT_UNUSED CT#PORT_PHASESTEP PORT_UNUSED CT#PORT_SCANCLK PORT_UNUSED CT#PORT_CLKBAD1 PORT_UNUSED CT#PORT_CLKBAD0 PORT_UNUSED CT#PORT_FBIN PORT_UNUSED CT#PORT_PHASEUPDOWN PORT_UNUSED CT#PORT_extclk3 PORT_UNUSED CT#PORT_extclk2 PORT_UNUSED CT#PORT_extclk1 PORT_UNUSED CT#PORT_PHASECOUNTERSELECT PORT_UNUSED CT#PORT_extclk0 PORT_UNUSED CT#PORT_ACTIVECLOCK PORT_UNUSED CT#CLK0_DUTY_CYCLE 50 CT#CLK0_DIVIDE_BY 3125 CT#PORT_LOCKED PORT_UNUSED</parameter>
+  <parameter name="HIDDEN_CUSTOM_ELABORATION">altpll_avalon_elaboration</parameter>
+  <parameter name="HIDDEN_CUSTOM_POST_EDIT">altpll_avalon_post_edit</parameter>
+  <parameter name="HIDDEN_IF_PORTS">IF#phasecounterselect {input 4} IF#locked {output 0} IF#reset {input 0} IF#clk {input 0} IF#phaseupdown {input 0} IF#scandone {output 0} IF#readdata {output 32} IF#write {input 0} IF#scanclk {input 0} IF#phasedone {output 0} IF#address {input 2} IF#c0 {output 0} IF#writedata {input 32} IF#read {input 0} IF#areset {input 0} IF#scanclkena {input 0} IF#scandataout {output 0} IF#configupdate {input 0} IF#phasestep {input 0} IF#scandata {input 0}</parameter>
+  <parameter name="HIDDEN_IS_FIRST_EDIT" value="0" />
+  <parameter name="HIDDEN_IS_NUMERIC">IN#WIDTH_CLOCK 1 IN#CLK0_DUTY_CYCLE 1 IN#PLL_TARGET_HARCOPY_CHECK 1 IN#SWITCHOVER_COUNT_EDIT 1 IN#INCLK0_INPUT_FREQUENCY 1 IN#PLL_LVDS_PLL_CHECK 1 IN#PLL_AUTOPLL_CHECK 1 IN#PLL_FASTPLL_CHECK 1 IN#PLL_ENHPLL_CHECK 1 IN#DIV_FACTOR0 1 IN#LVDS_MODE_DATA_RATE_DIRTY 1 IN#GLOCK_COUNTER_EDIT 1 IN#CLK0_DIVIDE_BY 1 IN#MULT_FACTOR0 1 IN#CLK0_MULTIPLY_BY 1 IN#USE_MIL_SPEED_GRADE 1</parameter>
+  <parameter name="HIDDEN_MF_PORTS">MF#areset 1 MF#clk 1 MF#locked 1 MF#inclk 1</parameter>
+  <parameter name="HIDDEN_PRIVATES">PT#GLOCKED_FEATURE_ENABLED 0 PT#SPREAD_FEATURE_ENABLED 0 PT#BANDWIDTH_FREQ_UNIT MHz PT#CUR_DEDICATED_CLK c0 PT#INCLK0_FREQ_EDIT 50.000 PT#BANDWIDTH_PRESET Low PT#PLL_LVDS_PLL_CHECK 0 PT#BANDWIDTH_USE_PRESET 0 PT#AVALON_USE_SEPARATE_SYSCLK NO PT#PLL_ENHPLL_CHECK 0 PT#OUTPUT_FREQ_UNIT0 MHz PT#PHASE_RECONFIG_FEATURE_ENABLED 1 PT#CREATE_CLKBAD_CHECK 0 PT#CLKSWITCH_CHECK 0 PT#INCLK1_FREQ_EDIT 100.000 PT#NORMAL_MODE_RADIO 1 PT#SRC_SYNCH_COMP_RADIO 0 PT#PLL_ARESET_CHECK 0 PT#LONG_SCAN_RADIO 1 PT#SCAN_FEATURE_ENABLED 1 PT#PHASE_RECONFIG_INPUTS_CHECK 0 PT#USE_CLK0 1 PT#PRIMARY_CLK_COMBO inclk0 PT#BANDWIDTH 1.000 PT#GLOCKED_COUNTER_EDIT_CHANGED 1 PT#PLL_FASTPLL_CHECK 0 PT#SPREAD_FREQ_UNIT KHz PT#PLL_AUTOPLL_CHECK 1 PT#LVDS_PHASE_SHIFT_UNIT0 deg PT#SWITCHOVER_FEATURE_ENABLED 0 PT#MIG_DEVICE_SPEED_GRADE Any PT#OUTPUT_FREQ_MODE0 0 PT#BANDWIDTH_FEATURE_ENABLED 1 PT#INCLK0_FREQ_UNIT_COMBO MHz PT#ZERO_DELAY_RADIO 0 PT#OUTPUT_FREQ0 0.04800000 PT#SHORT_SCAN_RADIO 0 PT#LVDS_MODE_DATA_RATE_DIRTY 0 PT#CUR_FBIN_CLK c0 PT#PLL_ADVANCED_PARAM_CHECK 0 PT#CLKBAD_SWITCHOVER_CHECK 0 PT#PHASE_SHIFT_STEP_ENABLED_CHECK 0 PT#DEVICE_SPEED_GRADE Any PT#PLL_FBMIMIC_CHECK 0 PT#LVDS_MODE_DATA_RATE {Not Available} PT#LOCKED_OUTPUT_CHECK 0 PT#SPREAD_PERCENT 0.500 PT#PHASE_SHIFT0 0.00000000 PT#DIV_FACTOR0 3125 PT#CNX_NO_COMPENSATE_RADIO 0 PT#USE_CLKENA0 0 PT#CREATE_INCLK1_CHECK 0 PT#GLOCK_COUNTER_EDIT 1048575 PT#INCLK1_FREQ_UNIT_COMBO MHz PT#EFF_OUTPUT_FREQ_VALUE0 0.048000 PT#SPREAD_FREQ 50.000 PT#USE_MIL_SPEED_GRADE 0 PT#EXPLICIT_SWITCHOVER_COUNTER 0 PT#STICKY_CLK0 1 PT#EXT_FEEDBACK_RADIO 0 PT#MIRROR_CLK0 0 PT#SWITCHOVER_COUNT_EDIT 1 PT#SELF_RESET_LOCK_LOSS 0 PT#PLL_PFDENA_CHECK 0 PT#INT_FEEDBACK__MODE_RADIO 1 PT#INCLK1_FREQ_EDIT_CHANGED 1 PT#CLKLOSS_CHECK 0 PT#SYNTH_WRAPPER_GEN_POSTFIX 0 PT#PHASE_SHIFT_UNIT0 deg PT#BANDWIDTH_USE_AUTO 1 PT#HAS_MANUAL_SWITCHOVER 1 PT#MULT_FACTOR0 3 PT#SPREAD_USE 0 PT#GLOCKED_MODE_CHECK 0 PT#SACN_INPUTS_CHECK 0 PT#DUTY_CYCLE0 50.00000000 PT#INTENDED_DEVICE_FAMILY {Cyclone IV E} PT#PLL_TARGET_HARCOPY_CHECK 0 PT#INCLK1_FREQ_UNIT_CHANGED 1 PT#RECONFIG_FILE ALTPLL1555113733057058.mif PT#ACTIVECLK_CHECK 0</parameter>
+  <parameter name="HIDDEN_USED_PORTS">UP#locked used UP#c0 used UP#areset used UP#inclk0 used</parameter>
+  <parameter name="INCLK0_INPUT_FREQUENCY" value="20000" />
+  <parameter name="INCLK1_INPUT_FREQUENCY" value="" />
+  <parameter name="INTENDED_DEVICE_FAMILY" value="Cyclone IV E" />
+  <parameter name="INVALID_LOCK_MULTIPLIER" value="" />
+  <parameter name="LOCK_HIGH" value="" />
+  <parameter name="LOCK_LOW" value="" />
+  <parameter name="OPERATION_MODE" value="NORMAL" />
+  <parameter name="PLL_TYPE" value="AUTO" />
+  <parameter name="PORT_ACTIVECLOCK" value="PORT_UNUSED" />
+  <parameter name="PORT_ARESET" value="PORT_UNUSED" />
+  <parameter name="PORT_CLKBAD0" value="PORT_UNUSED" />
+  <parameter name="PORT_CLKBAD1" value="PORT_UNUSED" />
+  <parameter name="PORT_CLKLOSS" value="PORT_UNUSED" />
+  <parameter name="PORT_CLKSWITCH" value="PORT_UNUSED" />
+  <parameter name="PORT_CONFIGUPDATE" value="PORT_UNUSED" />
+  <parameter name="PORT_ENABLE0" value="" />
+  <parameter name="PORT_ENABLE1" value="" />
+  <parameter name="PORT_FBIN" value="PORT_UNUSED" />
+  <parameter name="PORT_FBOUT" value="" />
+  <parameter name="PORT_INCLK0" value="PORT_USED" />
+  <parameter name="PORT_INCLK1" value="PORT_UNUSED" />
+  <parameter name="PORT_LOCKED" value="PORT_UNUSED" />
+  <parameter name="PORT_PFDENA" value="PORT_UNUSED" />
+  <parameter name="PORT_PHASECOUNTERSELECT" value="PORT_UNUSED" />
+  <parameter name="PORT_PHASEDONE" value="PORT_UNUSED" />
+  <parameter name="PORT_PHASESTEP" value="PORT_UNUSED" />
+  <parameter name="PORT_PHASEUPDOWN" value="PORT_UNUSED" />
+  <parameter name="PORT_PLLENA" value="PORT_UNUSED" />
+  <parameter name="PORT_SCANACLR" value="PORT_UNUSED" />
+  <parameter name="PORT_SCANCLK" value="PORT_UNUSED" />
+  <parameter name="PORT_SCANCLKENA" value="PORT_UNUSED" />
+  <parameter name="PORT_SCANDATA" value="PORT_UNUSED" />
+  <parameter name="PORT_SCANDATAOUT" value="PORT_UNUSED" />
+  <parameter name="PORT_SCANDONE" value="PORT_UNUSED" />
+  <parameter name="PORT_SCANREAD" value="PORT_UNUSED" />
+  <parameter name="PORT_SCANWRITE" value="PORT_UNUSED" />
+  <parameter name="PORT_SCLKOUT0" value="" />
+  <parameter name="PORT_SCLKOUT1" value="" />
+  <parameter name="PORT_VCOOVERRANGE" value="" />
+  <parameter name="PORT_VCOUNDERRANGE" value="" />
+  <parameter name="PORT_clk0" value="PORT_USED" />
+  <parameter name="PORT_clk1" value="PORT_UNUSED" />
+  <parameter name="PORT_clk2" value="PORT_UNUSED" />
+  <parameter name="PORT_clk3" value="PORT_UNUSED" />
+  <parameter name="PORT_clk4" value="PORT_UNUSED" />
+  <parameter name="PORT_clk5" value="PORT_UNUSED" />
+  <parameter name="PORT_clk6" value="" />
+  <parameter name="PORT_clk7" value="" />
+  <parameter name="PORT_clk8" value="" />
+  <parameter name="PORT_clk9" value="" />
+  <parameter name="PORT_clkena0" value="PORT_UNUSED" />
+  <parameter name="PORT_clkena1" value="PORT_UNUSED" />
+  <parameter name="PORT_clkena2" value="PORT_UNUSED" />
+  <parameter name="PORT_clkena3" value="PORT_UNUSED" />
+  <parameter name="PORT_clkena4" value="PORT_UNUSED" />
+  <parameter name="PORT_clkena5" value="PORT_UNUSED" />
+  <parameter name="PORT_extclk0" value="PORT_UNUSED" />
+  <parameter name="PORT_extclk1" value="PORT_UNUSED" />
+  <parameter name="PORT_extclk2" value="PORT_UNUSED" />
+  <parameter name="PORT_extclk3" value="PORT_UNUSED" />
+  <parameter name="PORT_extclkena0" value="" />
+  <parameter name="PORT_extclkena1" value="" />
+  <parameter name="PORT_extclkena2" value="" />
+  <parameter name="PORT_extclkena3" value="" />
+  <parameter name="PRIMARY_CLOCK" value="" />
+  <parameter name="QUALIFY_CONF_DONE" value="" />
+  <parameter name="SCAN_CHAIN" value="" />
+  <parameter name="SCAN_CHAIN_MIF_FILE" value="" />
+  <parameter name="SCLKOUT0_PHASE_SHIFT" value="" />
+  <parameter name="SCLKOUT1_PHASE_SHIFT" value="" />
+  <parameter name="SELF_RESET_ON_GATED_LOSS_LOCK" value="" />
+  <parameter name="SELF_RESET_ON_LOSS_LOCK" value="" />
+  <parameter name="SKIP_VCO" value="" />
+  <parameter name="SPREAD_FREQUENCY" value="" />
+  <parameter name="SWITCH_OVER_COUNTER" value="" />
+  <parameter name="SWITCH_OVER_ON_GATED_LOCK" value="" />
+  <parameter name="SWITCH_OVER_ON_LOSSCLK" value="" />
+  <parameter name="SWITCH_OVER_TYPE" value="" />
+  <parameter name="USING_FBMIMICBIDIR_PORT" value="" />
+  <parameter name="VALID_LOCK_MULTIPLIER" value="" />
+  <parameter name="VCO_DIVIDE_BY" value="" />
+  <parameter name="VCO_FREQUENCY_CONTROL" value="" />
+  <parameter name="VCO_MULTIPLY_BY" value="" />
+  <parameter name="VCO_PHASE_SHIFT_STEP" value="" />
+  <parameter name="WIDTH_CLOCK" value="5" />
+  <parameter name="WIDTH_PHASECOUNTERSELECT" value="" />
+ </module>
  <module name="amp" kind="altera_avalon_pio" version="18.1" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="false" />
   <parameter name="bitModifyingOutReg" value="false" />
@@ -447,7 +564,7 @@
   <parameter name="resetValue" value="0" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="32" />
+  <parameter name="width" value="8" />
  </module>
  <module
    name="jtag_uart_0"
@@ -496,20 +613,6 @@
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="8" />
  </module>
- <module name="led" kind="altera_avalon_pio" version="18.1" enabled="1">
-  <parameter name="bitClearingEdgeCapReg" value="false" />
-  <parameter name="bitModifyingOutReg" value="false" />
-  <parameter name="captureEdge" value="false" />
-  <parameter name="clockRate" value="50000000" />
-  <parameter name="direction" value="Output" />
-  <parameter name="edgeType" value="RISING" />
-  <parameter name="generateIRQ" value="false" />
-  <parameter name="irqType" value="LEVEL" />
-  <parameter name="resetValue" value="0" />
-  <parameter name="simDoTestBenchWiring" value="false" />
-  <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="8" />
- </module>
  <module
    name="nios2_gen2_0"
    kind="altera_nios2_gen2"
@@ -534,7 +637,7 @@
   <parameter name="dataAddrWidth" value="29" />
   <parameter name="dataMasterHighPerformanceAddrWidth" value="1" />
   <parameter name="dataMasterHighPerformanceMapParam" value="" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x0' end='0x400' type='altera_avalon_onchip_memory2.s1' /><slave name='key_on.s1' start='0x460' end='0x470' type='altera_avalon_pio.s1' /><slave name='otg_hpi_reset.s1' start='0x470' end='0x480' type='altera_avalon_pio.s1' /><slave name='otg_hpi_cs.s1' start='0x480' end='0x490' type='altera_avalon_pio.s1' /><slave name='otg_hpi_w.s1' start='0x490' end='0x4A0' type='altera_avalon_pio.s1' /><slave name='otg_hpi_r.s1' start='0x4A0' end='0x4B0' type='altera_avalon_pio.s1' /><slave name='otg_hpi_data.s1' start='0x4B0' end='0x4C0' type='altera_avalon_pio.s1' /><slave name='otg_hpi_address.s1' start='0x4C0' end='0x4D0' type='altera_avalon_pio.s1' /><slave name='keycode.s1' start='0x4D0' end='0x4E0' type='altera_avalon_pio.s1' /><slave name='led.s1' start='0x4E0' end='0x4F0' type='altera_avalon_pio.s1' /><slave name='amp.s1' start='0x4F0' end='0x500' type='altera_avalon_pio.s1' /><slave name='freq.s1' start='0x500' end='0x510' type='altera_avalon_pio.s1' /><slave name='sw.s1' start='0x510' end='0x520' type='altera_avalon_pio.s1' /><slave name='sdram_pll.pll_slave' start='0x520' end='0x530' type='altpll.pll_slave' /><slave name='sample_clk.pll_slave' start='0x530' end='0x540' type='altpll.pll_slave' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x548' end='0x550' type='altera_avalon_jtag_uart.avalon_jtag_slave' /><slave name='sysid_qsys_0.control_slave' start='0x550' end='0x558' type='altera_avalon_sysid_qsys.control_slave' /><slave name='nios2_gen2_0.debug_mem_slave' start='0x1000' end='0x1800' type='altera_nios2_gen2.debug_mem_slave' /><slave name='sdram.s1' start='0x10000000' end='0x18000000' type='altera_avalon_new_sdram_controller.s1' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x0' end='0x10' type='altera_avalon_onchip_memory2.s1' /><slave name='altpll_0.pll_slave' start='0x50' end='0x60' type='altpll.pll_slave' /><slave name='key_on.s1' start='0x60' end='0x70' type='altera_avalon_pio.s1' /><slave name='amp.s1' start='0x70' end='0x80' type='altera_avalon_pio.s1' /><slave name='freq.s1' start='0x80' end='0x90' type='altera_avalon_pio.s1' /><slave name='otg_hpi_reset.s1' start='0x90' end='0xA0' type='altera_avalon_pio.s1' /><slave name='otg_hpi_cs.s1' start='0xA0' end='0xB0' type='altera_avalon_pio.s1' /><slave name='otg_hpi_w.s1' start='0xB0' end='0xC0' type='altera_avalon_pio.s1' /><slave name='otg_hpi_r.s1' start='0xC0' end='0xD0' type='altera_avalon_pio.s1' /><slave name='otg_hpi_data.s1' start='0xD0' end='0xE0' type='altera_avalon_pio.s1' /><slave name='otg_hpi_address.s1' start='0xE0' end='0xF0' type='altera_avalon_pio.s1' /><slave name='keycode.s1' start='0xF0' end='0x100' type='altera_avalon_pio.s1' /><slave name='sdram_pll.pll_slave' start='0x100' end='0x110' type='altpll.pll_slave' /><slave name='sysid_qsys_0.control_slave' start='0x118' end='0x120' type='altera_avalon_sysid_qsys.control_slave' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x120' end='0x128' type='altera_avalon_jtag_uart.avalon_jtag_slave' /><slave name='nios2_gen2_0.debug_mem_slave' start='0x1000' end='0x1800' type='altera_nios2_gen2.debug_mem_slave' /><slave name='sdram.s1' start='0x10000000' end='0x18000000' type='altera_avalon_new_sdram_controller.s1' /></address-map>]]></parameter>
   <parameter name="data_master_high_performance_paddr_base" value="0" />
   <parameter name="data_master_high_performance_paddr_size" value="0" />
   <parameter name="data_master_paddr_base" value="0" />
@@ -573,14 +676,14 @@
   <parameter name="icache_tagramBlockType" value="Automatic" />
   <parameter name="impl" value="Tiny" />
   <parameter name="instAddrWidth" value="29" />
-  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x0' end='0x400' type='altera_avalon_onchip_memory2.s1' /><slave name='led.s1' start='0x4E0' end='0x4F0' type='altera_avalon_pio.s1' /><slave name='amp.s1' start='0x4F0' end='0x500' type='altera_avalon_pio.s1' /><slave name='freq.s1' start='0x500' end='0x510' type='altera_avalon_pio.s1' /><slave name='sw.s1' start='0x510' end='0x520' type='altera_avalon_pio.s1' /><slave name='sdram_pll.pll_slave' start='0x520' end='0x530' type='altpll.pll_slave' /><slave name='sample_clk.pll_slave' start='0x530' end='0x540' type='altpll.pll_slave' /><slave name='sysid_qsys_0.control_slave' start='0x550' end='0x558' type='altera_avalon_sysid_qsys.control_slave' /><slave name='nios2_gen2_0.debug_mem_slave' start='0x1000' end='0x1800' type='altera_nios2_gen2.debug_mem_slave' /><slave name='sdram.s1' start='0x10000000' end='0x18000000' type='altera_avalon_new_sdram_controller.s1' /></address-map>]]></parameter>
+  <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x0' end='0x10' type='altera_avalon_onchip_memory2.s1' /><slave name='altpll_0.pll_slave' start='0x50' end='0x60' type='altpll.pll_slave' /><slave name='key_on.s1' start='0x60' end='0x70' type='altera_avalon_pio.s1' /><slave name='amp.s1' start='0x70' end='0x80' type='altera_avalon_pio.s1' /><slave name='freq.s1' start='0x80' end='0x90' type='altera_avalon_pio.s1' /><slave name='sdram_pll.pll_slave' start='0x100' end='0x110' type='altpll.pll_slave' /><slave name='sysid_qsys_0.control_slave' start='0x118' end='0x120' type='altera_avalon_sysid_qsys.control_slave' /><slave name='nios2_gen2_0.debug_mem_slave' start='0x1000' end='0x1800' type='altera_nios2_gen2.debug_mem_slave' /><slave name='sdram.s1' start='0x10000000' end='0x18000000' type='altera_avalon_new_sdram_controller.s1' /></address-map>]]></parameter>
   <parameter name="instructionMasterHighPerformanceAddrWidth" value="1" />
   <parameter name="instructionMasterHighPerformanceMapParam" value="" />
   <parameter name="instruction_master_high_performance_paddr_base" value="0" />
   <parameter name="instruction_master_high_performance_paddr_size" value="0" />
   <parameter name="instruction_master_paddr_base" value="0" />
   <parameter name="instruction_master_paddr_size" value="0" />
-  <parameter name="internalIrqMaskSystemInfo" value="1" />
+  <parameter name="internalIrqMaskSystemInfo" value="32" />
   <parameter name="io_regionbase" value="0" />
   <parameter name="io_regionsize" value="0" />
   <parameter name="master_addr_map" value="false" />
@@ -698,7 +801,7 @@
    version="18.1"
    enabled="1">
   <parameter name="allowInSystemMemoryContentEditor" value="false" />
-  <parameter name="autoInitializationFileName">$${FILENAME}_onchip_memory2_0</parameter>
+  <parameter name="autoInitializationFileName">soc_onchip_memory2_0</parameter>
   <parameter name="blockType" value="AUTO" />
   <parameter name="copyInitFile" value="false" />
   <parameter name="dataWidth" value="32" />
@@ -712,7 +815,7 @@
   <parameter name="initMemContent" value="true" />
   <parameter name="initializationFileName" value="onchip_mem.hex" />
   <parameter name="instanceID" value="NONE" />
-  <parameter name="memorySize" value="1024" />
+  <parameter name="memorySize" value="16" />
   <parameter name="readDuringWriteMode" value="DONT_CARE" />
   <parameter name="resetrequest_enabled" value="true" />
   <parameter name="simAllowMRAMContentsFile" value="false" />
@@ -820,173 +923,6 @@
   <parameter name="simDrivenValue" value="0" />
   <parameter name="width" value="1" />
  </module>
- <module name="sample_clk" kind="altpll" version="18.1" enabled="1">
-  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
-  <parameter name="AUTO_INCLK_INTERFACE_CLOCK_RATE" value="50000000" />
-  <parameter name="AVALON_USE_SEPARATE_SYSCLK" value="NO" />
-  <parameter name="BANDWIDTH" value="" />
-  <parameter name="BANDWIDTH_TYPE" value="AUTO" />
-  <parameter name="CLK0_DIVIDE_BY" value="3125" />
-  <parameter name="CLK0_DUTY_CYCLE" value="50" />
-  <parameter name="CLK0_MULTIPLY_BY" value="3" />
-  <parameter name="CLK0_PHASE_SHIFT" value="0" />
-  <parameter name="CLK1_DIVIDE_BY" value="" />
-  <parameter name="CLK1_DUTY_CYCLE" value="" />
-  <parameter name="CLK1_MULTIPLY_BY" value="" />
-  <parameter name="CLK1_PHASE_SHIFT" value="" />
-  <parameter name="CLK2_DIVIDE_BY" value="" />
-  <parameter name="CLK2_DUTY_CYCLE" value="" />
-  <parameter name="CLK2_MULTIPLY_BY" value="" />
-  <parameter name="CLK2_PHASE_SHIFT" value="" />
-  <parameter name="CLK3_DIVIDE_BY" value="" />
-  <parameter name="CLK3_DUTY_CYCLE" value="" />
-  <parameter name="CLK3_MULTIPLY_BY" value="" />
-  <parameter name="CLK3_PHASE_SHIFT" value="" />
-  <parameter name="CLK4_DIVIDE_BY" value="" />
-  <parameter name="CLK4_DUTY_CYCLE" value="" />
-  <parameter name="CLK4_MULTIPLY_BY" value="" />
-  <parameter name="CLK4_PHASE_SHIFT" value="" />
-  <parameter name="CLK5_DIVIDE_BY" value="" />
-  <parameter name="CLK5_DUTY_CYCLE" value="" />
-  <parameter name="CLK5_MULTIPLY_BY" value="" />
-  <parameter name="CLK5_PHASE_SHIFT" value="" />
-  <parameter name="CLK6_DIVIDE_BY" value="" />
-  <parameter name="CLK6_DUTY_CYCLE" value="" />
-  <parameter name="CLK6_MULTIPLY_BY" value="" />
-  <parameter name="CLK6_PHASE_SHIFT" value="" />
-  <parameter name="CLK7_DIVIDE_BY" value="" />
-  <parameter name="CLK7_DUTY_CYCLE" value="" />
-  <parameter name="CLK7_MULTIPLY_BY" value="" />
-  <parameter name="CLK7_PHASE_SHIFT" value="" />
-  <parameter name="CLK8_DIVIDE_BY" value="" />
-  <parameter name="CLK8_DUTY_CYCLE" value="" />
-  <parameter name="CLK8_MULTIPLY_BY" value="" />
-  <parameter name="CLK8_PHASE_SHIFT" value="" />
-  <parameter name="CLK9_DIVIDE_BY" value="" />
-  <parameter name="CLK9_DUTY_CYCLE" value="" />
-  <parameter name="CLK9_MULTIPLY_BY" value="" />
-  <parameter name="CLK9_PHASE_SHIFT" value="" />
-  <parameter name="COMPENSATE_CLOCK" value="CLK0" />
-  <parameter name="DOWN_SPREAD" value="" />
-  <parameter name="DPA_DIVIDER" value="" />
-  <parameter name="DPA_DIVIDE_BY" value="" />
-  <parameter name="DPA_MULTIPLY_BY" value="" />
-  <parameter name="ENABLE_SWITCH_OVER_COUNTER" value="" />
-  <parameter name="EXTCLK0_DIVIDE_BY" value="" />
-  <parameter name="EXTCLK0_DUTY_CYCLE" value="" />
-  <parameter name="EXTCLK0_MULTIPLY_BY" value="" />
-  <parameter name="EXTCLK0_PHASE_SHIFT" value="" />
-  <parameter name="EXTCLK1_DIVIDE_BY" value="" />
-  <parameter name="EXTCLK1_DUTY_CYCLE" value="" />
-  <parameter name="EXTCLK1_MULTIPLY_BY" value="" />
-  <parameter name="EXTCLK1_PHASE_SHIFT" value="" />
-  <parameter name="EXTCLK2_DIVIDE_BY" value="" />
-  <parameter name="EXTCLK2_DUTY_CYCLE" value="" />
-  <parameter name="EXTCLK2_MULTIPLY_BY" value="" />
-  <parameter name="EXTCLK2_PHASE_SHIFT" value="" />
-  <parameter name="EXTCLK3_DIVIDE_BY" value="" />
-  <parameter name="EXTCLK3_DUTY_CYCLE" value="" />
-  <parameter name="EXTCLK3_MULTIPLY_BY" value="" />
-  <parameter name="EXTCLK3_PHASE_SHIFT" value="" />
-  <parameter name="FEEDBACK_SOURCE" value="" />
-  <parameter name="GATE_LOCK_COUNTER" value="" />
-  <parameter name="GATE_LOCK_SIGNAL" value="" />
-  <parameter name="HIDDEN_CONSTANTS">CT#PORT_clk5 PORT_UNUSED CT#PORT_clk4 PORT_UNUSED CT#PORT_clk3 PORT_UNUSED CT#PORT_clk2 PORT_UNUSED CT#PORT_clk1 PORT_UNUSED CT#PORT_clk0 PORT_USED CT#CLK0_MULTIPLY_BY 3 CT#PORT_SCANWRITE PORT_UNUSED CT#PORT_SCANACLR PORT_UNUSED CT#PORT_PFDENA PORT_UNUSED CT#PORT_PLLENA PORT_UNUSED CT#PORT_SCANDATA PORT_UNUSED CT#PORT_SCANCLKENA PORT_UNUSED CT#WIDTH_CLOCK 5 CT#PORT_SCANDATAOUT PORT_UNUSED CT#LPM_TYPE altpll CT#PLL_TYPE AUTO CT#CLK0_PHASE_SHIFT 0 CT#PORT_PHASEDONE PORT_UNUSED CT#OPERATION_MODE NORMAL CT#PORT_CONFIGUPDATE PORT_UNUSED CT#COMPENSATE_CLOCK CLK0 CT#PORT_CLKSWITCH PORT_UNUSED CT#INCLK0_INPUT_FREQUENCY 20000 CT#PORT_SCANDONE PORT_UNUSED CT#PORT_CLKLOSS PORT_UNUSED CT#PORT_INCLK1 PORT_UNUSED CT#AVALON_USE_SEPARATE_SYSCLK NO CT#PORT_INCLK0 PORT_USED CT#PORT_clkena5 PORT_UNUSED CT#PORT_clkena4 PORT_UNUSED CT#PORT_clkena3 PORT_UNUSED CT#PORT_clkena2 PORT_UNUSED CT#PORT_clkena1 PORT_UNUSED CT#PORT_clkena0 PORT_UNUSED CT#PORT_ARESET PORT_UNUSED CT#BANDWIDTH_TYPE AUTO CT#INTENDED_DEVICE_FAMILY {Cyclone IV E} CT#PORT_SCANREAD PORT_UNUSED CT#PORT_PHASESTEP PORT_UNUSED CT#PORT_SCANCLK PORT_UNUSED CT#PORT_CLKBAD1 PORT_UNUSED CT#PORT_CLKBAD0 PORT_UNUSED CT#PORT_FBIN PORT_UNUSED CT#PORT_PHASEUPDOWN PORT_UNUSED CT#PORT_extclk3 PORT_UNUSED CT#PORT_extclk2 PORT_UNUSED CT#PORT_extclk1 PORT_UNUSED CT#PORT_PHASECOUNTERSELECT PORT_UNUSED CT#PORT_extclk0 PORT_UNUSED CT#PORT_ACTIVECLOCK PORT_UNUSED CT#CLK0_DUTY_CYCLE 50 CT#CLK0_DIVIDE_BY 3125 CT#PORT_LOCKED PORT_UNUSED</parameter>
-  <parameter name="HIDDEN_CUSTOM_ELABORATION">altpll_avalon_elaboration</parameter>
-  <parameter name="HIDDEN_CUSTOM_POST_EDIT">altpll_avalon_post_edit</parameter>
-  <parameter name="HIDDEN_IF_PORTS">IF#phasecounterselect {input 4} IF#locked {output 0} IF#reset {input 0} IF#clk {input 0} IF#phaseupdown {input 0} IF#scandone {output 0} IF#readdata {output 32} IF#write {input 0} IF#scanclk {input 0} IF#phasedone {output 0} IF#address {input 2} IF#c0 {output 0} IF#writedata {input 32} IF#read {input 0} IF#areset {input 0} IF#scanclkena {input 0} IF#scandataout {output 0} IF#configupdate {input 0} IF#phasestep {input 0} IF#scandata {input 0}</parameter>
-  <parameter name="HIDDEN_IS_FIRST_EDIT" value="0" />
-  <parameter name="HIDDEN_IS_NUMERIC">IN#WIDTH_CLOCK 1 IN#CLK0_DUTY_CYCLE 1 IN#PLL_TARGET_HARCOPY_CHECK 1 IN#SWITCHOVER_COUNT_EDIT 1 IN#INCLK0_INPUT_FREQUENCY 1 IN#PLL_LVDS_PLL_CHECK 1 IN#PLL_AUTOPLL_CHECK 1 IN#PLL_FASTPLL_CHECK 1 IN#PLL_ENHPLL_CHECK 1 IN#DIV_FACTOR0 1 IN#LVDS_MODE_DATA_RATE_DIRTY 1 IN#GLOCK_COUNTER_EDIT 1 IN#CLK0_DIVIDE_BY 1 IN#MULT_FACTOR0 1 IN#CLK0_MULTIPLY_BY 1 IN#USE_MIL_SPEED_GRADE 1</parameter>
-  <parameter name="HIDDEN_MF_PORTS">MF#areset 1 MF#clk 1 MF#locked 1 MF#inclk 1</parameter>
-  <parameter name="HIDDEN_PRIVATES">PT#GLOCKED_FEATURE_ENABLED 0 PT#SPREAD_FEATURE_ENABLED 0 PT#BANDWIDTH_FREQ_UNIT MHz PT#CUR_DEDICATED_CLK c0 PT#INCLK0_FREQ_EDIT 50.000 PT#BANDWIDTH_PRESET Low PT#PLL_LVDS_PLL_CHECK 0 PT#BANDWIDTH_USE_PRESET 0 PT#AVALON_USE_SEPARATE_SYSCLK NO PT#PLL_ENHPLL_CHECK 0 PT#OUTPUT_FREQ_UNIT0 MHz PT#PHASE_RECONFIG_FEATURE_ENABLED 1 PT#CREATE_CLKBAD_CHECK 0 PT#CLKSWITCH_CHECK 0 PT#INCLK1_FREQ_EDIT 100.000 PT#NORMAL_MODE_RADIO 1 PT#SRC_SYNCH_COMP_RADIO 0 PT#PLL_ARESET_CHECK 0 PT#LONG_SCAN_RADIO 1 PT#SCAN_FEATURE_ENABLED 1 PT#PHASE_RECONFIG_INPUTS_CHECK 0 PT#USE_CLK0 1 PT#PRIMARY_CLK_COMBO inclk0 PT#BANDWIDTH 1.000 PT#GLOCKED_COUNTER_EDIT_CHANGED 1 PT#PLL_FASTPLL_CHECK 0 PT#SPREAD_FREQ_UNIT KHz PT#PLL_AUTOPLL_CHECK 1 PT#LVDS_PHASE_SHIFT_UNIT0 deg PT#SWITCHOVER_FEATURE_ENABLED 0 PT#MIG_DEVICE_SPEED_GRADE Any PT#OUTPUT_FREQ_MODE0 0 PT#BANDWIDTH_FEATURE_ENABLED 1 PT#INCLK0_FREQ_UNIT_COMBO MHz PT#ZERO_DELAY_RADIO 0 PT#OUTPUT_FREQ0 0.04800000 PT#SHORT_SCAN_RADIO 0 PT#LVDS_MODE_DATA_RATE_DIRTY 0 PT#CUR_FBIN_CLK c0 PT#PLL_ADVANCED_PARAM_CHECK 0 PT#CLKBAD_SWITCHOVER_CHECK 0 PT#PHASE_SHIFT_STEP_ENABLED_CHECK 0 PT#DEVICE_SPEED_GRADE Any PT#PLL_FBMIMIC_CHECK 0 PT#LVDS_MODE_DATA_RATE {Not Available} PT#LOCKED_OUTPUT_CHECK 0 PT#SPREAD_PERCENT 0.500 PT#PHASE_SHIFT0 0.00000000 PT#DIV_FACTOR0 3125 PT#CNX_NO_COMPENSATE_RADIO 0 PT#USE_CLKENA0 0 PT#CREATE_INCLK1_CHECK 0 PT#GLOCK_COUNTER_EDIT 1048575 PT#INCLK1_FREQ_UNIT_COMBO MHz PT#EFF_OUTPUT_FREQ_VALUE0 0.048000 PT#SPREAD_FREQ 50.000 PT#USE_MIL_SPEED_GRADE 0 PT#EXPLICIT_SWITCHOVER_COUNTER 0 PT#STICKY_CLK0 1 PT#EXT_FEEDBACK_RADIO 0 PT#MIRROR_CLK0 0 PT#SWITCHOVER_COUNT_EDIT 1 PT#SELF_RESET_LOCK_LOSS 0 PT#PLL_PFDENA_CHECK 0 PT#INT_FEEDBACK__MODE_RADIO 1 PT#INCLK1_FREQ_EDIT_CHANGED 1 PT#CLKLOSS_CHECK 0 PT#SYNTH_WRAPPER_GEN_POSTFIX 0 PT#PHASE_SHIFT_UNIT0 deg PT#BANDWIDTH_USE_AUTO 1 PT#HAS_MANUAL_SWITCHOVER 1 PT#MULT_FACTOR0 3 PT#SPREAD_USE 0 PT#GLOCKED_MODE_CHECK 0 PT#SACN_INPUTS_CHECK 0 PT#DUTY_CYCLE0 50.00000000 PT#INTENDED_DEVICE_FAMILY {Cyclone IV E} PT#PLL_TARGET_HARCOPY_CHECK 0 PT#INCLK1_FREQ_UNIT_CHANGED 1 PT#RECONFIG_FILE ALTPLL1551897035325536.mif PT#ACTIVECLK_CHECK 0</parameter>
-  <parameter name="HIDDEN_USED_PORTS">UP#locked used UP#c0 used UP#areset used UP#inclk0 used</parameter>
-  <parameter name="INCLK0_INPUT_FREQUENCY" value="20000" />
-  <parameter name="INCLK1_INPUT_FREQUENCY" value="" />
-  <parameter name="INTENDED_DEVICE_FAMILY" value="Cyclone IV E" />
-  <parameter name="INVALID_LOCK_MULTIPLIER" value="" />
-  <parameter name="LOCK_HIGH" value="" />
-  <parameter name="LOCK_LOW" value="" />
-  <parameter name="OPERATION_MODE" value="NORMAL" />
-  <parameter name="PLL_TYPE" value="AUTO" />
-  <parameter name="PORT_ACTIVECLOCK" value="PORT_UNUSED" />
-  <parameter name="PORT_ARESET" value="PORT_UNUSED" />
-  <parameter name="PORT_CLKBAD0" value="PORT_UNUSED" />
-  <parameter name="PORT_CLKBAD1" value="PORT_UNUSED" />
-  <parameter name="PORT_CLKLOSS" value="PORT_UNUSED" />
-  <parameter name="PORT_CLKSWITCH" value="PORT_UNUSED" />
-  <parameter name="PORT_CONFIGUPDATE" value="PORT_UNUSED" />
-  <parameter name="PORT_ENABLE0" value="" />
-  <parameter name="PORT_ENABLE1" value="" />
-  <parameter name="PORT_FBIN" value="PORT_UNUSED" />
-  <parameter name="PORT_FBOUT" value="" />
-  <parameter name="PORT_INCLK0" value="PORT_USED" />
-  <parameter name="PORT_INCLK1" value="PORT_UNUSED" />
-  <parameter name="PORT_LOCKED" value="PORT_UNUSED" />
-  <parameter name="PORT_PFDENA" value="PORT_UNUSED" />
-  <parameter name="PORT_PHASECOUNTERSELECT" value="PORT_UNUSED" />
-  <parameter name="PORT_PHASEDONE" value="PORT_UNUSED" />
-  <parameter name="PORT_PHASESTEP" value="PORT_UNUSED" />
-  <parameter name="PORT_PHASEUPDOWN" value="PORT_UNUSED" />
-  <parameter name="PORT_PLLENA" value="PORT_UNUSED" />
-  <parameter name="PORT_SCANACLR" value="PORT_UNUSED" />
-  <parameter name="PORT_SCANCLK" value="PORT_UNUSED" />
-  <parameter name="PORT_SCANCLKENA" value="PORT_UNUSED" />
-  <parameter name="PORT_SCANDATA" value="PORT_UNUSED" />
-  <parameter name="PORT_SCANDATAOUT" value="PORT_UNUSED" />
-  <parameter name="PORT_SCANDONE" value="PORT_UNUSED" />
-  <parameter name="PORT_SCANREAD" value="PORT_UNUSED" />
-  <parameter name="PORT_SCANWRITE" value="PORT_UNUSED" />
-  <parameter name="PORT_SCLKOUT0" value="" />
-  <parameter name="PORT_SCLKOUT1" value="" />
-  <parameter name="PORT_VCOOVERRANGE" value="" />
-  <parameter name="PORT_VCOUNDERRANGE" value="" />
-  <parameter name="PORT_clk0" value="PORT_USED" />
-  <parameter name="PORT_clk1" value="PORT_UNUSED" />
-  <parameter name="PORT_clk2" value="PORT_UNUSED" />
-  <parameter name="PORT_clk3" value="PORT_UNUSED" />
-  <parameter name="PORT_clk4" value="PORT_UNUSED" />
-  <parameter name="PORT_clk5" value="PORT_UNUSED" />
-  <parameter name="PORT_clk6" value="" />
-  <parameter name="PORT_clk7" value="" />
-  <parameter name="PORT_clk8" value="" />
-  <parameter name="PORT_clk9" value="" />
-  <parameter name="PORT_clkena0" value="PORT_UNUSED" />
-  <parameter name="PORT_clkena1" value="PORT_UNUSED" />
-  <parameter name="PORT_clkena2" value="PORT_UNUSED" />
-  <parameter name="PORT_clkena3" value="PORT_UNUSED" />
-  <parameter name="PORT_clkena4" value="PORT_UNUSED" />
-  <parameter name="PORT_clkena5" value="PORT_UNUSED" />
-  <parameter name="PORT_extclk0" value="PORT_UNUSED" />
-  <parameter name="PORT_extclk1" value="PORT_UNUSED" />
-  <parameter name="PORT_extclk2" value="PORT_UNUSED" />
-  <parameter name="PORT_extclk3" value="PORT_UNUSED" />
-  <parameter name="PORT_extclkena0" value="" />
-  <parameter name="PORT_extclkena1" value="" />
-  <parameter name="PORT_extclkena2" value="" />
-  <parameter name="PORT_extclkena3" value="" />
-  <parameter name="PRIMARY_CLOCK" value="" />
-  <parameter name="QUALIFY_CONF_DONE" value="" />
-  <parameter name="SCAN_CHAIN" value="" />
-  <parameter name="SCAN_CHAIN_MIF_FILE" value="" />
-  <parameter name="SCLKOUT0_PHASE_SHIFT" value="" />
-  <parameter name="SCLKOUT1_PHASE_SHIFT" value="" />
-  <parameter name="SELF_RESET_ON_GATED_LOSS_LOCK" value="" />
-  <parameter name="SELF_RESET_ON_LOSS_LOCK" value="" />
-  <parameter name="SKIP_VCO" value="" />
-  <parameter name="SPREAD_FREQUENCY" value="" />
-  <parameter name="SWITCH_OVER_COUNTER" value="" />
-  <parameter name="SWITCH_OVER_ON_GATED_LOCK" value="" />
-  <parameter name="SWITCH_OVER_ON_LOSSCLK" value="" />
-  <parameter name="SWITCH_OVER_TYPE" value="" />
-  <parameter name="USING_FBMIMICBIDIR_PORT" value="" />
-  <parameter name="VALID_LOCK_MULTIPLIER" value="" />
-  <parameter name="VCO_DIVIDE_BY" value="" />
-  <parameter name="VCO_FREQUENCY_CONTROL" value="" />
-  <parameter name="VCO_MULTIPLY_BY" value="" />
-  <parameter name="VCO_PHASE_SHIFT_STEP" value="" />
-  <parameter name="WIDTH_CLOCK" value="5" />
-  <parameter name="WIDTH_PHASECOUNTERSELECT" value="" />
- </module>
  <module
    name="sdram"
    kind="altera_avalon_new_sdram_controller"
@@ -1001,7 +937,7 @@
   <parameter name="casLatency" value="3" />
   <parameter name="clockRate" value="50000000" />
   <parameter name="columnWidth" value="10" />
-  <parameter name="componentName" value="$${FILENAME}_sdram" />
+  <parameter name="componentName" value="soc_sdram" />
   <parameter name="dataWidth" value="32" />
   <parameter name="generateSimulationModel" value="false" />
   <parameter name="initNOPDelay" value="0.0" />
@@ -1183,26 +1119,12 @@
   <parameter name="WIDTH_CLOCK" value="5" />
   <parameter name="WIDTH_PHASECOUNTERSELECT" value="" />
  </module>
- <module name="sw" kind="altera_avalon_pio" version="18.1" enabled="1">
-  <parameter name="bitClearingEdgeCapReg" value="false" />
-  <parameter name="bitModifyingOutReg" value="false" />
-  <parameter name="captureEdge" value="false" />
-  <parameter name="clockRate" value="50000000" />
-  <parameter name="direction" value="Input" />
-  <parameter name="edgeType" value="RISING" />
-  <parameter name="generateIRQ" value="false" />
-  <parameter name="irqType" value="LEVEL" />
-  <parameter name="resetValue" value="0" />
-  <parameter name="simDoTestBenchWiring" value="false" />
-  <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="8" />
- </module>
  <module
    name="sysid_qsys_0"
    kind="altera_avalon_sysid_qsys"
    version="18.1"
    enabled="1">
-  <parameter name="id" value="-320091394" />
+  <parameter name="id" value="0" />
  </module>
  <connection
    kind="avalon"
@@ -1210,7 +1132,7 @@
    start="nios2_gen2_0.data_master"
    end="jtag_uart_0.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0548" />
+  <parameter name="baseAddress" value="0x0120" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1219,7 +1141,7 @@
    start="nios2_gen2_0.data_master"
    end="sysid_qsys_0.control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0550" />
+  <parameter name="baseAddress" value="0x0118" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1235,18 +1157,18 @@
    kind="avalon"
    version="18.1"
    start="nios2_gen2_0.data_master"
-   end="sample_clk.pll_slave">
+   end="sdram_pll.pll_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0530" />
+  <parameter name="baseAddress" value="0x0100" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
    kind="avalon"
    version="18.1"
    start="nios2_gen2_0.data_master"
-   end="sdram_pll.pll_slave">
+   end="altpll_0.pll_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0520" />
+  <parameter name="baseAddress" value="0x0050" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1262,45 +1184,9 @@
    kind="avalon"
    version="18.1"
    start="nios2_gen2_0.data_master"
-   end="sw.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0510" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="18.1"
-   start="nios2_gen2_0.data_master"
-   end="freq.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0500" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="18.1"
-   start="nios2_gen2_0.data_master"
-   end="amp.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x04f0" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="18.1"
-   start="nios2_gen2_0.data_master"
    end="sdram.s1">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x10000000" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="18.1"
-   start="nios2_gen2_0.data_master"
-   end="led.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x04e0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1309,7 +1195,7 @@
    start="nios2_gen2_0.data_master"
    end="keycode.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x04d0" />
+  <parameter name="baseAddress" value="0x00f0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1318,7 +1204,7 @@
    start="nios2_gen2_0.data_master"
    end="otg_hpi_address.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x04c0" />
+  <parameter name="baseAddress" value="0x00e0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1327,7 +1213,7 @@
    start="nios2_gen2_0.data_master"
    end="otg_hpi_data.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x04b0" />
+  <parameter name="baseAddress" value="0x00d0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1336,7 +1222,7 @@
    start="nios2_gen2_0.data_master"
    end="otg_hpi_r.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x04a0" />
+  <parameter name="baseAddress" value="0x00c0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1345,7 +1231,7 @@
    start="nios2_gen2_0.data_master"
    end="otg_hpi_w.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0490" />
+  <parameter name="baseAddress" value="0x00b0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1354,7 +1240,7 @@
    start="nios2_gen2_0.data_master"
    end="otg_hpi_cs.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0480" />
+  <parameter name="baseAddress" value="0x00a0" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1363,7 +1249,25 @@
    start="nios2_gen2_0.data_master"
    end="otg_hpi_reset.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0470" />
+  <parameter name="baseAddress" value="0x0090" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="nios2_gen2_0.data_master"
+   end="freq.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0080" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="nios2_gen2_0.data_master"
+   end="amp.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0070" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1372,7 +1276,7 @@
    start="nios2_gen2_0.data_master"
    end="key_on.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0460" />
+  <parameter name="baseAddress" value="0x0060" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1381,7 +1285,7 @@
    start="nios2_gen2_0.instruction_master"
    end="sysid_qsys_0.control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0550" />
+  <parameter name="baseAddress" value="0x0118" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1397,18 +1301,18 @@
    kind="avalon"
    version="18.1"
    start="nios2_gen2_0.instruction_master"
-   end="sample_clk.pll_slave">
+   end="sdram_pll.pll_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0530" />
+  <parameter name="baseAddress" value="0x0100" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
    kind="avalon"
    version="18.1"
    start="nios2_gen2_0.instruction_master"
-   end="sdram_pll.pll_slave">
+   end="altpll_0.pll_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0520" />
+  <parameter name="baseAddress" value="0x0050" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1424,33 +1328,6 @@
    kind="avalon"
    version="18.1"
    start="nios2_gen2_0.instruction_master"
-   end="freq.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0500" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="18.1"
-   start="nios2_gen2_0.instruction_master"
-   end="sw.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0510" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="18.1"
-   start="nios2_gen2_0.instruction_master"
-   end="amp.s1">
-  <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x04f0" />
-  <parameter name="defaultConnection" value="false" />
- </connection>
- <connection
-   kind="avalon"
-   version="18.1"
-   start="nios2_gen2_0.instruction_master"
    end="sdram.s1">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x10000000" />
@@ -1460,17 +1337,31 @@
    kind="avalon"
    version="18.1"
    start="nios2_gen2_0.instruction_master"
-   end="led.s1">
+   end="freq.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x04e0" />
+  <parameter name="baseAddress" value="0x0080" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="nios2_gen2_0.instruction_master"
+   end="amp.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0070" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="nios2_gen2_0.instruction_master"
+   end="key_on.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0060" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection kind="clock" version="18.1" start="sdram_pll.c0" end="sdram.clk" />
  <connection kind="clock" version="18.1" start="clk_0.clk" end="nios2_gen2_0.clk" />
- <connection kind="clock" version="18.1" start="clk_0.clk" end="sw.clk" />
- <connection kind="clock" version="18.1" start="clk_0.clk" end="freq.clk" />
- <connection kind="clock" version="18.1" start="clk_0.clk" end="amp.clk" />
- <connection kind="clock" version="18.1" start="clk_0.clk" end="led.clk" />
  <connection kind="clock" version="18.1" start="clk_0.clk" end="sysid_qsys_0.clk" />
  <connection kind="clock" version="18.1" start="clk_0.clk" end="jtag_uart_0.clk" />
  <connection kind="clock" version="18.1" start="clk_0.clk" end="keycode.clk" />
@@ -1484,6 +1375,8 @@
  <connection kind="clock" version="18.1" start="clk_0.clk" end="otg_hpi_w.clk" />
  <connection kind="clock" version="18.1" start="clk_0.clk" end="otg_hpi_cs.clk" />
  <connection kind="clock" version="18.1" start="clk_0.clk" end="otg_hpi_reset.clk" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="freq.clk" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="amp.clk" />
  <connection kind="clock" version="18.1" start="clk_0.clk" end="key_on.clk" />
  <connection
    kind="clock"
@@ -1494,24 +1387,19 @@
    kind="clock"
    version="18.1"
    start="clk_0.clk"
-   end="sample_clk.inclk_interface" />
+   end="sdram_pll.inclk_interface" />
  <connection
    kind="clock"
    version="18.1"
    start="clk_0.clk"
-   end="sdram_pll.inclk_interface" />
+   end="altpll_0.inclk_interface" />
  <connection
    kind="interrupt"
    version="18.1"
    start="nios2_gen2_0.irq"
    end="jtag_uart_0.irq">
-  <parameter name="irqNumber" value="0" />
+  <parameter name="irqNumber" value="5" />
  </connection>
- <connection
-   kind="reset"
-   version="18.1"
-   start="clk_0.clk_reset"
-   end="sample_clk.inclk_interface_reset" />
  <connection
    kind="reset"
    version="18.1"
@@ -1521,17 +1409,18 @@
    kind="reset"
    version="18.1"
    start="clk_0.clk_reset"
+   end="altpll_0.inclk_interface_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
    end="nios2_gen2_0.reset" />
- <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="sw.reset" />
- <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="freq.reset" />
- <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="amp.reset" />
- <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="sdram.reset" />
- <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="led.reset" />
  <connection
    kind="reset"
    version="18.1"
    start="clk_0.clk_reset"
    end="sysid_qsys_0.reset" />
+ <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="sdram.reset" />
  <connection
    kind="reset"
    version="18.1"
@@ -1572,11 +1461,13 @@
    version="18.1"
    start="clk_0.clk_reset"
    end="otg_hpi_reset.reset" />
+ <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="freq.reset" />
  <connection
    kind="reset"
    version="18.1"
    start="clk_0.clk_reset"
    end="key_on.reset" />
+ <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="amp.reset" />
  <connection
    kind="reset"
    version="18.1"
@@ -1586,27 +1477,17 @@
    kind="reset"
    version="18.1"
    start="nios2_gen2_0.debug_reset_request"
-   end="sdram_pll.inclk_interface_reset" />
- <connection
-   kind="reset"
-   version="18.1"
-   start="nios2_gen2_0.debug_reset_request"
    end="nios2_gen2_0.reset" />
  <connection
    kind="reset"
    version="18.1"
    start="nios2_gen2_0.debug_reset_request"
-   end="sdram.reset" />
- <connection
-   kind="reset"
-   version="18.1"
-   start="nios2_gen2_0.debug_reset_request"
-   end="led.reset" />
- <connection
-   kind="reset"
-   version="18.1"
-   start="nios2_gen2_0.debug_reset_request"
    end="sysid_qsys_0.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="nios2_gen2_0.debug_reset_request"
+   end="sdram.reset" />
  <connection
    kind="reset"
    version="18.1"

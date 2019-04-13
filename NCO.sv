@@ -15,16 +15,14 @@ logic [15:0] rom_out;
 assign Acc = F_out + Phase_out;
 
 rom #("sine.mem",
-		12,16) sine(.Clk(CLOCK_50), .Reset(Reset||key_on), .addr(Phase_out[23:12]), .data(rom_out));
-//assign rom_out = 16'hFFFF;
-//dual_port_rom sine(.clk(CLOCK_50),.addr_a(Phase_out[23:12]), .q_a(rom_out));
+		12,16) sine(.Clk(CLOCK_50), .Reset(Reset), .CS(1'b1), .addr(Phase_out[23:12]), .data(rom_out));
 
-register #(24) F(.Clk(Clk), .Reset(Reset||key_on), .Load(loadF), .D(F_in), .Q(F_out));
-register #(24) Phase(.Clk(Clk), .Reset(Reset||key_on), .Load(1'b1), .D(Acc), .Q(Phase_out));
-register #(16) Amp(.Clk(Clk), .Reset(Reset||key_on), .Load(loadA), .D(A_in), .Q(Amp_out));
+register #(24) F(.Clk(Clk), .Reset(Reset), .Load(loadF), .D(F_in), .Q(F_out));
+register #(24) Phase(.Clk(Clk), .Reset(Reset), .Load(1'b1), .D(Acc), .Q(Phase_out));
+register #(16) Amp(.Clk(Clk), .Reset(Reset), .Load(loadA), .D(A_in), .Q(Amp_out));
 
 assign Mult = Amp_out * rom_out;
-assign out = key_on ? Mult[31:16] : 16'b0;
+assign out = (key_on == 1'b1) ? Mult[31:16] : 16'b0;
 
 	
 endmodule

@@ -5,7 +5,7 @@ parameter ADDRWIDTH = 12, // For 4096 addresses
 parameter WIDTH = 16
 )
 (
-        input Clk, Reset,
+        input Clk, Reset, CS,
         input [ADDRWIDTH-1:0] addr, // Address lines for saving data to memory
         output logic [WIDTH-1:0] data // Data out
 );
@@ -24,6 +24,12 @@ end
 always @(posedge Clk) begin
 	//memory[12'h025] <= 16'hDEAD;
     // Place data from RAM
-    data <= memory[addr];
+	 if (Reset || !CS)
+	 begin
+		data <= {WIDTH{1'bz}};
+	 end
+	 else begin
+		data <= memory[addr];
+	 end
 end        
 endmodule
