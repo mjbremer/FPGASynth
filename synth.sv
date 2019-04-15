@@ -35,12 +35,12 @@ logic Clk, INIT, INIT_FINISH, adc_full, data_over;
 logic [31:0] ADCDATA;
 
 
-logic [7:0] Frequency;
-logic [15:0] Amp;
-logic [23:0] Frequency2;
-logic [7:0] key_on_export;
+wire [7:0] Frequency;
+wire [15:0] Amp;
+wire [23:0] Frequency2;
+wire [7:0] key_on, shape;
 wire [15:0] osc_out;
-logic reset_ah;
+wire reset_ah;
 assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
 
 
@@ -53,8 +53,9 @@ NCO  osc0(.Clk(Clk),
 			.loadA(1'b1),
 			.F_in(Frequency2),
 			.A_in(Amp),
+			.shape(shape[1:0]),
 			.out(osc_out),
-			.key_on(key_on_export[0])
+			.key_on(key_on[0])
 			);
 			
 rom #("notes.mem",
@@ -98,8 +99,9 @@ soc soc0(.clk_clk(CLOCK_50),
 			.sr_clk(Clk),
 			.reset_reset_n(KEY[3]),
 			.freq_wire_export(Frequency),
-			.key_on_export(key_on_export),
+			.key_on_export(key_on),
 			.amp_wire_export(Amp),
+			.shape_wire_export(shape),
 			.sdram_wire_addr(DRAM_ADDR),    
 			.sdram_wire_ba(DRAM_BA),      	//  .ba
 			.sdram_wire_cas_n(DRAM_CAS_N),    //  .cas_n
@@ -146,8 +148,8 @@ HexDriver hex_driver5 (Amp[7:4], HEX5);
 HexDriver hex_driver4 (Amp[3:0], HEX4);
 HexDriver hex_driver3 (Frequency[7:4], HEX3);
 HexDriver hex_driver2 (Frequency[3:0], HEX2);
-HexDriver hex_driver1 (key_on_export[7:4], HEX1);
-HexDriver hex_driver0 (key_on_export[3:0], HEX0);
+HexDriver hex_driver1 (key_on[7:4], HEX1);
+HexDriver hex_driver0 (key_on[3:0], HEX0);
      
 
 endmodule

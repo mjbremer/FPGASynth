@@ -24,7 +24,7 @@ elif (waveshape == "saw"):
     ## Runs past 0x7FFF, so we have to nerf it a little bit to fit in within 2 signed bytes
 elif (waveshape == "square"):
     # This is also supposed to be 4. Yeah these got nerfed a lot lol
-    coefs = [((k%2) * A * (3.3/math.pi) / k) for k in range(0, nharm)]
+    coefs = [((k%2) * A * (3.3/math.pi) / k) for k in range(1, nharm+1)]
     # print(coefs)
 elif (waveshape == "triangle"):
     coefs = []
@@ -55,10 +55,10 @@ for i in range(0, len(wavelist)):
 
 ## Format the list to be readable by quartus and write it to file
 filelist = [str(n)[2:-1] + '\n' for n in textlist]
-f = open(waveshape + "test.mem", "w")
+f = open(waveshape + ".mem", "w")
 f.writelines(filelist)
 
 ##print(filelist)
-# plt.plot(wavelist)
-# plt.show()
+plt.plot(wavelist)
+plt.show()
 

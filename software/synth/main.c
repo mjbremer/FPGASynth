@@ -40,14 +40,20 @@ int main(void)
 
 	UsbSetupMIDI();
 
+	initControls();
+
 	//-----------------------------------get keycode value------------------------------------------------//
 	usleep(10000);
 	while(1)
 	{
 		toggle++;
-		do {
+
+
+		UsbGetMIDIMsg(toggle);
+		while (!(IO_read(HPI_STATUS) & HPI_STATUS_SIE1msg_FLAG)) {
 			UsbGetMIDIMsg(toggle);
-		} while (!(IO_read(HPI_STATUS) & HPI_STATUS_SIE1msg_FLAG)); //read sie1 msg register
+			usleep(1000); // This is probably unnecessary, but 200 still had occasional deadlocks
+		};
 
 		UsbWaitTDListDone();
 
@@ -61,7 +67,7 @@ int main(void)
 
 
 		UsbCheckUnplug();
-		usleep(1000);
+		// usleep(1000);
 	}
 	return 0;
 }

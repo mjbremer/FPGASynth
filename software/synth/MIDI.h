@@ -24,6 +24,7 @@
 #define PITCHBEND_CHANGE    (0xE)
 #define SINGLE_BYTE         (0xF)
 
+void initControls();
 void ProcessMIDIPacket();
 
 #endif /* MIDI_H_ */
