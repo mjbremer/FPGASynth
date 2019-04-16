@@ -6,8 +6,8 @@ module ADSR (
 	output logic [15:0] out
 );
 
-logic [15:0] state, state_next;
-assign out = state;
+logic [15:0] level, level_next;
+assign out = level;
 
 
 enum logic [2:0] {ResetState, Attack, Decay, Sustain, Release, Done}   Curr_State, Next_state;   // Internal state logic
@@ -19,7 +19,7 @@ enum logic [2:0] {ResetState, Attack, Decay, Sustain, Release, Done}   Curr_Stat
 		else 
 			Curr_State <= Next_state;
 			
-				state <= state_next;
+		level <= level_next;
 		end
 		
 
@@ -28,7 +28,7 @@ enum logic [2:0] {ResetState, Attack, Decay, Sustain, Release, Done}   Curr_Stat
 	begin 
 		// Default next state is staying at current state
 		Next_state = Curr_State;
-		state_next = state;
+		level_next = level;
 	
 		// Assign next state
 		unique case (Curr_State)
@@ -41,17 +41,15 @@ enum logic [2:0] {ResetState, Attack, Decay, Sustain, Release, Done}   Curr_Stat
 			
 			Attack : 
 			begin
-				if (RESET)
-					Next_state = ResetState;
-				else if ((state_next + A) > 16'h7FFF)
+				if (!key_in)
+					Next_state = Release;
+				else if ((level_next + A) > 16'h7FFF)
 					begin
-						state_next = 16'h7FFF;
+						level_next = 16'h7FFF;
 						Next_state = Decay;
 					end
-				else if (state_next < 16'h7FFF)
-					state_next = state_next + A;
-				else if (~key_in)
-					Next_state = Release;
+				else if (level_next < 16'h7FFF)
+					level_next = level + A;
 				else
 					Next_state = Decay;
 					
@@ -59,53 +57,43 @@ enum logic [2:0] {ResetState, Attack, Decay, Sustain, Release, Done}   Curr_Stat
 			
 			Decay : 
 			begin
-				if (RESET)
-					Next_state = ResetState;
-				else if ((state_next - D) < S)
+			
+				if (!key_in)
+					Next_state = Release;
+				else if ((level_next - D) < S)
 					begin
-						state_next = S;
+						level_next = S;
 						Next_state = Sustain;
 					end
-				else if (state_next > S)
-					state_next = state - D;
-				else if (~key_in)
-					Next_state = Release;
+				else if (level_next > S)
+					level_next = level - D;
 				else
 					Next_state = Sustain;
 			end
 			
 			Sustain : 
 			begin
-				if (RESET)
-					Next_state = ResetState;
-				else if(key_in);
-				else
+				if (!key_in)
 					Next_state = Release;
 			end
 			
 			Release : 
 			begin
-				if (RESET)
-					Next_state = ResetState;
-				if ($signed(state_next) < $signed(0))
+				if ($signed(level_next) < $signed(0))
 					begin
-						state_next = 0;
+						level_next = 0;
 						Next_state = Done;
 					end
-				if (state_next > 0)
-					state_next = state_next - R;
+				else if (level_next > 0)
+					level_next = level - R;
 				else
 					Next_state = Done;
 			end
 			
 			Done : 
 			begin
-				if (RESET)
-					Next_state = ResetState;
-				else if (key_in)
+				if (key_in)
 					Next_state = Attack;
-				else
-					Next_state = Done;
 			end		
 
 			default : ;

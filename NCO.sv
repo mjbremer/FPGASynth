@@ -7,7 +7,7 @@ module NCO (
 	);
 	
 
-wire [15:0] Amp_out;
+wire [15:0] Amp_out, ADSR_out;
 wire [23:0] F_out, Phase_out;
 wire [23:0] Acc;
 wire [31:0] Mult;
@@ -25,11 +25,20 @@ ShapeSelector ss0 (.Clk(Clk),
 
 
 register #(24) F(.Clk(Clk), .Reset(Reset), .Load(loadF), .D(F_in), .Q(F_out));
-register #(24) Phase(.Clk(Clk), .Reset(Reset), .Load(key_on), .D(Acc), .Q(Phase_out));
+register #(24) Phase(.Clk(Clk), .Reset(Reset), .Load(1'b1), .D(Acc), .Q(Phase_out));
 register #(16) Amp(.Clk(Clk), .Reset(Reset), .Load(loadA), .D(A_in), .Q(Amp_out));
 
-assign Mult = $signed(Amp_out) * $signed(rom_out);
+assign Mult = $signed(ADSR_out) * $signed(rom_out);
 assign out = Mult[31:16]; //  (key_on == 1'b1) ? Mult[31:16] : 16'b0;
 
+
+ADSR ADSR0 (.CLK(Clk),
+				.RESET(Reset),
+				.key_in(key_on),
+				.A(16'b1),
+				.D(16'b1),
+				.S(16'h4000),
+				.R(16'b1),
+				.out(ADSR_out));
 	
 endmodule

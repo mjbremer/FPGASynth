@@ -46,7 +46,7 @@ assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
 
 Initializer init(.INIT(INIT), .INIT_FINISH(INIT_FINISH), .Clk(CLOCK_50), .Reset(reset_ah));
 
-NCO  osc0(.Clk(Clk),
+NCO  osc0(.Clk(AUD_DACLRCK),
 			.CLOCK_50(CLOCK_50),
 			.Reset(reset_ah),
 			.loadF(1'b1),
@@ -66,10 +66,14 @@ rom #("notes.mem",
 								.CS(1'b1));
 //24'b000000100101100010111111
 
-assign LDATA = osc_out;
-assign RDATA = osc_out;
+//always_ff @ (negedge data_over) begin
+//	LDATA <= osc_out;
+//	RDATA <= osc_out;
+//end
 
-
+	assign LDATA = osc_out;
+	assign RDATA = osc_out;
+	
     logic [1:0] hpi_addr;
     logic [15:0] hpi_data_in, hpi_data_out;
     logic hpi_r, hpi_w, hpi_cs, hpi_reset;

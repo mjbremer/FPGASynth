@@ -55,7 +55,7 @@ for i in range(0, len(wavelist)):
 
 ## Format the list to be readable by quartus and write it to file
 filelist = [str(n)[2:-1] + '\n' for n in textlist]
-f = open(waveshape + ".mem", "w")
+f = open(waveshape + "test.mem", "w")
 f.writelines(filelist)
 
 ##print(filelist)
