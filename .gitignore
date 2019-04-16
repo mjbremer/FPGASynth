@@ -17,6 +17,7 @@
 !*/
 
 **/synth_bsp/
+**/synthesizer_bsp/
 .metadata/
 soc/
 synthesis/
