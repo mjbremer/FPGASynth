@@ -30,20 +30,20 @@ void initControls()
 	alt_u16* const amp = AMP_BASE;
 	alt_u8* const key_on =  KEY_ON_BASE;
 	alt_u8* const shape = SHAPESEL_BASE;
-	alt_u8* const attack = ATTACK_BASE;
-	alt_u8* const decay = DECAY_BASE;
-	alt_u8* const sustain = SUSTAIN_BASE;
-	alt_u8* const release = RELEASE0_BASE;
+	alt_u16* const attack = ATTACK_BASE;
+	alt_u16* const decay = DECAY_BASE;
+	alt_u16* const sustain = SUSTAIN_BASE;
+	alt_u16* const release = RELEASE0_BASE;
 
 
 	*freq = 0;
 	*amp = 0;
 	*key_on = 0;
 	*shape = 0;
-	*attack = 0x7F;
-	*decay = 0x7F;
-	*sustain = 0x7F;
-	*release = 0x7F;
+	*attack = 0x7FFF;
+	*decay = 0x7FFF;
+	*sustain = 0x7FFF;
+	*release = 0x7FFF;
 }
 
 void ProcessMIDIPacket(alt_u32 packet)
@@ -53,10 +53,10 @@ void ProcessMIDIPacket(alt_u32 packet)
 	alt_u16* const amp = AMP_BASE;
 	alt_u8* const key_on =  KEY_ON_BASE;
 	alt_u8* const shape = SHAPESEL_BASE;
-	alt_u8* const attack = ATTACK_BASE;
-	alt_u8* const decay = DECAY_BASE;
-	alt_u8* const sustain = SUSTAIN_BASE;
-	alt_u8* const release = RELEASE0_BASE;
+	alt_u16* const attack = ATTACK_BASE;
+	alt_u16* const decay = DECAY_BASE;
+	alt_u16* const sustain = SUSTAIN_BASE;
+	alt_u16* const release = RELEASE0_BASE;
     alt_u8 bytes[4];
     for (int i = 0; i < 4; i ++) {
         //bytes[i] = (packet >> (8*(3-i))) & 0xff;
@@ -70,6 +70,7 @@ void ProcessMIDIPacket(alt_u32 packet)
     alt_u8 note = bytes[2];
     alt_u8 velocity = bytes[3];
     alt_u8 control = bytes[2];
+    long ADSR;
 
     switch(CIN) {
         case NOTE_ON:
@@ -96,14 +97,18 @@ void ProcessMIDIPacket(alt_u32 packet)
         			*shape = *shape & 0x02; // Clear all but the second bit
         		else
         			*shape = *shape | 0x01; // Set the first bit
-        	} else if (control == 0x01){
-        		*attack = velocity;
-        	} else if (control == 0x02){
-        		*decay = velocity;
-        	} else if (control == 0x03){
-        		*sustain = velocity;
-        	} else if (control == 0x04){
-        		*release = velocity;
+        	} else if (control == 0x01){ //attack
+        		ADSR = map((long)velocity, 0, 0x7F, 0, 0x7FFF);
+        		*attack = ADSR;
+        	} else if (control == 0x02){ //decay
+        		ADSR = map((long)velocity, 0, 0x7F, 0, 0x7FFF);
+        		*decay = ADSR;
+        	} else if (control == 0x03){ //sustain
+        		ADSR = map((long)velocity, 0, 0x7F, 0, 0x7FFF);
+        		*sustain = ADSR;
+        	} else if (control == 0x04){ //release
+        		ADSR = map((long)velocity, 0, 0x7F, 0, 0x7FFF);
+        		*release = ADSR;
         	}
 
 
@@ -121,5 +126,10 @@ void ProcessMIDIPacket(alt_u32 packet)
     }
 
 
+}
+
+long map(long x, long in_min, long in_max, long out_min, long out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 

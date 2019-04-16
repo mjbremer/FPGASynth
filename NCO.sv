@@ -3,6 +3,7 @@ module NCO (
 	input [23:0] F_in,
 	input [15:0] A_in,
 	input [1:0] shape,
+	input [7:0] A, D, S, R,
 	output [15:0] out
 	);
 	
@@ -35,10 +36,10 @@ assign out = Mult[31:16]; //  (key_on == 1'b1) ? Mult[31:16] : 16'b0;
 ADSR ADSR0 (.CLK(Clk),
 				.RESET(Reset),
 				.key_in(key_on),
-				.A(16'b1),
-				.D(16'b1),
-				.S(16'h4000),
-				.R(16'b1),
+				.A(A),
+				.D(D),
+				.S(S),
+				.R(R),
 				.out(ADSR_out));
 	
 endmodule

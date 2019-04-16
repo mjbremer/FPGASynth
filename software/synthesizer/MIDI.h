@@ -26,5 +26,6 @@
 
 void initControls();
 void ProcessMIDIPacket();
+long map();
 
 #endif /* MIDI_H_ */
