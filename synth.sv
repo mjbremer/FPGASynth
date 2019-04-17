@@ -37,6 +37,7 @@ logic [31:0] ADCDATA;
 
 wire [7:0] Frequency;
 wire [15:0] Amp;
+wire [15:0] A,D,S,R;
 wire [23:0] Frequency2;
 wire [7:0] key_on, shape;
 wire [15:0] osc_out;
@@ -55,7 +56,8 @@ NCO  osc0(.Clk(AUD_DACLRCK),
 			.A_in(Amp),
 			.shape(shape[1:0]),
 			.out(osc_out),
-			.key_on(key_on[0])
+			.key_on(key_on[0]),
+			.A(A), .D(D), .S(S), .R(R),
 			);
 			
 rom #("notes.mem",
@@ -106,6 +108,10 @@ soc soc0(.clk_clk(CLOCK_50),
 			.key_on_export(key_on),
 			.amp_wire_export(Amp),
 			.shape_wire_export(shape),
+			.attack_export(A),
+			.decay_export(D),
+			.sustain_export(S),
+			.release0_export(R),
 			.sdram_wire_addr(DRAM_ADDR),    
 			.sdram_wire_ba(DRAM_BA),      	//  .ba
 			.sdram_wire_cas_n(DRAM_CAS_N),    //  .cas_n

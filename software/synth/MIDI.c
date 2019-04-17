@@ -98,16 +98,16 @@ void ProcessMIDIPacket(alt_u32 packet)
         		else
         			*shape = *shape | 0x01; // Set the first bit
         	} else if (control == 0x01){ //attack
-        		ADSR = map((long)velocity, 0, 0x7F, 0, 0x7FFF);
+        		ADSR = map((alt_u16)velocity, 0, 0x007F, 0, 0x7FFF);
         		*attack = ADSR;
         	} else if (control == 0x02){ //decay
-        		ADSR = map((long)velocity, 0, 0x7F, 0, 0x7FFF);
+        		ADSR = map((alt_u16)velocity, 0, 0x007F, 0, 0x7FFF);
         		*decay = ADSR;
         	} else if (control == 0x03){ //sustain
-        		ADSR = map((long)velocity, 0, 0x7F, 0, 0x7FFF);
+        		ADSR = map((alt_u16)velocity, 0, 0x007F, 0, 0x7FFF);
         		*sustain = ADSR;
         	} else if (control == 0x04){ //release
-        		ADSR = map((long)velocity, 0, 0x7F, 0, 0x7FFF);
+        		ADSR = map((alt_u16)velocity, 0, 0x007F, 0, 0x7FFF);
         		*release = ADSR;
         	}
 
@@ -128,7 +128,7 @@ void ProcessMIDIPacket(alt_u32 packet)
 
 }
 
-long map(long x, long in_min, long in_max, long out_min, long out_max)
+alt_u16 map(alt_u16 x, alt_u16 in_min, alt_u16 in_max, alt_u16 out_min, alt_u16 out_max)
 {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }

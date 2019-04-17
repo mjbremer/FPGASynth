@@ -26,6 +26,6 @@
 
 void initControls();
 void ProcessMIDIPacket();
-long map();
+alt_u16 map(alt_u16 x, alt_u16 in_min, alt_u16 in_max, alt_u16 out_min, alt_u16 out_max);
 
 #endif /* MIDI_H_ */

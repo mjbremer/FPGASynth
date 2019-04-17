@@ -1,6 +1,4 @@
-Fix sounds - need aux cord and scope
-Integrate ADSR
-Fix amplitude popping if not fixed by ADSR
+Adjust ADSR transitions and mapping structure - "Make it sound good"
 Add queuing structure - should work with 1 voice first
 Add more voices and make queuing algorithm more general to fit
 Add glide

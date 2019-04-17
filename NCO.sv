@@ -3,7 +3,7 @@ module NCO (
 	input [23:0] F_in,
 	input [15:0] A_in,
 	input [1:0] shape,
-	input [7:0] A, D, S, R,
+	input [15:0] A, D, S, R,
 	output [15:0] out
 	);
 	

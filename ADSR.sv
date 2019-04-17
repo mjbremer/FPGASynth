@@ -60,7 +60,7 @@ enum logic [2:0] {ResetState, Attack, Decay, Sustain, Release, Done}   Curr_Stat
 			
 				if (!key_in)
 					Next_state = Release;
-				else if ((level_next - D) < S)
+				else if (($signed(level_next - D)) < $signed(S))
 					begin
 						level_next = S;
 						Next_state = Sustain;
@@ -79,7 +79,12 @@ enum logic [2:0] {ResetState, Attack, Decay, Sustain, Release, Done}   Curr_Stat
 			
 			Release : 
 			begin
-				if ($signed(level_next) < $signed(0))
+				if (key_in)
+				begin
+					level_next = 0;
+					Next_state = Attack;
+				end
+				else if ($signed(level_next) < $signed(0))
 					begin
 						level_next = 0;
 						Next_state = Done;
