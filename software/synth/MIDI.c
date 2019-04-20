@@ -89,14 +89,24 @@ void ProcessMIDIPacket(alt_u32 packet)
         case CONTROL_CHANGE:
         	if (control == 0x18) {
         		if (velocity == 0)
-        			*shape = *shape & 0x01; // Clear all but the first bit
-        		else
-        			*shape = *shape | 0x02; // Set the second bit
-        	} else if (control == 0x19) {
-        		if (velocity == 0)
-        			*shape = *shape & 0x02; // Clear all but the second bit
+        			*shape = *shape & ~0x01; // Clear the first bit
         		else
         			*shape = *shape | 0x01; // Set the first bit
+        	} else if (control == 0x19) {
+        		if (velocity == 0)
+        			*shape = *shape & ~0x02; // Clear the second bit
+        		else
+        			*shape = *shape | 0x02; // Set the second bit
+        	}else if (control == 0x1a) {
+        		if (velocity == 0)
+        		    *shape = *shape & ~0x04; // Clear the third bit
+        		else
+        		    *shape = *shape | 0x04; // Set the third bit
+        	}else if (control == 0x1b) {
+        		if (velocity == 0)
+        		    *shape = *shape & ~0x08; // Clear the fourth bit
+        		else
+        		    *shape = *shape | 0x08; // Set the fourth bit
         	} else if (control == 0x01){ //attack
         		ADSR = map((alt_u16)velocity, 0, 0x007F, 0, 0x7FFF);
         		*attack = ADSR;

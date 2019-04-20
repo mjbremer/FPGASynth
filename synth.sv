@@ -69,7 +69,7 @@ Voice voice0(
 			.loadA(1'b1), 
 			.key_on(key_on[0]), 
 			.A_in(Amp),
-			.shape(shape[1:0]),
+			.shape(shape[3:0]),
 			.A(A), 
 			.D(D), 
 			.S(S), 

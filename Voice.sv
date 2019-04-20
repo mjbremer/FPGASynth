@@ -2,7 +2,7 @@ module Voice(
 			input [23:0] F_in,
 			input Clk, CLOCK_50, Reset, loadF, loadA, key_on,
 			input [15:0] A_in,
-			input [1:0] shape,
+			input [3:0] shape,
 			input [15:0] A, D, S, R,
 			output [15:0] out
 );
@@ -30,7 +30,7 @@ NCO  osc1(.Clk(Clk),
 			.loadA(1'b1),
 			.F_in(F_in),
 			.A_in(A_in),
-			.shape(shape[1:0]),
+			.shape(shape[3:2]),
 			.out(osc_out1),
 			.key_on(key_on),
 			);
