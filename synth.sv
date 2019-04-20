@@ -47,17 +47,34 @@ assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
 
 Initializer init(.INIT(INIT), .INIT_FINISH(INIT_FINISH), .Clk(CLOCK_50), .Reset(reset_ah));
 
-NCO  osc0(.Clk(AUD_DACLRCK),
-			.CLOCK_50(CLOCK_50),
-			.Reset(reset_ah),
-			.loadF(1'b1),
-			.loadA(1'b1),
+//NCO  osc0(.Clk(AUD_DACLRCK),
+//			.CLOCK_50(CLOCK_50),
+//			.Reset(reset_ah),
+//			.loadF(1'b1),
+//			.loadA(1'b1),
+//			.F_in(Frequency2),
+//			.A_in(Amp),
+//			.shape(shape[1:0]),
+//			.out(osc_out),
+//			.key_on(key_on[0]),
+//			.A(A), .D(D), .S(S), .R(R),
+//			);
+
+Voice voice0(
 			.F_in(Frequency2),
+			.Clk(AUD_DACLRCK), 
+			.CLOCK_50(CLOCK_50), 
+			.Reset(reset_ah), 
+			.loadF(1'b1), 
+			.loadA(1'b1), 
+			.key_on(key_on[0]), 
 			.A_in(Amp),
 			.shape(shape[1:0]),
-			.out(osc_out),
-			.key_on(key_on[0]),
-			.A(A), .D(D), .S(S), .R(R),
+			.A(A), 
+			.D(D), 
+			.S(S), 
+			.R(R),
+			.out(osc_out)
 			);
 			
 rom #("notes.mem",
