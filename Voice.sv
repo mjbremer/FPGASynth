@@ -1,5 +1,5 @@
 module Voice(
-			input [23:0] F_in,
+			input [7:0] F_in,
 			input Clk, CLOCK_50, Reset, loadF, loadA, key_on,
 			input [15:0] A_in,
 			input [3:0] shape,
@@ -16,7 +16,7 @@ NCO  osc0(.Clk(Clk),
 			.Reset(Reset),
 			.loadF(1'b1),
 			.loadA(1'b1),
-			.F_in(F_in),
+			.F_in(F_out),
 			.A_in(A_in),
 			.shape(shape[1:0]),
 			.out(osc_out0),
@@ -28,7 +28,7 @@ NCO  osc1(.Clk(Clk),
 			.Reset(Reset),
 			.loadF(1'b1),
 			.loadA(1'b1),
-			.F_in(F_in),
+			.F_in(F_out),
 			.A_in(A_in),
 			.shape(shape[3:2]),
 			.out(osc_out1),
@@ -43,6 +43,15 @@ ADSR ADSR0 (.CLK(Clk),
 				.S(S),
 				.R(R),
 				.out(ADSR_out));
+				
+wire [23:0] F_out;				
+				
+rom #("notes.mem",
+		7, 24) notelookup(.Clk(CLOCK_50),
+								.Reset(Reset),
+								.addr(F_in),
+								.data(F_out),
+								.CS(1'b1));
 
 always_comb
 	begin

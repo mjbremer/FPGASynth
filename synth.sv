@@ -38,9 +38,10 @@ logic [31:0] ADCDATA;
 wire [7:0] Frequency;
 wire [15:0] Amp;
 wire [15:0] A,D,S,R;
-wire [23:0] Frequency2;
+wire [31:0] Frequency0, Frequency1, Amp0, Amp1, Amp2, Amp3;
 wire [7:0] key_on, shape;
-wire [15:0] osc_out;
+wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3; //osc_out4, osc_out5, osc_out6, osc_out7;
+logic [17:0] osc_sum;
 wire reset_ah;
 assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
 
@@ -61,28 +62,153 @@ Initializer init(.INIT(INIT), .INIT_FINISH(INIT_FINISH), .Clk(CLOCK_50), .Reset(
 //			);
 
 Voice voice0(
-			.F_in(Frequency2),
+			.F_in(Frequency0[7:0]),
 			.Clk(AUD_DACLRCK), 
 			.CLOCK_50(CLOCK_50), 
 			.Reset(reset_ah), 
 			.loadF(1'b1), 
 			.loadA(1'b1), 
 			.key_on(key_on[0]), 
-			.A_in(Amp),
+			.A_in(Amp0[15:0]),
 			.shape(shape[3:0]),
 			.A(A), 
 			.D(D), 
 			.S(S), 
 			.R(R),
-			.out(osc_out)
+			.out(osc_out0)
 			);
 			
-rom #("notes.mem",
-		7, 24) notelookup(.Clk(CLOCK_50),
-								.Reset(reset_ah),
-								.addr(Frequency[6:0]),
-								.data(Frequency2),
-								.CS(1'b1));
+Voice voice1(
+			.F_in(Frequency0[15:8]),
+			.Clk(AUD_DACLRCK), 
+			.CLOCK_50(CLOCK_50), 
+			.Reset(reset_ah), 
+			.loadF(1'b1), 
+			.loadA(1'b1), 
+			.key_on(key_on[1]), 
+			.A_in(Amp0[31:16]),
+			.shape(shape[3:0]),
+			.A(A), 
+			.D(D), 
+			.S(S), 
+			.R(R),
+			.out(osc_out1)
+			);
+			
+Voice voice2(
+			.F_in(Frequency0[23:16]),
+			.Clk(AUD_DACLRCK), 
+			.CLOCK_50(CLOCK_50), 
+			.Reset(reset_ah), 
+			.loadF(1'b1), 
+			.loadA(1'b1), 
+			.key_on(key_on[2]), 
+			.A_in(Amp1[15:0]),
+			.shape(shape[3:0]),
+			.A(A), 
+			.D(D), 
+			.S(S), 
+			.R(R),
+			.out(osc_out2)
+			);
+			
+Voice voice3(
+			.F_in(Frequency0[31:24]),
+			.Clk(AUD_DACLRCK), 
+			.CLOCK_50(CLOCK_50), 
+			.Reset(reset_ah), 
+			.loadF(1'b1), 
+			.loadA(1'b1), 
+			.key_on(key_on[3]), 
+			.A_in(Amp1[31:16]),
+			.shape(shape[3:0]),
+			.A(A), 
+			.D(D), 
+			.S(S), 
+			.R(R),
+			.out(osc_out3)
+			);
+			
+//Voice voice4(
+//			.F_in(Frequency1[7:0]),
+//			.Clk(AUD_DACLRCK), 
+//			.CLOCK_50(CLOCK_50), 
+//			.Reset(reset_ah), 
+//			.loadF(1'b1), 
+//			.loadA(1'b1), 
+//			.key_on(key_on[4]), 
+//			.A_in(Amp2[15:0]),
+//			.shape(shape[3:0]),
+//			.A(A), 
+//			.D(D), 
+//			.S(S), 
+//			.R(R),
+//			.out(osc_out4)
+//			);
+//			
+//Voice voice5(
+//			.F_in(Frequency1[15:8]),
+//			.Clk(AUD_DACLRCK), 
+//			.CLOCK_50(CLOCK_50), 
+//			.Reset(reset_ah), 
+//			.loadF(1'b1), 
+//			.loadA(1'b1), 
+//			.key_on(key_on[5]), 
+//			.A_in(Amp2[31:16]),
+//			.shape(shape[3:0]),
+//			.A(A), 
+//			.D(D), 
+//			.S(S), 
+//			.R(R),
+//			.out(osc_out5)
+//			);
+//			
+//Voice voice6(
+//			.F_in(Frequency1[23:16]),
+//			.Clk(AUD_DACLRCK), 
+//			.CLOCK_50(CLOCK_50), 
+//			.Reset(reset_ah), 
+//			.loadF(1'b1), 
+//			.loadA(1'b1), 
+//			.key_on(key_on[6]), 
+//			.A_in(Amp3[15:0]),
+//			.shape(shape[3:0]),
+//			.A(A), 
+//			.D(D), 
+//			.S(S), 
+//			.R(R),
+//			.out(osc_out6)
+//			);
+//			
+//Voice voice7(
+//			.F_in(Frequency1[31:24]),
+//			.Clk(AUD_DACLRCK), 
+//			.CLOCK_50(CLOCK_50), 
+//			.Reset(reset_ah), 
+//			.loadF(1'b1), 
+//			.loadA(1'b1), 
+//			.key_on(key_on[7]), 
+//			.A_in(Amp3[31:16]),
+//			.shape(shape[3:0]),
+//			.A(A), 
+//			.D(D), 
+//			.S(S), 
+//			.R(R),
+//			.out(osc_out7)
+//			);
+			
+always_comb
+	begin
+		osc_sum = osc_out0 + osc_out1 + osc_out2 + osc_out3; //+ osc_out4 + osc_out5 + osc_out6 + osc_out7;
+		osc_out = osc_sum[17:2];
+	end
+			
+//rom #("notes.mem",
+//		7, 24) notelookup(.Clk(CLOCK_50),
+//								.Reset(reset_ah),
+//								.addr(Frequency[6:0]),
+//								.data(Frequency2),
+//								.CS(1'b1));
 //24'b000000100101100010111111
 
 //always_ff @ (negedge data_over) begin
@@ -121,9 +247,13 @@ rom #("notes.mem",
 soc soc0(.clk_clk(CLOCK_50),
 			.sr_clk(Clk),
 			.reset_reset_n(KEY[3]),
-			.freq_wire_export(Frequency),
+			.freq0_wire_export(Frequency0),
+			.freq1_wire_export(Frequency1),
 			.key_on_export(key_on),
-			.amp_wire_export(Amp),
+			.amp0_wire_export(Amp0),
+			.amp1_wire_export(Amp1),
+			.amp2_wire_export(Amp2),
+			.amp3_wire_export(Amp3),
 			.shape_wire_export(shape),
 			.attack_export(A),
 			.decay_export(D),
