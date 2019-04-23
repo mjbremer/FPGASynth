@@ -51,6 +51,8 @@ int main(void)
 		toggle++;
 
 
+		// I wonder if I should be doing larger transfers, like the MPK dumps all buffered
+		// messages when it gets a request, even if I only specify one msg worf
 		UsbGetMIDIMsg(toggle);
 		while (!(IO_read(HPI_STATUS) & HPI_STATUS_SIE1msg_FLAG)) {
 			UsbGetMIDIMsg(toggle);
@@ -69,7 +71,7 @@ int main(void)
 
 
 		//UsbCheckUnplug();
-		usleep(200);
+		//usleep(200);
 	}
 	return 0;
 }

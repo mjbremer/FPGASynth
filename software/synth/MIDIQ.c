@@ -21,12 +21,16 @@ static voice_t *freeVoicesHead, *freeVoicesTail;
 
 void initControls()
 {
+
+	// Want attack and release to be 5 ms minimum (according to Haken)
+	// So we take 5 ms * 48 samples/ms to get 240 samples.
+	// Then we just do 0x7FFF / 0d240 to get a rate of 0x88.
 	*shape1 = 0;
 	*shape0 = 0;
-	*attack = 0x7FFF;
+	*attack = 0x88;
 	*decay  = 0x7FFF;
 	*sustain = 0x7FFF;
-	*release = 0x7FFF;
+	*release = 0x88;
 
 	for (int i = 0; i < NUM_VOICES; i++) {
 		key_on[i] = 0x00;
@@ -60,13 +64,19 @@ void MuteVoice(voice_t * v)
 
 void NoteOnHandler(uint8_t note, uint8_t vel)
 {
-    voice_t * new = PopVoice(&freeVoicesHead, &freeVoicesTail,HEAD);
+    midikey_t * m = &(keys[note]);
+
+    // Make sure the note isn't already playing
+    if (m->osc != NULL)
+    	return;
+
+	voice_t * new = PopVoice(&freeVoicesHead, &freeVoicesTail,HEAD);
     if (new == NULL)
         return; // for now...
     
     InitVoice(new, note, vel);
 
-    midikey_t * m = &(keys[note]);
+
 
     m->status = KEY_PLAYING;
     m->osc = new;
