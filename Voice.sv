@@ -20,7 +20,7 @@ NCO  osc0(.Clk(Clk),
 			.A_in(A_in),
 			.shape(shape[1:0]),
 			.out(osc_out0),
-			.key_on(key_on),
+			.key_on(key_on)
 			);
 
 NCO  osc1(.Clk(Clk),
@@ -32,7 +32,7 @@ NCO  osc1(.Clk(Clk),
 			.A_in(A_in),
 			.shape(shape[3:2]),
 			.out(osc_out1),
-			.key_on(key_on),
+			.key_on(key_on)
 			);
 			
 ADSR ADSR0 (.CLK(Clk),
@@ -46,7 +46,7 @@ ADSR ADSR0 (.CLK(Clk),
 				
 wire [23:0] F_out;				
 				
-rom #("notes.mem",
+rom #("notes.mem",	//this is a look up for a note with a certain frequency
 		7, 24) notelookup(.Clk(CLOCK_50),
 								.Reset(Reset),
 								.addr(F_in),
@@ -54,9 +54,8 @@ rom #("notes.mem",
 								.CS(1'b1));
 
 always_comb
-	begin
+	begin   //combine the outputs of each oscillator and modulate by ADSR
 		osc_sum = $signed(osc_out0) + $signed(osc_out1);
-		//osc_sum = osc_sum >>> 1;
 		Mult = $signed(ADSR_out) * $signed(osc_sum[16:1]);
 		out = Mult[31:16];
 	end

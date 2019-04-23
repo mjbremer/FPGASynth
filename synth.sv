@@ -52,10 +52,10 @@ glide glide0(
 			.key_on(key_on[0]),
 			.CLK(CLOCK_50),
 			.RESET(reset_ah),
-			.Enable(),
+			//.Enable(),
 			.state(GlideFreq),
 			.in(Frequency0[7:0]),
-			.glider(),
+			//.glider(),
 			.out(GlideFreq)
 			);
 
