@@ -6,6 +6,7 @@
 !*.sdc
 !*.qpf
 !*.vhd
+!*.tcl
 !.gitignore
 !TODO
 !*.c
