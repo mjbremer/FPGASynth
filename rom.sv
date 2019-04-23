@@ -26,7 +26,7 @@ always @(posedge Clk) begin
     // Place data from RAM
 	 if (Reset || !CS)
 	 begin
-		data <= {WIDTH{1'bz}};
+		data <= {WIDTH{1'bx}};
 	 end
 	 else begin
 		data <= memory[addr];
