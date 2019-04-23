@@ -41,8 +41,8 @@ module control_interface (
 	//logic [31:0] reg_file_next [0:63];
 	
 	
-	assign SHAPE0 = reg_file[0][1:0];
-	assign SHAPE1 = reg_file[1][1:0];
+	assign SHAPE1 = reg_file[0][1:0];
+	assign SHAPE0 = reg_file[1][1:0];
 	assign ATTACK = reg_file[2][15:0];
 	assign DECAY = reg_file[3][15:0];
 	assign SUSTAIN = reg_file[4][15:0];

@@ -1,18 +1,17 @@
-Switch to using AES Interface-style controls
-Integrate Polyphony Algorithm
+Add back parameter changing
 Add 2-voice mixing - Both amps should add to ~0x2000
-Add Glide
+Test Glide
+Test Arpeggiator
 Mode switcher - Poly/Mono/Glide
 Add filters
 Delay/Reverb/Panning
 Add voice stealing
-Arpeggiator
 Filter ADSRs
 LFOs for whatever
 
 
 FIX
+Dogshit USB
 ADSR Param mapping
 Popping
 Memory usage
-

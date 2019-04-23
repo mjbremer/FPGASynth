@@ -1,5 +1,16 @@
 #include "MIDIQ.h"
 
+static alt_u32* const shape1 = SYNTH_CONTROLLER_0_BASE;
+static alt_u32* const shape0 = SYNTH_CONTROLLER_0_BASE + (1*4);
+static alt_u32* const attack = SYNTH_CONTROLLER_0_BASE + (2*4);
+static alt_u32* const decay = SYNTH_CONTROLLER_0_BASE + (3*4);
+static alt_u32* const sustain = SYNTH_CONTROLLER_0_BASE + (4*4);
+static alt_u32* const release = SYNTH_CONTROLLER_0_BASE + (5*4);
+
+static alt_u32* const key_on = SYNTH_CONTROLLER_0_BASE + (32*4);
+static alt_u32* const freq = SYNTH_CONTROLLER_0_BASE + (40*4);
+static alt_u32* const amp1 = SYNTH_CONTROLLER_0_BASE + (48*4);
+static alt_u32* const amp0 = SYNTH_CONTROLLER_0_BASE + (56*4);
 
 static voice_t voices [NUM_VOICES];
 
@@ -8,22 +19,41 @@ static midikey_t keys [NUM_KEYS];
 static voice_t *freeVoicesHead, *freeVoicesTail;
 //static voice_t *activeVoicesHead, *activeVoicesTail;
 
-static uint8_t freq[NUM_VOICES];
-static uint8_t key_on;
-static uint8_t vel[NUM_VOICES];
+void initControls()
+{
+	*shape1 = 0;
+	*shape0 = 0;
+	*attack = 0x7FFF;
+	*decay  = 0x7FFF;
+	*sustain = 0x7FFF;
+	*release = 0x7FFF;
+
+	for (int i = 0; i < NUM_VOICES; i++) {
+		key_on[i] = 0x00;
+		freq[i] = 0;
+		amp1[i] = 0;
+		amp0[i] = 0;
+	}
+
+}
+
+void ControlHandler(uint8_t control, uint8_t value)
+{
+	// TODO: CBT me.
+}
 
 
 void InitVoice(voice_t * v, uint8_t note, uint8_t vel)
 {
     *v->freq = note;
-    *v->vel = vel;
-    key_on = key_on | (0x01 << v->key_on);
+    *v->vel = vel << 6;
+    *v->key_on = 0x01;
     v->status = VOICE_ACTIVE;
 }
 
 void MuteVoice(voice_t * v)
 {
-    key_on = key_on & ~(0x01 << v->key_on);
+    *v->key_on = 0x00;
     v->status = VOICE_INACTIVE;
 }
 
@@ -130,7 +160,7 @@ voice_t * PopVoice(voice_t ** head, voice_t ** tail, PopVoiceLocation from)
     return ret;
 }
 
-void InitStructures()
+void initStructures()
 {
     int i;
     voice_t* v;
@@ -142,10 +172,10 @@ void InitStructures()
         v = &(voices[i]);
         v->status = VOICE_INACTIVE;
         v->freq = &(freq[i]);
-        v->vel = &(vel[i]);
-        v->key_on = i;
+        v->vel = &(amp1[i]);
+        v->key_on = &(key_on[i]);
         PushVoice(&freeVoicesHead, &freeVoicesTail,TAIL, v);
-        printf("%d\n",CountActiveOscs());
+        printf("%d\n",CountActiveVoices());
     }
 
     for (i = 0; i < NUM_KEYS; i++) {
@@ -156,7 +186,7 @@ void InitStructures()
 }
 
 
-int CountActiveOscs()
+int CountActiveVoices()
 {
     int count = 0;
     for (voice_t * v = freeVoicesHead; v != NULL; v = v->next) {
@@ -164,38 +194,3 @@ int CountActiveOscs()
     }
     return count;
 }
-
-//int main()
-//{
-//    InitStructures();
-//    //printf("%d\n", CountActiveOscs());
-//
-//    NoteOnHandler(0x00, 0xFF);
-//    printf("%d\n", CountActiveOscs());
-//        NoteOnHandler(0x00, 0xFF);
-//    printf("%d\n", CountActiveOscs());
-//        NoteOnHandler(0x01, 0xFF);
-//    printf("%d\n", CountActiveOscs());
-//        NoteOnHandler(0x02, 0xFF);
-//    printf("%d\n", CountActiveOscs());
-//        NoteOnHandler(0x03, 0xFF);
-//    printf("%d\n", CountActiveOscs());
-//        NoteOnHandler(0x04, 0xFF);
-//    printf("%d\n", CountActiveOscs());
-//        NoteOnHandler(0x05, 0xFF);
-//    printf("%d\n", CountActiveOscs());
-//        NoteOnHandler(0x06, 0xFF);
-//    printf("%d\n", CountActiveOscs());
-//        NoteOnHandler(0x07, 0xFF);
-//    printf("%d\n", CountActiveOscs());
-//        NoteOnHandler(0x08, 0xFF);
-//    printf("%d\n", CountActiveOscs());
-//
-//    NoteOffHandler(0x00);
-//
-//           NoteOnHandler(0x08, 0xFF);
-//    printf("%d\n", CountActiveOscs());
-//
-//    printf("%d\n", CountActiveOscs());
-//    return 0;
-//}

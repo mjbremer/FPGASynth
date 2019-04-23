@@ -3,9 +3,10 @@
 
 #include <stdio.h>
 #include <stdint.h>
-#include "MIDI.h"
+#include <system.h>
+#include <alt_types.h>
 
-#define NUM_VOICES     (8)
+#define NUM_VOICES     (4)
 #define NUM_KEYS     (128)
 
 // #define VOICE_ACTIVE    (1)
@@ -25,8 +26,8 @@ typedef enum {VOICE_ACTIVE, VOICE_INACTIVE} voiceState;
 
 typedef struct voice_t {
     voiceState status;
-    uint8_t *freq, key_on;
-    uint8_t *vel;
+    uint32_t *freq, *key_on;
+    uint32_t *vel;
 
     struct voice_t* prev, *next;
 } voice_t;
@@ -35,18 +36,18 @@ typedef struct midikey_t {
     uint8_t key_num;
     uint8_t status;
     voice_t* osc;
-
     struct midikey_t* prev, *next;
 } midikey_t;
 
 
-
+void initControls();
+void ControlHandler(uint8_t control, uint8_t value);
 void NoteOnHandler(uint8_t note, uint8_t vel);
 void NoteOffHandler(uint8_t note);
-void InitStructures();
+void initStructures();
 voice_t * PopVoice(voice_t ** head, voice_t ** tail, PopVoiceLocation from);
 void PushVoice(voice_t ** head, voice_t ** tail, PopVoiceLocation from, voice_t * v);
 void InitVoice(voice_t * v, uint8_t note, uint8_t vel);
 void MuteVoice(voice_t * v);
-int CountActiveOscs();
+int CountActiveVoices();
 #endif

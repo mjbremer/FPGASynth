@@ -8,7 +8,7 @@ module Voice(
 );
 
 logic [15:0] osc_out0, osc_out1, ADSR_out;
-logic [16:0] osc_sum;
+logic [15:0] osc_sum;
 wire [31:0] Mult;
 
 NCO  osc0(.Clk(Clk),
@@ -56,7 +56,7 @@ rom #("notes.mem",	//this is a look up for a note with a certain frequency
 always_comb
 	begin   //combine the outputs of each oscillator and modulate by ADSR
 		osc_sum = $signed(osc_out0) + $signed(osc_out1);
-		Mult = $signed(ADSR_out) * $signed(osc_sum[16:1]);
+		Mult = $signed(ADSR_out) * $signed(osc_sum);
 		out = Mult[31:16];
 	end
 
