@@ -6,38 +6,51 @@ timeprecision 1ns;
 
 // These signals are internal because the processor will be 
 // instantiated as a submodule in testbench.
+logic Clk, Reset;
 
-logic AUD_XCK,  AUD_DACDAT, I2C_SDAT, I2C_SCLK;
-logic AUD_BCLK, AUD_ADCDAT, AUD_DACLRCK, AUD_ADCLRCK, CLOCK_50;
-logic [3:0] Key;
-logic SR;
-logic [23:0] phase;
-logic [15:0] out;
-logic [11:0] rom_in;
-logic [15:0] rom_out;
-logic [3:0] KEY;
-logic [17:0] SW;
-logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7;
-synth synth0(.*);	
+// To store expected results
+//logic [15:0] ans_1a, ans_2b;
+				
+// A counter to count the instances where simulation results
+// do no match with expected results
+//integer ErrorCnt = 0;
+
+integer cont_wait;
+// Instantiating the DUT
+// Make sure the module and signal names match with those in your design
+lab6_toplevel lab6_toplevel0(.*);	
 
 
 always_comb begin: INTERNAL_MONITORING
-	SR = synth0.Clk;
-	phase = synth0.osc0.Phase_out;
-	out = synth0.osc0.out;
-	rom_in = synth0.osc0.sine.addr;
-	rom_out = synth0.osc0.sine.data;
+	MDR = lab6_toplevel0.my_slc.MDR;
+	PC = lab6_toplevel0.my_slc.PC;
+	IR = lab6_toplevel0.my_slc.IR;
+	R0 = lab6_toplevel0.my_slc.d0.reg_file_inst.R[0];
+	R1 = lab6_toplevel0.my_slc.d0.reg_file_inst.R[1];
+	R2 = lab6_toplevel0.my_slc.d0.reg_file_inst.R[2];
+	R7 = lab6_toplevel0.my_slc.d0.reg_file_inst.R[7];
+	Bus = lab6_toplevel0.my_slc.d0.Bus;
+	state = lab6_toplevel0.my_slc.state_controller.State;
+	BEN = lab6_toplevel0.my_slc.state_controller.BEN;
 end
 	
 
 // Toggle the clock
 // #1 means wait for a delay of 1 timeunit
 always begin : CLOCK_GENERATION
-#1 CLOCK_50 = ~CLOCK_50;
+#1 Clk = ~Clk;
+#1 cont_wait = cont_wait + 1;
+
+if (cont_wait == 3)
+	begin
+		Continue = ~Continue;
+		cont_wait = 0;
+	end
 end
 
 initial begin: CLOCK_INITIALIZATION
-    CLOCK_50 = 0;
+    Clk = 0;
+	 cont_wait = 0;
 end 
 
 // Testing begins here
@@ -45,9 +58,53 @@ end
 // Everything happens sequentially inside an initial block
 // as in a software program
 initial begin: TEST_VECTORS
-KEY[3] = 0;		// Toggle Reset
+Reset = 0;		// Toggle Rest
+Continue = 0;
+Run = 1;
+S = 16'hb;
 
-#1300 KEY[3] = 1;
+#2 Reset = 1;
 
+#3 Run = 0;
+
+#4 Run = 1;
+	
+
+//#2 S = 8'h74;	// Toggle LoadB
+//
+//#2 Run = 0;	// Toggle Execute
+//   
+//#22 Run = 1;
+//    ans_1a = (8'h8c * 8'h74); // Expected result of 1st cycle
+//    // Aval is expected to be 8’h33 XOR 8’h55
+//    // Bval is expected to be the original 8’h55
+//    if ({Aval, Bval} != ans_1a)
+//	 ErrorCnt++;
+//
+//#2 Execute = 0;	// Toggle Execute
+//#2 Execute = 1;
+//
+//#22 Execute = 0;
+//    // Aval is expected to stay the same
+//    // Bval is expected to be the answer of 1st cycle XNOR 8’h55
+//    if (Aval != ans_1a)	
+//	 ErrorCnt++;
+//    ans_2b = ~(ans_1a ^ 8'h55); // Expected result of 2nd  cycle
+//    if (Bval != ans_2b)
+//	 ErrorCnt++;
+//    R = 2'b11;
+//#2 Execute = 1;
+//
+//// Aval and Bval are expected to swap
+//#22 if (Aval != ans_2b)
+//	 ErrorCnt++;
+//    if (Bval != ans_1a)
+//	 ErrorCnt++;
+
+//
+//if (ErrorCnt == 0)
+//	$display("Success!");  // Command line output in ModelSim
+//else
+//	$display("%d error(s) detected. Try again!", ErrorCnt);
 end
 endmodule
