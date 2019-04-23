@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include "system.h"
 #include "alt_types.h"
+#include "MIDIQ.h"
 
 #define NOTE_OFF            (0x8)
 #define NOTE_ON             (0x9)

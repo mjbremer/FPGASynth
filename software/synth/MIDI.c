@@ -26,8 +26,8 @@ static char * CIN_names[] = {"Miscellaneous Function Code",
 
 void initControls()
 {
-	alt_u8* const freq = FREQ_BASE;
-	alt_u16* const amp = AMP_BASE;
+	alt_u8* const freq = FREQ0_BASE;
+	alt_u16* const amp = AMP0_BASE;
 	alt_u8* const key_on =  KEY_ON_BASE;
 	alt_u8* const shape = SHAPESEL_BASE;
 	alt_u16* const attack = ATTACK_BASE;
@@ -49,8 +49,8 @@ void initControls()
 void ProcessMIDIPacket(alt_u32 packet)
 {
 	//alt_u8* const hex = KEYCODE_BASE;
-	alt_u8* const freq = FREQ_BASE;
-	alt_u16* const amp = AMP_BASE;
+	alt_u8* const freq = FREQ0_BASE;
+	alt_u16* const amp = AMP0_BASE;
 	alt_u8* const key_on =  KEY_ON_BASE;
 	alt_u8* const shape = SHAPESEL_BASE;
 	alt_u16* const attack = ATTACK_BASE;

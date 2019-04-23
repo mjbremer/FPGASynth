@@ -1,4 +1,6 @@
+Switch to using AES Interface-style controls
 Integrate Polyphony Algorithm
+Add 2-voice mixing - Both amps should add to ~0x2000
 Add Glide
 Mode switcher - Poly/Mono/Glide
 Add filters
@@ -12,6 +14,5 @@ LFOs for whatever
 FIX
 ADSR Param mapping
 Popping
-Shitty mixing (Multiply down & add instead of add & bitshift)
 Memory usage
 
