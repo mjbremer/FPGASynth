@@ -1,8 +1,8 @@
 module Voice(
 			input [7:0] F_in,
 			input Clk, CLOCK_50, Reset, loadF, loadA, key_on,
-			input [15:0] A_in,
-			input [3:0] shape,
+			input [15:0] A1, A0,
+			input [1:0] shape1, shape0,
 			input [15:0] A, D, S, R,
 			output [15:0] out
 );
@@ -17,10 +17,10 @@ NCO  osc0(.Clk(Clk),
 			.loadF(1'b1),
 			.loadA(1'b1),
 			.F_in(F_out),
-			.A_in(A_in),
-			.shape(shape[1:0]),
+			.A_in(A0),
+			.shape(shape0),
 			.out(osc_out0),
-			.key_on(key_on),
+			.key_on(key_on)
 			);
 
 NCO  osc1(.Clk(Clk),
@@ -29,10 +29,10 @@ NCO  osc1(.Clk(Clk),
 			.loadF(1'b1),
 			.loadA(1'b1),
 			.F_in(F_out),
-			.A_in(A_in),
-			.shape(shape[3:2]),
+			.A_in(A1),
+			.shape(shape1),
 			.out(osc_out1),
-			.key_on(key_on),
+			.key_on(key_on)
 			);
 			
 ADSR ADSR0 (.CLK(Clk),
@@ -49,7 +49,7 @@ wire [23:0] F_out;
 rom #("notes.mem",
 		7, 24) notelookup(.Clk(CLOCK_50),
 								.Reset(Reset),
-								.addr(F_in),
+								.addr(F_in[6:0]),
 								.data(F_out),
 								.CS(1'b1));
 

@@ -29,17 +29,19 @@ output logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7,
 
 logic [15:0] LDATA, RDATA;
 
-logic Clk, INIT, INIT_FINISH, adc_full, data_over;
+logic INIT, INIT_FINISH, adc_full, data_over;
 
 
 logic [31:0] ADCDATA;
 
 
-wire [7:0] Frequency;
-wire [15:0] Amp;
-wire [15:0] A,D,S,R;
-wire [31:0] Frequency0, Frequency1, Amp0, Amp1, Amp2, Amp3;
-wire [7:0] key_on, shape;
+logic [15:0]ATTACK,RLEASE,SUSTAIN,DECAY;
+logic [1:0] SHAPE1,SHAPE0;
+logic [6:0] FREQ0, FREQ1, FREQ2, FREQ3;
+logic [15:0] AMP1_0, AMP0_0, AMP1_1, AMP0_1, AMP1_2, AMP0_2, AMP1_3, AMP0_3;
+logic KEY3, KEY2, KEY1, KEY0;
+
+
 wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3; //osc_out4, osc_out5, osc_out6, osc_out7;
 logic [17:0] osc_sum;
 wire reset_ah;
@@ -48,154 +50,83 @@ assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
 
 Initializer init(.INIT(INIT), .INIT_FINISH(INIT_FINISH), .Clk(CLOCK_50), .Reset(reset_ah));
 
-//NCO  osc0(.Clk(AUD_DACLRCK),
-//			.CLOCK_50(CLOCK_50),
-//			.Reset(reset_ah),
-//			.loadF(1'b1),
-//			.loadA(1'b1),
-//			.F_in(Frequency2),
-//			.A_in(Amp),
-//			.shape(shape[1:0]),
-//			.out(osc_out),
-//			.key_on(key_on[0]),
-//			.A(A), .D(D), .S(S), .R(R),
-//			);
 
 Voice voice0(
-			.F_in(Frequency0[7:0]),
+			.F_in(FREQ0),
 			.Clk(AUD_DACLRCK), 
 			.CLOCK_50(CLOCK_50), 
 			.Reset(reset_ah), 
 			.loadF(1'b1), 
 			.loadA(1'b1), 
-			.key_on(key_on[0]), 
-			.A_in(Amp0[15:0]),
-			.shape(shape[3:0]),
-			.A(A), 
-			.D(D), 
-			.S(S), 
-			.R(R),
+			.key_on(KEY0), 
+			.A1(AMP1_0),
+			.A0(AMP0_0),
+			.shape1(SHAPE1),
+			.shape0(SHAPE0),
+			.A(ATTACK), 
+			.D(DECAY), 
+			.S(SUSTAIN), 
+			.R(RLEASE),
 			.out(osc_out0)
 			);
 			
 Voice voice1(
-			.F_in(Frequency0[15:8]),
+			.F_in(FREQ1),
 			.Clk(AUD_DACLRCK), 
 			.CLOCK_50(CLOCK_50), 
 			.Reset(reset_ah), 
 			.loadF(1'b1), 
 			.loadA(1'b1), 
-			.key_on(key_on[1]), 
-			.A_in(Amp0[31:16]),
-			.shape(shape[3:0]),
-			.A(A), 
-			.D(D), 
-			.S(S), 
-			.R(R),
+			.key_on(KEY1), 
+			.A1(AMP1_1),
+			.A0(AMP0_1),
+			.shape1(SHAPE1),
+			.shape0(SHAPE0),
+			.A(ATTACK), 
+			.D(DECAY), 
+			.S(SUSTAIN), 
+			.R(RLEASE),
 			.out(osc_out1)
 			);
 			
 Voice voice2(
-			.F_in(Frequency0[23:16]),
+			.F_in(FREQ2),
 			.Clk(AUD_DACLRCK), 
 			.CLOCK_50(CLOCK_50), 
 			.Reset(reset_ah), 
 			.loadF(1'b1), 
 			.loadA(1'b1), 
-			.key_on(key_on[2]), 
-			.A_in(Amp1[15:0]),
-			.shape(shape[3:0]),
-			.A(A), 
-			.D(D), 
-			.S(S), 
-			.R(R),
+			.key_on(KEY2), 
+			.A1(AMP1_2),
+			.A0(AMP0_2),
+			.shape1(SHAPE1),
+			.shape0(SHAPE0),
+			.A(ATTACK), 
+			.D(DECAY), 
+			.S(SUSTAIN), 
+			.R(RLEASE),
 			.out(osc_out2)
 			);
 			
 Voice voice3(
-			.F_in(Frequency0[31:24]),
+			.F_in(FREQ3),
 			.Clk(AUD_DACLRCK), 
 			.CLOCK_50(CLOCK_50), 
 			.Reset(reset_ah), 
 			.loadF(1'b1), 
 			.loadA(1'b1), 
-			.key_on(key_on[3]), 
-			.A_in(Amp1[31:16]),
-			.shape(shape[3:0]),
-			.A(A), 
-			.D(D), 
-			.S(S), 
-			.R(R),
+			.key_on(KEY3), 
+			.A1(AMP1_3),
+			.A0(AMP0_3),
+			.shape1(SHAPE1),
+			.shape0(SHAPE0),
+			.A(ATTACK), 
+			.D(DECAY), 
+			.S(SUSTAIN), 
+			.R(RLEASE),
 			.out(osc_out3)
 			);
 			
-//Voice voice4(
-//			.F_in(Frequency1[7:0]),
-//			.Clk(AUD_DACLRCK), 
-//			.CLOCK_50(CLOCK_50), 
-//			.Reset(reset_ah), 
-//			.loadF(1'b1), 
-//			.loadA(1'b1), 
-//			.key_on(key_on[4]), 
-//			.A_in(Amp2[15:0]),
-//			.shape(shape[3:0]),
-//			.A(A), 
-//			.D(D), 
-//			.S(S), 
-//			.R(R),
-//			.out(osc_out4)
-//			);
-//			
-//Voice voice5(
-//			.F_in(Frequency1[15:8]),
-//			.Clk(AUD_DACLRCK), 
-//			.CLOCK_50(CLOCK_50), 
-//			.Reset(reset_ah), 
-//			.loadF(1'b1), 
-//			.loadA(1'b1), 
-//			.key_on(key_on[5]), 
-//			.A_in(Amp2[31:16]),
-//			.shape(shape[3:0]),
-//			.A(A), 
-//			.D(D), 
-//			.S(S), 
-//			.R(R),
-//			.out(osc_out5)
-//			);
-//			
-//Voice voice6(
-//			.F_in(Frequency1[23:16]),
-//			.Clk(AUD_DACLRCK), 
-//			.CLOCK_50(CLOCK_50), 
-//			.Reset(reset_ah), 
-//			.loadF(1'b1), 
-//			.loadA(1'b1), 
-//			.key_on(key_on[6]), 
-//			.A_in(Amp3[15:0]),
-//			.shape(shape[3:0]),
-//			.A(A), 
-//			.D(D), 
-//			.S(S), 
-//			.R(R),
-//			.out(osc_out6)
-//			);
-//			
-//Voice voice7(
-//			.F_in(Frequency1[31:24]),
-//			.Clk(AUD_DACLRCK), 
-//			.CLOCK_50(CLOCK_50), 
-//			.Reset(reset_ah), 
-//			.loadF(1'b1), 
-//			.loadA(1'b1), 
-//			.key_on(key_on[7]), 
-//			.A_in(Amp3[31:16]),
-//			.shape(shape[3:0]),
-//			.A(A), 
-//			.D(D), 
-//			.S(S), 
-//			.R(R),
-//			.out(osc_out7)
-//			);
 			
 always_comb
 	begin
@@ -203,18 +134,6 @@ always_comb
 		osc_out = osc_sum[17:2];
 	end
 			
-//rom #("notes.mem",
-//		7, 24) notelookup(.Clk(CLOCK_50),
-//								.Reset(reset_ah),
-//								.addr(Frequency[6:0]),
-//								.data(Frequency2),
-//								.CS(1'b1));
-//24'b000000100101100010111111
-
-//always_ff @ (negedge data_over) begin
-//	LDATA <= osc_out;
-//	RDATA <= osc_out;
-//end
 
 	assign LDATA = osc_out;
 	assign RDATA = osc_out;
@@ -245,40 +164,47 @@ always_comb
     );
 
 soc soc0(.clk_clk(CLOCK_50),
-			.sr_clk(Clk),
-			.reset_reset_n(KEY[3]),
-			.freq0_wire_export(Frequency0),
-			.freq1_wire_export(Frequency1),
-			.key_on_export(key_on),
-			.amp0_wire_export(Amp0),
-			.amp1_wire_export(Amp1),
-			.amp2_wire_export(Amp2),
-			.amp3_wire_export(Amp3),
-			.shape_wire_export(shape),
-			.attack_export(A),
-			.decay_export(D),
-			.sustain_export(S),
-			.release0_export(R),
-			.sdram_wire_addr(DRAM_ADDR),    
-			.sdram_wire_ba(DRAM_BA),      	//  .ba
-			.sdram_wire_cas_n(DRAM_CAS_N),    //  .cas_n
-			.sdram_wire_cke(DRAM_CKE),     	//  .cke
-			.sdram_wire_cs_n(DRAM_CS_N),      //  .cs_n
-			.sdram_wire_dq(DRAM_DQ),      	//  .dq
-			.sdram_wire_dqm(DRAM_DQM),     	//  .dqm
-			.sdram_wire_ras_n(DRAM_RAS_N),    //  .ras_n
-			.sdram_wire_we_n(DRAM_WE_N),      //  .we_n
-			.sdram_clk_clk(DRAM_CLK),			//  clock out to SDRAM from other PLL port);
-			
-			                    .otg_hpi_address_export(hpi_addr),
-                             .otg_hpi_data_in_port(hpi_data_in),
-                             .otg_hpi_data_out_port(hpi_data_out),
-                             .otg_hpi_cs_export(hpi_cs),
-                             .otg_hpi_r_export(hpi_r),
-                             .otg_hpi_w_export(hpi_w),
-                             .otg_hpi_reset_export(hpi_reset));
-//assign Clk = KEY[0]; // DEBUG CLOCK
-
+		.reset_reset_n(KEY[3]),
+		.sdram_wire_addr(DRAM_ADDR),    
+		.sdram_wire_ba(DRAM_BA),      	//  .ba
+		.sdram_wire_cas_n(DRAM_CAS_N),    //  .cas_n
+		.sdram_wire_cke(DRAM_CKE),     	//  .cke
+		.sdram_wire_cs_n(DRAM_CS_N),      //  .cs_n
+		.sdram_wire_dq(DRAM_DQ),      	//  .dq
+		.sdram_wire_dqm(DRAM_DQM),     	//  .dqm
+		.sdram_wire_ras_n(DRAM_RAS_N),    //  .ras_n
+		.sdram_wire_we_n(DRAM_WE_N),      //  .we_n
+		.sdram_clk_clk(DRAM_CLK),			//  clock out to SDRAM from other PLL port);
+		.otg_hpi_address_export(hpi_addr),
+		.otg_hpi_data_in_port(hpi_data_in),
+		.otg_hpi_data_out_port(hpi_data_out),
+		.otg_hpi_cs_export(hpi_cs),
+		.otg_hpi_r_export(hpi_r),
+		.otg_hpi_w_export(hpi_w),
+		.otg_hpi_reset_export(hpi_reset),
+		.a_attack(ATTACK),               //               a.attack
+		.amp0_0_amp0_0(AMP0_0),          //          amp0_0.amp0_0
+		.amp0_1_amp0_1(AMP0_1),          //          amp0_1.amp0_1
+		.amp0_2_amp0_2(AMP0_2),          //          amp0_2.amp0_2
+		.amp0_3_amp0_3(AMP0_3),          //          amp0_3.amp0_3
+		.amp1_0_amp1_0(AMP1_0),          //          amp1_0.amp1_0
+		.amp1_1_amp1_1(AMP1_1),          //          amp1_1.amp1_1
+		.amp1_2_amp1_2(AMP1_2),          //          amp1_2.amp1_2
+		.amp1_3_amp1_3(AMP1_3),          //          amp1_3.amp1_3
+		.d_decay(DECAY),                //               d.decay
+		.freq0_freq0(FREQ0),            //           freq0.freq0
+		.freq1_freq1(FREQ1),            //           freq1.freq1
+		.freq2_freq2(FREQ2),            //           freq2.freq2
+		.freq3_freq3(FREQ3),            //           freq3.freq3
+		.key0_key0(KEY0),              //            key0.key0
+		.key1_key1(KEY1),              //            key1.key1
+		.key2_key2(KEY2),              //            key2.key2
+		.key3_key3(KEY3),              //            key3.key3
+		.r_rlease(RLEASE),               //               r.rlease
+		.s_sustain(SUSTAIN),              //               s.sustain
+		.shape0_shape0(SHAPE0),          //          shape0.shape0
+		.shape1_shape1(SHAPE1)           //          shape1.shape1
+		 );
 
 audio_interface ai0(.LDATA(LDATA),
 						   .RDATA(RDATA),
@@ -299,14 +225,14 @@ audio_interface ai0(.LDATA(LDATA),
 							.ADCDATA(ADCDATA)
 							);
 
-HexDriver hex_driver7 (Amp[15:12], HEX7);
-HexDriver hex_driver6 (Amp[11:8], HEX6);
-HexDriver hex_driver5 (Amp[7:4], HEX5);
-HexDriver hex_driver4 (Amp[3:0], HEX4);
-HexDriver hex_driver3 (Frequency[7:4], HEX3);
-HexDriver hex_driver2 (Frequency[3:0], HEX2);
-HexDriver hex_driver1 (key_on[7:4], HEX1);
-HexDriver hex_driver0 (key_on[3:0], HEX0);
+HexDriver hex_driver7 (AMP1_0[15:12], HEX7);
+HexDriver hex_driver6 (AMP1_0[11:8], HEX6);
+HexDriver hex_driver5 (AMP1_0[7:4], HEX5);
+HexDriver hex_driver4 (AMP1_0[3:0], HEX4);
+HexDriver hex_driver3 ({1'b0,FREQ0[6:4]}, HEX3);
+HexDriver hex_driver2 (FREQ0[3:0], HEX2);
+HexDriver hex_driver1 ({4{KEY0}}, HEX1);
+HexDriver hex_driver0 ({4{KEY0}}, HEX0);
      
 
 endmodule
