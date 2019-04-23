@@ -40,8 +40,6 @@ logic [1:0] SHAPE1,SHAPE0;
 logic [6:0] FREQ0, FREQ1, FREQ2, FREQ3;
 logic [15:0] AMP1_0, AMP0_0, AMP1_1, AMP0_1, AMP1_2, AMP0_2, AMP1_3, AMP0_3;
 logic KEY3, KEY2, KEY1, KEY0;
-
-
 wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3; //osc_out4, osc_out5, osc_out6, osc_out7;
 logic [17:0] osc_sum;
 wire reset_ah;

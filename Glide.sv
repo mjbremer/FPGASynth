@@ -34,7 +34,7 @@ enum logic [1:0] {ResetState, Key_false, Key_true}   Curr_State, Next_state;   /
 				if (Enable) 
 					Next_state = Key_false;
 				else
-					freq_next = state;
+					freq_next = in;
 			end
 			
 			Key_false : 
@@ -74,9 +74,11 @@ enum logic [1:0] {ResetState, Key_false, Key_true}   Curr_State, Next_state;   /
 							begin
 								if((freq_next + glider) > in)
 									freq_next = in;
-								else if (freq_next > in)
+								else if (freq_next < in)
 									freq_next = freq_next - glider;
 							end
+						else if (state == in)
+							freq_next = state;
 					end
 					
 			end

@@ -588,4 +588,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE HexDriver.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ADSR.sv
 set_global_assignment -name VHDL_FILE audio_interface.vhd
 set_global_assignment -name SYSTEMVERILOG_FILE Voice.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Glide.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Arpeggiator.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
