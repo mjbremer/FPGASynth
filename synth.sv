@@ -39,7 +39,7 @@ wire [7:0] Frequency;
 wire [15:0] Amp;
 wire [15:0] A,D,S,R;
 wire [31:0] Frequency0, Frequency1, Amp0, Amp1, Amp2, Amp3;
-wire [7:0] key_on, shape;
+wire [7:0] key_on, shape, GlideFreq;
 wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3; //osc_out4, osc_out5, osc_out6, osc_out7;
 logic [17:0] osc_sum;
 wire reset_ah;
@@ -48,21 +48,19 @@ assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
 
 Initializer init(.INIT(INIT), .INIT_FINISH(INIT_FINISH), .Clk(CLOCK_50), .Reset(reset_ah));
 
-//NCO  osc0(.Clk(AUD_DACLRCK),
-//			.CLOCK_50(CLOCK_50),
-//			.Reset(reset_ah),
-//			.loadF(1'b1),
-//			.loadA(1'b1),
-//			.F_in(Frequency2),
-//			.A_in(Amp),
-//			.shape(shape[1:0]),
-//			.out(osc_out),
-//			.key_on(key_on[0]),
-//			.A(A), .D(D), .S(S), .R(R),
-//			);
+glide glide0(
+			.key_on(key_on[0]),
+			.CLK(CLOCK_50),
+			.RESET(reset_ah),
+			.Enable(),
+			.state(GlideFreq),
+			.in(Frequency0[7:0]),
+			.glider(),
+			.out(GlideFreq)
+			);
 
 Voice voice0(
-			.F_in(Frequency0[7:0]),
+			.F_in(GlideFreq),
 			.Clk(AUD_DACLRCK), 
 			.CLOCK_50(CLOCK_50), 
 			.Reset(reset_ah), 
