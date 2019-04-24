@@ -1,15 +1,13 @@
-Add back parameter changing
-Add 2-voice mixing - Both amps should add to ~0x2000
+Add voice stealing
 Test Glide
 Test Arpeggiator
 Mode switcher - Poly/Mono/Glide
+Panning / Detune - Both should be easy - 3 mode: Off, Controlled by XY, or controlled by LFO
 Add filters
-Delay/Reverb/Panning
-Add voice stealing
+Delay/Reverb
 Filter ADSRs
-LFOs for whatever
-
+Any other LFOs
 
 FIX
 Dogshit USB
-Memory usage
+Memory usage for more voices

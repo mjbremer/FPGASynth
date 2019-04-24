@@ -16,6 +16,8 @@ static voice_t voices [NUM_VOICES];
 
 static midikey_t keys [NUM_KEYS];
 
+static uint8_t mix;
+
 static voice_t *freeVoicesHead, *freeVoicesTail;
 //static voice_t *activeVoicesHead, *activeVoicesTail;
 
@@ -31,6 +33,8 @@ void initControls()
 	*decay  = 0x7FFF;
 	*sustain = 0x7FFF;
 	*release = 0x88;
+
+	mix = 0x40;
 
 	for (int i = 0; i < NUM_VOICES; i++) {
 		key_on[i] = 0x00;
@@ -85,6 +89,9 @@ void ControlHandler(uint8_t control, uint8_t value)
 	case 0x04: // release
 		*release = value + 1;
 		break;
+	case 0x05:
+		mix = value;
+		break;
 	default:
 		break;
 	}
@@ -94,7 +101,8 @@ void ControlHandler(uint8_t control, uint8_t value)
 void InitVoice(voice_t * v, uint8_t note, uint8_t vel)
 {
     *v->freq = note;
-    *v->vel = vel << 6;
+    *v->amp1 = (vel) * (0x7f - mix);
+    *v->amp0 = (vel) * mix;
     *v->key_on = 0x01;
     v->status = VOICE_ACTIVE;
 }
@@ -226,7 +234,8 @@ void initStructures()
         v = &(voices[i]);
         v->status = VOICE_INACTIVE;
         v->freq = &(freq[i]);
-        v->vel = &(amp1[i]);
+        v->amp1 = &(amp1[i]);
+        v->amp0 = &(amp0[i]);
         v->key_on = &(key_on[i]);
         PushVoice(&freeVoicesHead, &freeVoicesTail,TAIL, v);
         printf("%d\n",CountActiveVoices());

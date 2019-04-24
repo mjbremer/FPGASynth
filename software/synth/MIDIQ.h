@@ -27,7 +27,7 @@ typedef enum {VOICE_ACTIVE, VOICE_INACTIVE} voiceState;
 typedef struct voice_t {
     voiceState status;
     uint32_t *freq, *key_on;
-    uint32_t *vel;
+    uint32_t *amp1, *amp0;
 
     struct voice_t* prev, *next;
 } voice_t;
