@@ -1,7 +1,11 @@
-Add voice stealing
-Test Glide
-Test Arpeggiator
-Mode switcher - Poly/Mono/Glide
+Add Mode Controls - Mono/Poly/Glide
+	- Poly - InitStructures(NUM_VOICES), DISABLE Glide
+	- Mono - InitStructures(1), DISABLE Glide
+	- Glide - InitStructures(1), ENABLE Glide, 
+Add Glide controls
+	Test Glide
+Add Arp controls
+	Test Arp
 Panning / Detune - Both should be easy - 3 mode: Off, Controlled by XY, or controlled by LFO
 Add filters
 Delay/Reverb
