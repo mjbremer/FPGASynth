@@ -43,7 +43,51 @@ void initControls()
 
 void ControlHandler(uint8_t control, uint8_t value)
 {
-	// TODO: CBT me.
+
+	switch (control) {
+	case 0x18:
+		if (value == 0)
+			*shape1 = *shape1 & ~0x01; // Clear the first bit
+		else
+			*shape1 = *shape1 | 0x01; // Set the first bit
+
+		break;
+	case 0x19:
+		if (value == 0)
+			*shape1 = *shape1 & ~0x02; // Clear the second bit
+		else
+			*shape1 = *shape1 | 0x02; // Set the second bit
+
+		break;
+	case 0x1a:
+		if (value == 0)
+		    *shape0 = *shape0 & ~0x01; // Clear the third bit
+		else
+		    *shape0 = *shape0 | 0x01; // Set the third bit
+
+		break;
+	case 0x1b:
+		if (value == 0)
+		    *shape0 = *shape0 & ~0x02; // Clear the fourth bit
+		else
+		    *shape0 = *shape0 | 0x02; // Set the fourth bit
+
+		break;
+	case 0x01: //attack
+		*attack = value + 1;
+		break;
+	case 0x02: // decay
+		*decay = value + 1;
+		break;
+	case 0x03: // sustain
+		*sustain = (value << 8) + 0xff;
+		break;
+	case 0x04: // release
+		*release = value + 1;
+		break;
+	default:
+		break;
+	}
 }
 
 
