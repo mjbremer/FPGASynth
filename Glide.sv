@@ -1,12 +1,15 @@
-module glide (input CLK, RESET,
-				  input [23:0] in, rate,
-				  output [23:0] out
+module glide #(
+parameter WIDTH = 16
+)
+(input CLK, RESET,
+				  input [WIDTH-1:0] in, rate,
+				  output [WIDTH-1:0] out
 );
 
-logic [23:0] freq, freq_next;
+logic [WIDTH-1:0] freq, freq_next;
 assign out = freq;
 
-enum logic [1:0] {ResetState, Key_false, Key_true}   Curr_State, Next_state;   // Internal state logic
+//enum logic [1:0] {ResetState, Key_false, Key_true}   Curr_State, Next_state;   // Internal state logic
 
 	always_ff @ (posedge CLK)
 	begin
@@ -34,7 +37,7 @@ enum logic [1:0] {ResetState, Key_false, Key_true}   Curr_State, Next_state;   /
 				
 				else if (freq > in)
 				begin
-					if (freq - rate > in)
+					if ($signed(freq - rate) > $signed(in))
 					begin
 						freq_next = freq-rate;
 					end

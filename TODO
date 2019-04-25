@@ -1,10 +1,9 @@
-Add fast release to ADSR (and interpolate Arp with matching wait times) OR Just smooth ADSR Input!!!
 Implement and Test Arp
 Panning / Detune - Both should be easy - 3 mode: Off, Controlled by XY, or controlled by LFO
 Add filters
 Delay/Reverb
 Filter ADSRs
-Any other LFOs
+Any other LFOs - Frequency / Amplitude Modulation
 
 FIX
 Dogshit USB

@@ -8,8 +8,9 @@ module Voice(
 			output [15:0] out
 );
 
-logic [15:0] osc_out0, osc_out1, ADSR_out;
+logic [15:0] osc_out0, osc_out1, ADSR_out, ADSR_smooth;
 logic [15:0] osc_sum;
+logic [15:0] A1_smooth, A0_smooth;
 wire [31:0] Mult;
 wire [23:0] glide_out;
 wire [23:0] F_out;	
@@ -24,7 +25,7 @@ NCO  osc0(.Clk(Clk),
 			.loadF(1'b1),
 			.loadA(1'b1),
 			.F_in(osc_f_in),
-			.A_in(A0),
+			.A_in(A0_smooth),
 			.shape(shape0),
 			.out(osc_out0),
 			.key_on(key_on)
@@ -36,7 +37,7 @@ NCO  osc1(.Clk(Clk),
 			.loadF(1'b1),
 			.loadA(1'b1),
 			.F_in(osc_f_in),
-			.A_in(A1),
+			.A_in(A1_smooth),
 			.shape(shape1),
 			.out(osc_out1),
 			.key_on(key_on)
@@ -51,12 +52,29 @@ ADSR ADSR0 (.CLK(Clk),
 				.R(R),
 				.out(ADSR_out));
 				
-glide g0 (.CLK(Clk),
+glide #(24) g0 (.CLK(Clk),
 				.RESET(Reset | ~key_on),
 				.in(F_out),
 				.rate(glide_rate),
 				.out(glide_out));
 				
+glide #(16) ampsmoother (.CLK(Clk),
+				.RESET(Reset),
+				.in(ADSR_out),
+				.rate(16'h0088),
+				.out(ADSR_smooth));
+				
+glide #(16) a1smoother (.CLK(Clk),
+				.RESET(Reset),
+				.in(A1),
+				.rate(16'h0088),
+				.out(A1_smooth));
+				
+glide #(16) a0smoother (.CLK(Clk),
+				.RESET(Reset),
+				.in(A0),
+				.rate(16'h0088),
+				.out(A0_smooth));
 			
 				
 rom #("notes.mem",	//this is a look up for a note with a certain frequency
@@ -69,7 +87,7 @@ rom #("notes.mem",	//this is a look up for a note with a certain frequency
 always_comb
 	begin   //combine the outputs of each oscillator and modulate by ADSR
 		osc_sum = $signed(osc_out0) + $signed(osc_out1);
-		Mult = $signed(ADSR_out) * $signed(osc_sum);
+		Mult = $signed(ADSR_smooth) * $signed(osc_sum);
 		out = Mult[31:16];
 	end
 
