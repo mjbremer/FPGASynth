@@ -1,5 +1,4 @@
-Add fast release to ADSR (and interpolate Arp with matching wait times) 
-Implement and Test Glide
+Add fast release to ADSR (and interpolate Arp with matching wait times) OR Just smooth ADSR Input!!!
 Implement and Test Arp
 Panning / Detune - Both should be easy - 3 mode: Off, Controlled by XY, or controlled by LFO
 Add filters
@@ -11,4 +10,3 @@ FIX
 Dogshit USB
 Memory usage for more voices
 Find real sampling rate to fix notes
-voice steal popping - "fast-release state"

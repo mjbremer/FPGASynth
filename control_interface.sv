@@ -30,7 +30,8 @@ module control_interface (
 	output logic [15:0] AMP1_0, AMP0_0, AMP1_1, AMP0_1, AMP1_2, AMP0_2, AMP1_3, AMP0_3,
 	output logic KEY3, KEY2, KEY1, KEY0,
 	output logic ARP_EN, GLIDE_EN,
-	output logic [15:0] ARP_TIME, GLIDE_RATE,
+	output logic [15:0] ARP_TIME
+	output logic [24:0] GLIDE_RATE,
 	
 	input logic [5:0] AVL_ADDR,
 	input logic [3:0] AVL_BYTE_EN,
@@ -50,7 +51,7 @@ module control_interface (
 	assign SUSTAIN = reg_file[4][15:0];
 	assign RLEASE = reg_file[5][15:0];
 	assign GLIDE_EN = reg_file[6][0];
-	assign GLIDE_RATE = reg_file[7][15:0];
+	assign GLIDE_RATE = reg_file[7][24:0];
 	assign ARP_EN = reg_file[8][0];
 	assign ARP_TIME = reg_file[9][15:0];
 	

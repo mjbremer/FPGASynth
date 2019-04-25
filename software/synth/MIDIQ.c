@@ -156,6 +156,9 @@ void ControlHandler(uint8_t control, uint8_t value)
 	case 0x05:
 		mix = value;
 		break;
+	case 0x06:
+		*glide_rate = value;
+		break;
 	default:
 		break;
 	}
