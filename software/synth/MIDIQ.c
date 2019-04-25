@@ -20,6 +20,11 @@ static alt_u32* const decay = SYNTH_CONTROLLER_0_BASE + (3*4);
 static alt_u32* const sustain = SYNTH_CONTROLLER_0_BASE + (4*4);
 static alt_u32* const release = SYNTH_CONTROLLER_0_BASE + (5*4);
 
+static alt_u32* const glide_en = SYNTH_CONTROLLER_0_BASE + (6*4);
+static alt_u32* const glide_rate = SYNTH_CONTROLLER_0_BASE + (7*4);
+static alt_u32* const arp_en = SYNTH_CONTROLLER_0_BASE + (8*4);
+static alt_u32* const arp_time = SYNTH_CONTROLLER_0_BASE + (9*4);
+
 static alt_u32* const key_on = SYNTH_CONTROLLER_0_BASE + (32*4);
 static alt_u32* const freq = SYNTH_CONTROLLER_0_BASE + (40*4);
 static alt_u32* const amp1 = SYNTH_CONTROLLER_0_BASE + (48*4);
@@ -49,6 +54,10 @@ void initControls()
 	*decay  = 0x7FFF;
 	*sustain = 0x7FFF;
 	*release = 0x88;
+	*glide_en = 0;
+	*glide_rate = 0x01;	// Slowest
+	*arp_en = 0;
+	*arp_time = 28800; // ~ 100 bpm
 
     mode = SYNTH_MODE_POLY;
 	mix = 0x40;
@@ -66,6 +75,44 @@ void ControlHandler(uint8_t control, uint8_t value)
 {
 
 	switch (control) {
+
+	case 0x14:
+		if (value == 0) {
+
+			if (mode == SYNTH_MODE_GLIDE) {
+				printf("Turn glide off first");
+			} else {
+			mode = SYNTH_MODE_POLY;
+			initStructures(NUM_VOICES);
+			}
+		}
+		else {
+			mode = SYNTH_MODE_MONO;
+			initStructures(1);
+		}
+		break;
+	case 0x15:
+		if (value == 0) {
+			mode = SYNTH_MODE_MONO;
+			initStructures(NUM_VOICES);
+		}
+		else {
+
+			if (mode == SYNTH_MODE_MONO) {
+				mode = SYNTH_MODE_GLIDE;
+				*glide_en = 1;
+			}
+			else {
+				printf("Switch to Mono voicing first");
+			}
+
+		}
+		break;
+	case 0x16:
+		break;
+	case 0x17:
+		break;
+
 	case 0x18:
 		if (value == 0)
 			*shape1 = *shape1 & ~0x01; // Clear the first bit

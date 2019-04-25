@@ -29,6 +29,8 @@ module control_interface (
 	output logic [6:0] FREQ0, FREQ1, FREQ2, FREQ3,
 	output logic [15:0] AMP1_0, AMP0_0, AMP1_1, AMP0_1, AMP1_2, AMP0_2, AMP1_3, AMP0_3,
 	output logic KEY3, KEY2, KEY1, KEY0,
+	output logic ARP_EN, GLIDE_EN,
+	output logic [15:0] ARP_TIME, GLIDE_RATE,
 	
 	input logic [5:0] AVL_ADDR,
 	input logic [3:0] AVL_BYTE_EN,
@@ -38,11 +40,50 @@ module control_interface (
 );
 
    logic [31:0] reg_file [0:63];
-	logic [31:0] reg_file_next [0:63];
+	//logic [31:0] reg_file_next [0:63];
 	
 	
-	assign ATTACK = reg_file[7][15:0];
+	assign SHAPE1 = reg_file[0][1:0];
+	assign SHAPE0 = reg_file[1][1:0];
+	assign ATTACK = reg_file[2][15:0];
+	assign DECAY = reg_file[3][15:0];
+	assign SUSTAIN = reg_file[4][15:0];
+	assign RLEASE = reg_file[5][15:0];
+	assign GLIDE_EN = reg_file[6][0];
+	assign GLIDE_RATE = reg_file[7][15:0];
+	assign ARP_EN = reg_file[8][0];
+	assign ARP_TIME = reg_file[9][15:0];
 	
+	assign KEY0 = reg_file[32][0];
+	assign KEY1 = reg_file[33][0];
+	assign KEY2 = reg_file[34][0];
+	assign KEY3 = reg_file[35][0];
+	
+	assign FREQ0 = reg_file[40][6:0];
+	assign FREQ1 = reg_file[41][6:0];
+	assign FREQ2 = reg_file[42][6:0];
+	assign FREQ3 = reg_file[43][6:0];
+	
+	assign AMP1_0 = reg_file[48][15:0];
+	assign AMP1_1 = reg_file[49][15:0];
+	assign AMP1_2 = reg_file[50][15:0];
+	assign AMP1_3 = reg_file[51][15:0];
+	
+	assign AMP0_0 = reg_file[56][15:0];
+	assign AMP0_1 = reg_file[57][15:0];
+	assign AMP0_2 = reg_file[58][15:0];
+	assign AMP0_3 = reg_file[59][15:0];
+	
+	
+	// Select Regs to output from regfile
+always_comb
+begin
+	if (AVL_READ & AVL_CS)
+		AVL_READDATA = reg_file[AVL_ADDR];
+	else
+		AVL_READDATA = 32'dx;
+end
+
 	
 	always_ff @ (posedge CLK)
 	begin
@@ -56,14 +97,6 @@ module control_interface (
 			begin
 				reg_file[AVL_ADDR] = AVL_WRITEDATA;
 			end
-		else if (AVL_READ & AVL_CS)
-			begin
-				AVL_READDATA = reg_file[AVL_ADDR];
-			end
-		else
-		begin
-			AVL_READDATA = 32'bx;
-		end
 		
 		
 	end
