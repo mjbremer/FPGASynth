@@ -40,7 +40,7 @@ void ProcessMIDIPacket(alt_u32 packet)
 
     switch(CIN) {
         case NOTE_ON:
-        	NoteOnHandler(note, velocity);
+        	NoteOnHandler(note, velocity, HEAD);
 //        	printf("Note on\n");
             break;
         case NOTE_OFF:

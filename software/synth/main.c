@@ -42,7 +42,7 @@ int main(void)
 	UsbSetupMIDI();
 
 	initControls();
-	initStructures();
+	initStructures(NUM_VOICES);
 
 	//-----------------------------------get keycode value------------------------------------------------//
 	usleep(10000);

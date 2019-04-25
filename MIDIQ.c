@@ -477,6 +477,14 @@ int main()
     PrintVoiceInfo(activeVoicesHead);
     PrintWaitingInfo(waitingHead);
 
+	initStructures(4);
+
+
+    printf("%d Free, %d Active, %d Waiting\n",CountVoices(freeVoicesHead),CountVoices(activeVoicesHead), CountWaiting());
+    PrintVoiceInfo(activeVoicesHead);
+    PrintWaitingInfo(waitingHead);
+
+
     NoteOnHandler(0x0b, 0xFF, HEAD);
 
     printf("%d Free, %d Active, %d Waiting\n",CountVoices(freeVoicesHead),CountVoices(activeVoicesHead), CountWaiting());
