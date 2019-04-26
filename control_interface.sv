@@ -30,7 +30,7 @@ module control_interface (
 	output logic [15:0] AMP1_0, AMP0_0, AMP1_1, AMP0_1, AMP1_2, AMP0_2, AMP1_3, AMP0_3,
 	output logic KEY3, KEY2, KEY1, KEY0,
 	output logic ARP_EN, GLIDE_EN,
-	output logic [15:0] ARP_TIME
+	output logic [15:0] ARP_TIME,
 	output logic [24:0] GLIDE_RATE,
 	
 	input logic [5:0] AVL_ADDR,

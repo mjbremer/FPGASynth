@@ -93,8 +93,10 @@ void ControlHandler(uint8_t control, uint8_t value)
 		break;
 	case 0x15:
 		if (value == 0) {
+			if (mode == SYNTH_MODE_GLIDE) {
 			mode = SYNTH_MODE_MONO;
-			initStructures(NUM_VOICES);
+			initStructures(1);
+			}
 		}
 		else {
 
