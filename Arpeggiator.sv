@@ -1,15 +1,10 @@
-module Arpeggiator (input key0, key1, key2, key3, CLK, RESET, Enable, 
-						  input [15:0] countermax, //this tells us how long to stay on each note
-						  output out0, out1, out2, out3
+module Arpeggiator (input logic key0, key1, key2, key3, CLK, RESET, Enable, 
+						  input logic [15:0] countermax, //this tells us how long to stay on each note
+						  output logic out0, out1, out2, out3
 );
 
 logic on0, on1, on2, on3;
-integer counter, counter_next;
-
-assign out0 = on0;
-assign out1 = on1;
-assign out2 = on2;
-assign out3 = on3;
+logic [15:0] counter, counter_next;
 
 enum logic [2:0] {ResetState, Bypass, Key0, Key1, Key2, Key3}   Curr_State, Next_state;   // Internal state logic
 
@@ -69,14 +64,14 @@ enum logic [2:0] {ResetState, Bypass, Key0, Key1, Key2, Key3}   Curr_State, Next
 					Next_state = Bypass;
 				else if (RESET)
 					Next_state = ResetState;
-				else if ((counter_next > countermax) | !key0)
+				else if ((counter_next > countermax) || !key0)
 					begin
-						counter_next = 0;
+						counter_next = 16'b0;
 						Next_state = Key1;
 					end
 				else
 					begin
-						counter_next = counter_next + 1;
+						counter_next = counter_next + 1'b1;
 						on0 = key0;
 					end		
 			end
@@ -87,7 +82,7 @@ enum logic [2:0] {ResetState, Bypass, Key0, Key1, Key2, Key3}   Curr_State, Next
 					Next_state = Bypass;
 				else if (RESET)
 					Next_state = ResetState;
-				else if ((counter_next > countermax) | !key1)
+				else if ((counter_next > countermax) || !key1)
 					begin
 						counter_next = 0;
 						Next_state = Key2;
@@ -105,7 +100,7 @@ enum logic [2:0] {ResetState, Bypass, Key0, Key1, Key2, Key3}   Curr_State, Next
 					Next_state = Bypass;
 				else if (RESET)
 					Next_state = ResetState;
-				else if ((counter_next > countermax) | !key2)
+				else if ((counter_next > countermax) || !key2)
 					begin
 						counter_next = 0;
 						Next_state = Key3;
@@ -123,7 +118,7 @@ enum logic [2:0] {ResetState, Bypass, Key0, Key1, Key2, Key3}   Curr_State, Next
 					Next_state = Bypass;
 				else if (RESET)
 					Next_state = ResetState;
-				else if ((counter_next > countermax) | !key3)
+				else if ((counter_next > countermax) || !key3)
 					begin
 						counter_next = 0;
 						Next_state = Key0;
