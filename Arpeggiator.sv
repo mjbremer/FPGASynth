@@ -1,11 +1,10 @@
-module Arpeggiator (input key0, key1, key2, key3, CLK, RESET, Enable, 
-						  input [15:0] countermax, //this tells us how long to stay on each note
-						  output out0, out1, out2, out3
+module Arpeggiator (input logic key0, key1, key2, key3, CLK, RESET, Enable, 
+						  input logic [15:0] countermax, //this tells us how long to stay on each note
+						  output logic out0, out1, out2, out3
 );
 
 logic on0, on1, on2, on3;
-integer counter, counter_next;
-
+logic [15:0] counter, counter_next;
 assign out0 = on0;
 assign out1 = on1;
 assign out2 = on2;
@@ -71,15 +70,17 @@ enum logic [2:0] {ResetState, Bypass, Key0, Key1, Key2, Key3}   Curr_State, Next
 			Key0 :	//stay on the first pressed note for a certain amount of time
 			begin
 				if (!Enable)
+
 					Next_State = Bypass;
 				else if ((counter_next > countermax) | !key0)
 					begin
 						counter_next = 0;
 						Next_State = Key1;
+
 					end
 				else
 					begin
-						counter_next = counter_next + 1;
+						counter_next = counter_next + 1'b1;
 						on0 = key0;
 					end		
 			end
@@ -87,6 +88,7 @@ enum logic [2:0] {ResetState, Bypass, Key0, Key1, Key2, Key3}   Curr_State, Next
 			Key1 :	//stay on the second pressed note for a certain amount of time
 			begin
 				if (!Enable)
+
 					Next_State = Bypass;
 				else if ((counter_next > countermax) | !key1)
 					begin
@@ -119,6 +121,7 @@ enum logic [2:0] {ResetState, Bypass, Key0, Key1, Key2, Key3}   Curr_State, Next
 			Key3 : //stay on the fourth pressed note for a certain amount of time
 			begin
 				if (!Enable)
+
 					Next_State = Bypass;
 				else if ((counter_next > countermax) | !key3)
 					begin

@@ -6,38 +6,35 @@ timeprecision 1ns;
 
 // These signals are internal because the processor will be 
 // instantiated as a submodule in testbench.
+logic CLK, RESET, key0, key1, key2, key3, Enable; 
+logic [15:0] countermax;
+logic out0, out1, out2, out3;
+logic [2:0] state;
 
-logic AUD_XCK,  AUD_DACDAT, I2C_SDAT, I2C_SCLK;
-logic AUD_BCLK, AUD_ADCDAT, AUD_DACLRCK, AUD_ADCLRCK, CLOCK_50;
-logic [3:0] Key;
-logic SR;
-logic [23:0] phase;
-logic [15:0] out;
-logic [11:0] rom_in;
-logic [15:0] rom_out;
-logic [3:0] KEY;
-logic [17:0] SW;
-logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7;
-synth synth0(.*);	
+integer cont_wait;
+// Instantiating the DUT
+// Make sure the module and signal names match with those in your design
+Arpeggiator Arpeggiator0(.*);	
 
 
 always_comb begin: INTERNAL_MONITORING
-	SR = synth0.Clk;
-	phase = synth0.osc0.Phase_out;
-	out = synth0.osc0.out;
-	rom_in = synth0.osc0.sine.addr;
-	rom_out = synth0.osc0.sine.data;
+	out0 = Arpeggiator0.out0;
+	out1 = Arpeggiator0.out1;
+	out2 = Arpeggiator0.out2;
+	out3 = Arpeggiator0.out3;
+	state = Arpeggiator0.Curr_State;
+	
 end
 	
 
 // Toggle the clock
 // #1 means wait for a delay of 1 timeunit
 always begin : CLOCK_GENERATION
-#1 CLOCK_50 = ~CLOCK_50;
+#1 CLK = ~CLK;
 end
 
 initial begin: CLOCK_INITIALIZATION
-    CLOCK_50 = 0;
+    CLK = 0;
 end 
 
 // Testing begins here
@@ -45,9 +42,16 @@ end
 // Everything happens sequentially inside an initial block
 // as in a software program
 initial begin: TEST_VECTORS
-KEY[3] = 0;		// Toggle Reset
+RESET = 1;		// Toggle Rest
 
-#1300 KEY[3] = 1;
+#2 RESET = 0;
+
+#3 Enable = 1;
+#3 countermax = 20;
+#4 key0 = 1;
+#4 key1 = 1;
+#4 key2 = 1;
+#4 key3 = 1;
 
 end
 endmodule
