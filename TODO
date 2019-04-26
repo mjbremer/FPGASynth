@@ -1,18 +1,11 @@
-Switch to using AES Interface-style controls
-Integrate Polyphony Algorithm
-Add 2-voice mixing - Both amps should add to ~0x2000
-Add Glide
-Mode switcher - Poly/Mono/Glide
+Implement and Test Arp
+Panning / Detune - Both should be easy - 3 mode: Off, Controlled by XY, or controlled by LFO
 Add filters
-Delay/Reverb/Panning
-Add voice stealing
-Arpeggiator
+Delay/Reverb
 Filter ADSRs
-LFOs for whatever
-
+Any other LFOs - Frequency / Amplitude Modulation
 
 FIX
-ADSR Param mapping
-Popping
-Memory usage
-
+Dogshit USB
+Memory usage for more voices
+Find real sampling rate to fix notes

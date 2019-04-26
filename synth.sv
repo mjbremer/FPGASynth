@@ -37,11 +37,14 @@ logic [31:0] ADCDATA;
 
 logic [15:0]ATTACK,RLEASE,SUSTAIN,DECAY;
 logic [1:0] SHAPE1,SHAPE0;
+logic ARP_EN, GLIDE_EN;
+logic [15:0] ARP_TIME;
+logic [23:0] GLIDE_RATE;
 logic [6:0] FREQ0, FREQ1, FREQ2, FREQ3;
 logic [15:0] AMP1_0, AMP0_0, AMP1_1, AMP0_1, AMP1_2, AMP0_2, AMP1_3, AMP0_3;
 logic KEY3, KEY2, KEY1, KEY0;
 wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3; //osc_out4, osc_out5, osc_out6, osc_out7;
-logic [17:0] osc_sum;
+logic [15:0] osc_sum;
 wire reset_ah;
 assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
 
@@ -65,7 +68,9 @@ Voice voice0(
 			.D(DECAY), 
 			.S(SUSTAIN), 
 			.R(RLEASE),
-			.out(osc_out0)
+			.out(osc_out0),
+			.glide_en(GLIDE_EN),
+			.glide_rate(GLIDE_RATE)
 			);
 			
 Voice voice1(
@@ -84,7 +89,8 @@ Voice voice1(
 			.D(DECAY), 
 			.S(SUSTAIN), 
 			.R(RLEASE),
-			.out(osc_out1)
+			.out(osc_out1),
+			.glide_en(1'b0)
 			);
 			
 Voice voice2(
@@ -103,7 +109,8 @@ Voice voice2(
 			.D(DECAY), 
 			.S(SUSTAIN), 
 			.R(RLEASE),
-			.out(osc_out2)
+			.out(osc_out2),
+			.glide_en(1'b0)
 			);
 			
 Voice voice3(
@@ -122,14 +129,15 @@ Voice voice3(
 			.D(DECAY), 
 			.S(SUSTAIN), 
 			.R(RLEASE),
-			.out(osc_out3)
+			.out(osc_out3),
+			.glide_en(1'b0)
 			);
 			
 			
 always_comb
 	begin
 		osc_sum = osc_out0 + osc_out1 + osc_out2 + osc_out3; //+ osc_out4 + osc_out5 + osc_out6 + osc_out7;
-		osc_out = osc_sum[17:2];
+		osc_out = osc_sum;
 	end
 			
 
@@ -201,7 +209,11 @@ soc soc0(.clk_clk(CLOCK_50),
 		.r_rlease(RLEASE),               //               r.rlease
 		.s_sustain(SUSTAIN),              //               s.sustain
 		.shape0_shape0(SHAPE0),          //          shape0.shape0
-		.shape1_shape1(SHAPE1)           //          shape1.shape1
+		.shape1_shape1(SHAPE1),           //          shape1.shape1
+		.glide_en_glide_en(GLIDE_EN),
+		.glide_rate_glide_rate(GLIDE_RATE),
+		.arp_en_arp_en(ARP_EN),
+		.arp_time_arp_time(ARP_TIME)
 		 );
 
 audio_interface ai0(.LDATA(LDATA),
