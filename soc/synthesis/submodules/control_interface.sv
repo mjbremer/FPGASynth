@@ -32,6 +32,7 @@ module control_interface (
 	output logic ARP_EN, GLIDE_EN,
 	output logic [15:0] ARP_TIME,
 	output logic [24:0] GLIDE_RATE,
+	output logic PingPongEn,
 	
 	input logic [5:0] AVL_ADDR,
 	input logic [3:0] AVL_BYTE_EN,
@@ -54,6 +55,7 @@ module control_interface (
 	assign GLIDE_RATE = reg_file[7][24:0];
 	assign ARP_EN = reg_file[8][0];
 	assign ARP_TIME = reg_file[9][15:0];
+	assign PingPongEn = reg_file[10][0];
 	
 	assign KEY0 = reg_file[32][0];
 	assign KEY1 = reg_file[33][0];

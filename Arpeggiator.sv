@@ -1,9 +1,9 @@
-module Arpeggiator (input logic key0, key1, key2, key3, CLK, RESET, Enable, 
+module Arpeggiator (input logic key0, key1, key2, key3, CLK, RESET, Enable, PingPongEn,
 						  input logic [15:0] countermax, //this tells us how long to stay on each note
 						  output logic out0, out1, out2, out3
 );
 
-logic on0, on1, on2, on3;
+logic on0, on1, on2, on3, direction, direction_next;
 logic [15:0] counter, counter_next;
 assign out0 = on0;
 assign out1 = on1;
@@ -18,16 +18,19 @@ enum logic [2:0] {ResetState, Bypass, Key0, Key1, Key2, Key3}   Curr_State, Next
 		begin
 			Curr_State <= ResetState;
 			counter <= 0;
+			direction <= 0;
 		end
 		else if (!Enable)
 		begin
 			Curr_State <= Bypass;
 			counter <= 0;
+			direction <= 1'b0;
 		end
 		else
 		begin
 		Curr_State <= Next_State;		
 		counter <= counter_next;
+		direction <= direction_next;
 		end
 
 
@@ -37,6 +40,7 @@ enum logic [2:0] {ResetState, Bypass, Key0, Key1, Key2, Key3}   Curr_State, Next
 	begin 
 		// Default next state is staying at current state
 		Next_State = Curr_State;
+		direction_next = direction;
 		counter_next = counter;
 		on0 = 1'b0;
 		on1 = 1'b0;
@@ -70,13 +74,14 @@ enum logic [2:0] {ResetState, Bypass, Key0, Key1, Key2, Key3}   Curr_State, Next
 			Key0 :	//stay on the first pressed note for a certain amount of time
 			begin
 				if (!Enable)
-
 					Next_State = Bypass;
 				else if ((counter_next > countermax) | !key0)
 					begin
 						counter_next = 0;
-						Next_State = Key1;
-
+						if (PingPongEn & (direction == 1))
+							Next_State = Key3;
+						else
+							Next_State = Key1;
 					end
 				else
 					begin
@@ -88,12 +93,17 @@ enum logic [2:0] {ResetState, Bypass, Key0, Key1, Key2, Key3}   Curr_State, Next
 			Key1 :	//stay on the second pressed note for a certain amount of time
 			begin
 				if (!Enable)
-
 					Next_State = Bypass;
 				else if ((counter_next > countermax) | !key1)
 					begin
 						counter_next = 0;
-						Next_State = Key2;
+						if (PingPongEn & (direction == 1'b1))
+							begin
+								direction_next = 1'b0;
+								Next_State = Key0;
+							end
+						else
+							Next_State = Key2;
 					end
 				else
 					begin
@@ -109,7 +119,15 @@ enum logic [2:0] {ResetState, Bypass, Key0, Key1, Key2, Key3}   Curr_State, Next
 				else if ((counter_next > countermax) | !key2)
 					begin
 						counter_next = 0;
-						Next_State = Key3;
+						if (PingPongEn & (direction == 1'b0))
+							begin
+								direction_next = 1'b1;
+								Next_State = Key3;
+							end
+						else if (direction == 1'b1)
+							Next_State = Key1;
+						else 
+							Next_State = Key3;
 					end
 				else
 					begin
@@ -121,12 +139,14 @@ enum logic [2:0] {ResetState, Bypass, Key0, Key1, Key2, Key3}   Curr_State, Next
 			Key3 : //stay on the fourth pressed note for a certain amount of time
 			begin
 				if (!Enable)
-
 					Next_State = Bypass;
 				else if ((counter_next > countermax) | !key3)
 					begin
 						counter_next = 0;
-						Next_State = Key0;
+						if (PingPongEn & (direction == 1))
+							Next_State = Key2;
+						else
+							Next_State = Key0;
 					end
 				else
 					begin

@@ -44,6 +44,7 @@ logic [6:0] FREQ0, FREQ1, FREQ2, FREQ3;
 logic [15:0] AMP1_0, AMP0_0, AMP1_1, AMP0_1, AMP1_2, AMP0_2, AMP1_3, AMP0_3;
 logic KEY3, KEY2, KEY1, KEY0;
 logic ARP3, ARP2, ARP1, ARP0;
+logic PingPongEn;
 
 wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3; //osc_out4, osc_out5, osc_out6, osc_out7;
 logic [15:0] osc_sum;
@@ -62,6 +63,7 @@ Arpeggiator arp0(
 						.CLK(AUD_DACLRCK),
 						.RESET(reset_ah),
 						.Enable(ARP_EN),
+						.PingPongEn(PingPongEn),
 						.countermax(ARP_TIME),
 						.out0(ARP0),
 						.out1(ARP1),
@@ -306,7 +308,8 @@ soc soc0(.clk_clk(CLOCK_50),
 		.glide_en_glide_en(GLIDE_EN),
 		.glide_rate_glide_rate(GLIDE_RATE),
 		.arp_en_arp_en(ARP_EN),
-		.arp_time_arp_time(ARP_TIME)
+		.arp_time_arp_time(ARP_TIME),
+		.pingpongen_new_signal(PingPongEn)
 		 );
 
 audio_interface ai0(.LDATA(LDATA),

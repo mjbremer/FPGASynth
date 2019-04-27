@@ -556,7 +556,7 @@ set_location_assignment PIN_A14 -to ENETCLK_25
 
 set_global_assignment -name FAMILY "Cyclone IV E"
 set_global_assignment -name DEVICE EP4CE115F29C7
-set_global_assignment -name TOP_LEVEL_ENTITY synth
+set_global_assignment -name TOP_LEVEL_ENTITY Arpeggiator
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "20:16:21  APRIL 12, 2019"
 set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
@@ -596,11 +596,11 @@ set_global_assignment -name VHDL_FILE audio_interface.vhd
 set_global_assignment -name SYSTEMVERILOG_FILE Voice.sv
 set_global_assignment -name SYSTEMVERILOG_FILE Glide.sv
 set_global_assignment -name SYSTEMVERILOG_FILE Arpeggiator.sv
-set_global_assignment -name EDA_TEST_BENCH_FILE testbench.sv -section_id testbench
 set_global_assignment -name EDA_TEST_BENCH_NAME arptestbench -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id arptestbench
-set_global_assignment -name EDA_TEST_BENCH_RUN_SIM_FOR "1000 s" -section_id arptestbench
+set_global_assignment -name EDA_TEST_BENCH_RUN_SIM_FOR "1000 ns" -section_id arptestbench
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME arptestbench -section_id arptestbench
+set_global_assignment -name EDA_TEST_BENCH_FILE testbench.sv -section_id testbench
 set_global_assignment -name EDA_TEST_BENCH_FILE arptestbench.sv -section_id arptestbench
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
