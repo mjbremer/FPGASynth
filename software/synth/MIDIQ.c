@@ -59,6 +59,8 @@ void initControls()
 	*arp_en = 0;
 	*arp_time = 3600; // ~ 100 bpm
 
+	// Arp time range 1500 to 6000
+
     mode = SYNTH_MODE_POLY;
 	mix = 0x40;
 
@@ -166,6 +168,9 @@ void ControlHandler(uint8_t control, uint8_t value)
 		break;
 	case 0x06:
 		*glide_rate = value;
+		break;
+	case 0x07:
+		*arp_time = 6000 - (value * 36);
 		break;
 	default:
 		break;
