@@ -40,18 +40,27 @@ logic [1:0] SHAPE1,SHAPE0;
 logic ARP_EN, GLIDE_EN;
 logic [15:0] ARP_TIME;
 logic [23:0] GLIDE_RATE;
+logic PingPongEn;
+
+
 logic [6:0] FREQ0, FREQ1, FREQ2, FREQ3;
 logic [15:0] AMP1_0, AMP0_0, AMP1_1, AMP0_1, AMP1_2, AMP0_2, AMP1_3, AMP0_3;
 logic KEY3, KEY2, KEY1, KEY0;
 logic ARP3, ARP2, ARP1, ARP0;
-logic PingPongEn;
+
+
+logic [6:0] FREQ4, FREQ5, FREQ6, FREQ7;
+logic [15:0] AMP1_4, AMP0_4, AMP1_5, AMP0_5, AMP1_6, AMP0_6, AMP1_7, AMP0_7;
+logic KEY4, KEY5, KEY6, KEY7;
+logic ARP4, ARP5, ARP6, ARP7;
+
 
 assign LEDG[0] = ARP3;
 assign LEDG[1] = ARP2;
 assign LEDG[2] = ARP1;
 assign LEDG[3] = ARP0;
 
-wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3; //osc_out4, osc_out5, osc_out6, osc_out7;
+wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3, osc_out4, osc_out5, osc_out6, osc_out7;
 logic [15:0] osc_sum;
 wire reset_ah;
 assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
@@ -60,6 +69,12 @@ assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
 Initializer init(.INIT(INIT), .INIT_FINISH(INIT_FINISH), .Clk(CLOCK_50), .Reset(reset_ah));
 
 
+
+//Pending expansion of of Arpeggiator for 8 voices
+assign ARP7 = KEY7;
+assign ARP6 = KEY6;
+assign ARP5 = KEY5;
+assign ARP4 = KEY4;
 Arpeggiator arp0(
 						.key0(KEY0),
 						.key1(KEY1),
@@ -156,87 +171,87 @@ Voice voice3(
 			.glide_en(1'b0)
 			);
 			
-//Voice voice4(
-//			.F_in(FREQ3),
-//			.Clk(AUD_DACLRCK), 
-//			.CLOCK_50(CLOCK_50), 
-//			.Reset(reset_ah), 
-//			.loadF(1'b1), 
-//			.loadA(1'b1), 
-//			.key_on(ARP3), 
-//			.A1(AMP1_3),
-//			.A0(AMP0_3),
-//			.shape1(SHAPE1),
-//			.shape0(SHAPE0),
-//			.A(ATTACK), 
-//			.D(DECAY), 
-//			.S(SUSTAIN), 
-//			.R(RLEASE),
-//			.out(LEDR[0]),
-//			.glide_en(1'b0)
-//				);
-//Voice voice5(
-//			.F_in(FREQ3),
-//			.Clk(AUD_DACLRCK), 
-//			.CLOCK_50(CLOCK_50), 
-//			.Reset(reset_ah), 
-//			.loadF(1'b1), 
-//			.loadA(1'b1), 
-//			.key_on(ARP3), 
-//			.A1(AMP1_3),
-//			.A0(AMP0_3),
-//			.shape1(SHAPE1),
-//			.shape0(SHAPE0),
-//			.A(ATTACK), 
-//			.D(DECAY), 
-//			.S(SUSTAIN), 
-//			.R(RLEASE),
-//			.out(LEDR[1]),
-//			.glide_en(1'b0)
-//				);
-//Voice voice6(
-//			.F_in(FREQ3),
-//			.Clk(AUD_DACLRCK), 
-//			.CLOCK_50(CLOCK_50), 
-//			.Reset(reset_ah), 
-//			.loadF(1'b1), 
-//			.loadA(1'b1), 
-//			.key_on(ARP3), 
-//			.A1(AMP1_3),
-//			.A0(AMP0_3),
-//			.shape1(SHAPE1),
-//			.shape0(SHAPE0),
-//			.A(ATTACK), 
-//			.D(DECAY), 
-//			.S(SUSTAIN), 
-//			.R(RLEASE),
-//			.out(LEDR[2]),
-//			.glide_en(1'b0)
-//				);	
-//Voice voice7(
-//			.F_in(FREQ3),
-//			.Clk(AUD_DACLRCK), 
-//			.CLOCK_50(CLOCK_50), 
-//			.Reset(reset_ah), 
-//			.loadF(1'b1), 
-//			.loadA(1'b1), 
-//			.key_on(ARP3), 
-//			.A1(AMP1_3),
-//			.A0(AMP0_3),
-//			.shape1(SHAPE1),
-//			.shape0(SHAPE0),
-//			.A(ATTACK), 
-//			.D(DECAY), 
-//			.S(SUSTAIN), 
-//			.R(RLEASE),
-//			.out(LEDR[3]),
-//			.glide_en(1'b0)
-//				);
-//			
+Voice voice4(
+			.F_in(FREQ4),
+			.Clk(AUD_DACLRCK), 
+			.CLOCK_50(CLOCK_50), 
+			.Reset(reset_ah), 
+			.loadF(1'b1), 
+			.loadA(1'b1), 
+			.key_on(ARP4), 
+			.A1(AMP1_4),
+			.A0(AMP0_4),
+			.shape1(SHAPE1),
+			.shape0(SHAPE0),
+			.A(ATTACK), 
+			.D(DECAY), 
+			.S(SUSTAIN), 
+			.R(RLEASE),
+			.out(osc_out4),
+			.glide_en(1'b0)
+				);
+Voice voice5(
+			.F_in(FREQ5),
+			.Clk(AUD_DACLRCK), 
+			.CLOCK_50(CLOCK_50), 
+			.Reset(reset_ah), 
+			.loadF(1'b1), 
+			.loadA(1'b1), 
+			.key_on(ARP5), 
+			.A1(AMP1_5),
+			.A0(AMP0_5),
+			.shape1(SHAPE1),
+			.shape0(SHAPE0),
+			.A(ATTACK), 
+			.D(DECAY), 
+			.S(SUSTAIN), 
+			.R(RLEASE),
+			.out(osc_out5),
+			.glide_en(1'b0)
+				);
+Voice voice6(
+			.F_in(FREQ3),
+			.Clk(AUD_DACLRCK), 
+			.CLOCK_50(CLOCK_50), 
+			.Reset(reset_ah), 
+			.loadF(1'b1), 
+			.loadA(1'b1), 
+			.key_on(ARP6), 
+			.A1(AMP1_6),
+			.A0(AMP0_6),
+			.shape1(SHAPE1),
+			.shape0(SHAPE0),
+			.A(ATTACK), 
+			.D(DECAY), 
+			.S(SUSTAIN), 
+			.R(RLEASE),
+			.out(osc_out6),
+			.glide_en(1'b0)
+				);	
+Voice voice7(
+			.F_in(FREQ7),
+			.Clk(AUD_DACLRCK), 
+			.CLOCK_50(CLOCK_50), 
+			.Reset(reset_ah), 
+			.loadF(1'b1), 
+			.loadA(1'b1), 
+			.key_on(ARP7), 
+			.A1(AMP1_7),
+			.A0(AMP0_7),
+			.shape1(SHAPE1),
+			.shape0(SHAPE0),
+			.A(ATTACK), 
+			.D(DECAY), 
+			.S(SUSTAIN), 
+			.R(RLEASE),
+			.out(osc_out7),
+			.glide_en(1'b0)
+				);
+			
 			
 always_comb
 	begin
-		osc_sum = osc_out0 + osc_out1 + osc_out2 + osc_out3; //+ osc_out4 + osc_out5 + osc_out6 + osc_out7;
+		osc_sum = osc_out0 + osc_out1 + osc_out2 + osc_out3 + osc_out4 + osc_out5 + osc_out6 + osc_out7;
 		osc_out = osc_sum;
 	end
 			
@@ -306,6 +321,22 @@ soc soc0(.clk_clk(CLOCK_50),
 		.key1_key1(KEY1),              //            key1.key1
 		.key2_key2(KEY2),              //            key2.key2
 		.key3_key3(KEY3),              //            key3.key3
+		.amp0_4_amp0_4(AMP0_4),          //          amp0_0.amp0_0
+		.amp0_5_amp0_5(AMP0_5),          //          amp0_1.amp0_1
+		.amp0_6_amp0_6(AMP0_6),          //          amp0_2.amp0_2
+		.amp0_7_amp0_7(AMP0_7),          //          amp0_3.amp0_3
+		.amp1_4_amp1_4(AMP1_4),          //          amp1_0.amp1_0
+		.amp1_5_amp1_5(AMP1_5),          //          amp1_1.amp1_1
+		.amp1_6_amp1_6(AMP1_6),          //          amp1_2.amp1_2
+		.amp1_7_amp1_7(AMP1_7),          //          amp1_3.amp1_3
+		.freq4_freq4(FREQ4),            //           freq0.freq0
+		.freq5_freq5(FREQ5),            //           freq1.freq1
+		.freq6_freq6(FREQ6),            //           freq2.freq2
+		.freq7_freq7(FREQ7),            //           freq3.freq3
+		.key4_key4(KEY4),              //            key0.key0
+		.key5_key5(KEY5),              //            key1.key1
+		.key6_key6(KEY6),              //            key2.key2
+		.key7_key7(KEY7),              //            key3.key3
 		.r_rlease(RLEASE),               //               r.rlease
 		.s_sustain(SUSTAIN),              //               s.sustain
 		.shape0_shape0(SHAPE0),          //          shape0.shape0
@@ -314,7 +345,7 @@ soc soc0(.clk_clk(CLOCK_50),
 		.glide_rate_glide_rate(GLIDE_RATE),
 		.arp_en_arp_en(ARP_EN),
 		.arp_time_arp_time(ARP_TIME),
-		.pingpongen_new_signal(PingPongEn)
+		.pingpongen_pingpongen(PingPongEn)
 		 );
 
 audio_interface ai0(.LDATA(LDATA),

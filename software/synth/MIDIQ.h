@@ -13,7 +13,7 @@
 #include <alt_types.h>
 #endif
 
-#define NUM_VOICES     (4)
+#define NUM_VOICES     (8)
 #define NUM_KEYS     (128)
 
 #define VOICE_NOKEY     (255)

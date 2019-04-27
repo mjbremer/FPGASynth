@@ -1,4 +1,4 @@
-Add Arp Pingpong
+Fix Arp Pingpong
 Panning - XY vs LFO
 Detune - XY only
 Filters
@@ -7,5 +7,4 @@ Filter ADSRs + LFOs
 Any other LFOs - Frequency / Amplitude Modulation
 
 FIX
-Memory usage for more voices
 Find real sampling rate to fix notes

@@ -18,7 +18,7 @@ add_interface_port ATTACK ATTACK attack Output 16
 interfaces = ["ATTACK", "RLEASE", "SUSTAIN", "DECAY", "SHAPE1", "SHAPE0"]
 widths = ["16", "16", "16", "16", "2", "2"]
 
-voices = 4
+voices = 8
 
 for i in range(voices):
     interfaces.append("FREQ" + str(i))

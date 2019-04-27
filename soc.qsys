@@ -249,6 +249,14 @@
          type = "String";
       }
    }
+   element soc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
    element sysid_qsys_0
    {
       datum _sortIndex
@@ -312,6 +320,26 @@
    type="conduit"
    dir="end" />
  <interface
+   name="amp0_4"
+   internal="Synth_Controller_0.AMP0_4"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="amp0_5"
+   internal="Synth_Controller_0.AMP0_5"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="amp0_6"
+   internal="Synth_Controller_0.AMP0_6"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="amp0_7"
+   internal="Synth_Controller_0.AMP0_7"
+   type="conduit"
+   dir="end" />
+ <interface
    name="amp1_0"
    internal="Synth_Controller_0.AMP1_0"
    type="conduit"
@@ -329,6 +357,26 @@
  <interface
    name="amp1_3"
    internal="Synth_Controller_0.AMP1_3"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="amp1_4"
+   internal="Synth_Controller_0.AMP1_4"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="amp1_5"
+   internal="Synth_Controller_0.AMP1_5"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="amp1_6"
+   internal="Synth_Controller_0.AMP1_6"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="amp1_7"
+   internal="Synth_Controller_0.AMP1_7"
    type="conduit"
    dir="end" />
  <interface
@@ -364,6 +412,26 @@
    type="conduit"
    dir="end" />
  <interface
+   name="freq4"
+   internal="Synth_Controller_0.FREQ4"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="freq5"
+   internal="Synth_Controller_0.FREQ5"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="freq6"
+   internal="Synth_Controller_0.FREQ6"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="freq7"
+   internal="Synth_Controller_0.FREQ7"
+   type="conduit"
+   dir="end" />
+ <interface
    name="glide_en"
    internal="Synth_Controller_0.GLIDE_EN"
    type="conduit"
@@ -391,6 +459,26 @@
  <interface
    name="key3"
    internal="Synth_Controller_0.KEY3"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="key4"
+   internal="Synth_Controller_0.KEY4"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="key5"
+   internal="Synth_Controller_0.KEY5"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="key6"
+   internal="Synth_Controller_0.KEY6"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="key7"
+   internal="Synth_Controller_0.KEY7"
    type="conduit"
    dir="end" />
  <interface
@@ -425,7 +513,7 @@
    dir="end" />
  <interface
    name="pingpongen"
-   internal="Synth_Controller_0.PingPongEn"
+   internal="Synth_Controller_0.PINGPONGEN"
    type="conduit"
    dir="end" />
  <interface

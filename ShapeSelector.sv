@@ -43,3 +43,57 @@ rom #("triangle.mem", 12,16) triangle (.Clk(Clk),
 
 
 endmodule
+
+module DualShapeSelector
+(
+        input Clk, Reset,
+        input [11:0] addr, // Address lines for saving data to memory
+		  input [1:0] sel1, sel0,
+        output logic [15:0] data1, data0 // Data out
+);
+
+wire [15:0] sine_out, square_out, saw_out, tri_out;
+
+mux4_1  #(16) selector1 (.A(sine_out),
+								.B(square_out),
+								.C(saw_out),
+								.D(tri_out),
+								.sel(sel1),
+								.Out(data1));
+								
+mux4_1  #(16) selector0 (.A(sine_out),
+								.B(square_out),
+								.C(saw_out),
+								.D(tri_out),
+								.sel(sel0),
+								.Out(data0));
+
+rom #("sine.mem", 12,16) sine (.Clk(Clk),
+										 .Reset(Reset),
+										 .CS(1'b1),
+										 .addr(addr),
+										 .data(sine_out));
+										 
+rom #("square.mem", 12,16) square (.Clk(Clk),
+											  .Reset(Reset),
+										     .CS(1'b1),
+										     .addr(addr),
+										     .data(square_out));
+
+rom #("saw.mem", 12,16) saw (.Clk(Clk),
+										 .Reset(Reset),
+										 .CS(1'b1),
+										 .addr(addr),
+										 .data(saw_out));
+
+rom #("triangle.mem", 12,16) triangle (.Clk(Clk),
+										 .Reset(Reset),
+										 .CS(1'b1),
+										 .addr(addr),
+										 .data(tri_out));
+
+
+
+
+endmodule
+
