@@ -149,6 +149,83 @@ Voice voice3(
 			.glide_en(1'b0)
 			);
 			
+//Voice voice4(
+//			.F_in(FREQ3),
+//			.Clk(AUD_DACLRCK), 
+//			.CLOCK_50(CLOCK_50), 
+//			.Reset(reset_ah), 
+//			.loadF(1'b1), 
+//			.loadA(1'b1), 
+//			.key_on(ARP3), 
+//			.A1(AMP1_3),
+//			.A0(AMP0_3),
+//			.shape1(SHAPE1),
+//			.shape0(SHAPE0),
+//			.A(ATTACK), 
+//			.D(DECAY), 
+//			.S(SUSTAIN), 
+//			.R(RLEASE),
+//			.out(LEDR[0]),
+//			.glide_en(1'b0)
+//				);
+//Voice voice5(
+//			.F_in(FREQ3),
+//			.Clk(AUD_DACLRCK), 
+//			.CLOCK_50(CLOCK_50), 
+//			.Reset(reset_ah), 
+//			.loadF(1'b1), 
+//			.loadA(1'b1), 
+//			.key_on(ARP3), 
+//			.A1(AMP1_3),
+//			.A0(AMP0_3),
+//			.shape1(SHAPE1),
+//			.shape0(SHAPE0),
+//			.A(ATTACK), 
+//			.D(DECAY), 
+//			.S(SUSTAIN), 
+//			.R(RLEASE),
+//			.out(LEDR[1]),
+//			.glide_en(1'b0)
+//				);
+//Voice voice6(
+//			.F_in(FREQ3),
+//			.Clk(AUD_DACLRCK), 
+//			.CLOCK_50(CLOCK_50), 
+//			.Reset(reset_ah), 
+//			.loadF(1'b1), 
+//			.loadA(1'b1), 
+//			.key_on(ARP3), 
+//			.A1(AMP1_3),
+//			.A0(AMP0_3),
+//			.shape1(SHAPE1),
+//			.shape0(SHAPE0),
+//			.A(ATTACK), 
+//			.D(DECAY), 
+//			.S(SUSTAIN), 
+//			.R(RLEASE),
+//			.out(LEDR[2]),
+//			.glide_en(1'b0)
+//				);	
+//Voice voice7(
+//			.F_in(FREQ3),
+//			.Clk(AUD_DACLRCK), 
+//			.CLOCK_50(CLOCK_50), 
+//			.Reset(reset_ah), 
+//			.loadF(1'b1), 
+//			.loadA(1'b1), 
+//			.key_on(ARP3), 
+//			.A1(AMP1_3),
+//			.A0(AMP0_3),
+//			.shape1(SHAPE1),
+//			.shape0(SHAPE0),
+//			.A(ATTACK), 
+//			.D(DECAY), 
+//			.S(SUSTAIN), 
+//			.R(RLEASE),
+//			.out(LEDR[3]),
+//			.glide_en(1'b0)
+//				);
+//			
 			
 always_comb
 	begin
