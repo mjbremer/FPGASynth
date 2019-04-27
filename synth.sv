@@ -43,6 +43,8 @@ logic [23:0] GLIDE_RATE;
 logic [6:0] FREQ0, FREQ1, FREQ2, FREQ3;
 logic [15:0] AMP1_0, AMP0_0, AMP1_1, AMP0_1, AMP1_2, AMP0_2, AMP1_3, AMP0_3;
 logic KEY3, KEY2, KEY1, KEY0;
+logic ARP3, ARP2, ARP1, ARP0;
+
 wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3; //osc_out4, osc_out5, osc_out6, osc_out7;
 logic [15:0] osc_sum;
 wire reset_ah;
@@ -52,6 +54,20 @@ assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
 Initializer init(.INIT(INIT), .INIT_FINISH(INIT_FINISH), .Clk(CLOCK_50), .Reset(reset_ah));
 
 
+Arpeggiator arp0(
+						.key0(KEY0),
+						.key1(KEY1),
+						.key2(KEY2),
+						.key3(KEY3),
+						.CLK(AUD_DACLRCK),
+						.RESET(reset_ah),
+						.Enable(ARP_EN),
+						.countermax(ARP_TIME),
+						.out0(ARP0),
+						.out1(ARP1),
+						.out2(ARP2),
+						.out3(ARP3));
+
 Voice voice0(
 			.F_in(FREQ0),
 			.Clk(AUD_DACLRCK), 
@@ -59,7 +75,7 @@ Voice voice0(
 			.Reset(reset_ah), 
 			.loadF(1'b1), 
 			.loadA(1'b1), 
-			.key_on(KEY0), 
+			.key_on(ARP0), 
 			.A1(AMP1_0),
 			.A0(AMP0_0),
 			.shape1(SHAPE1),
@@ -80,7 +96,7 @@ Voice voice1(
 			.Reset(reset_ah), 
 			.loadF(1'b1), 
 			.loadA(1'b1), 
-			.key_on(KEY1), 
+			.key_on(ARP1), 
 			.A1(AMP1_1),
 			.A0(AMP0_1),
 			.shape1(SHAPE1),
@@ -100,7 +116,7 @@ Voice voice2(
 			.Reset(reset_ah), 
 			.loadF(1'b1), 
 			.loadA(1'b1), 
-			.key_on(KEY2), 
+			.key_on(ARP2), 
 			.A1(AMP1_2),
 			.A0(AMP0_2),
 			.shape1(SHAPE1),
@@ -120,7 +136,7 @@ Voice voice3(
 			.Reset(reset_ah), 
 			.loadF(1'b1), 
 			.loadA(1'b1), 
-			.key_on(KEY3), 
+			.key_on(ARP3), 
 			.A1(AMP1_3),
 			.A0(AMP0_3),
 			.shape1(SHAPE1),

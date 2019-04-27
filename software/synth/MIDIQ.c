@@ -57,7 +57,7 @@ void initControls()
 	*glide_en = 0;
 	*glide_rate = 0x01;	// Slowest
 	*arp_en = 0;
-	*arp_time = 28800; // ~ 100 bpm
+	*arp_time = 3600; // ~ 100 bpm
 
     mode = SYNTH_MODE_POLY;
 	mix = 0x40;
@@ -142,6 +142,12 @@ void ControlHandler(uint8_t control, uint8_t value)
 		else
 		    *shape0 = *shape0 | 0x02; // Set the fourth bit
 
+		break;
+	case 0x20:
+		if (value == 0)
+			*arp_en = 0x00;
+		else
+			*arp_en = 0x01;
 		break;
 	case 0x01: //attack
 		*attack = value + 1;
