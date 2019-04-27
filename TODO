@@ -1,11 +1,11 @@
-Implement and Test Arp
-Panning / Detune - Both should be easy - 3 mode: Off, Controlled by XY, or controlled by LFO
-Add filters
+Add Arp Pingpong
+Panning - XY vs LFO
+Detune - XY only
+Filters
 Delay/Reverb
-Filter ADSRs
+Filter ADSRs + LFOs
 Any other LFOs - Frequency / Amplitude Modulation
 
 FIX
-Dogshit USB
 Memory usage for more voices
 Find real sampling rate to fix notes

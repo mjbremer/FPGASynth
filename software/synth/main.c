@@ -37,7 +37,18 @@ int main(void)
 {
 
 	alt_u8 toggle = 0;
-	alt_u32 last_midi_msg = 0, new_midi_msg = 0;
+	alt_u16 last_bytes[0x10];
+	alt_u16 new_bytes[0x10];
+ int debugflag = 0;
+
+
+	for (int i = 0; i < 0x20; i++)
+	{
+		last_bytes[i] = 0;
+		new_bytes[i] = 0;
+	}
+	alt_u32 last_midi_msg = 0;
+	alt_u32 new_midi_msg = 0;
 
 	UsbSetupMIDI();
 
@@ -55,19 +66,37 @@ int main(void)
 		// messages when it gets a request, even if I only specify one msg worf
 		UsbGetMIDIMsg(toggle);
 		while (!(IO_read(HPI_STATUS) & HPI_STATUS_SIE1msg_FLAG)) {
-			UsbGetMIDIMsg(toggle);
-			usleep(2000); // This is probably unnecessary, but 200 still had occasional deadlocks
+
+//			UsbGetMIDIMsg(++toggle);
+//			usleep(2000); // This is probably unnecessary, but 200 still had occasional deadlocks
 		};
 
 		UsbWaitTDListDone();
 
+
 		new_midi_msg = (UsbRead(0x51e) << 16) | UsbRead(0x51c);
 
+
 		if (new_midi_msg != last_midi_msg) {
-//			printf("%08x\n", new_midi_msg);
-			last_midi_msg = new_midi_msg;
 			ProcessMIDIPacket(new_midi_msg);
+			last_midi_msg = new_midi_msg;
 		}
+
+//		for (int i = 0; i < 0x10; i++)
+//		{
+//			new_bytes[i] = UsbRead(0x51c + (2*i));
+//			if (new_bytes[i] != last_bytes[i]) {
+//				printf("0x%04x: 0x%04x\n", 0x51c + (2*i),new_bytes[i]);
+//				last_bytes[i] = new_bytes[i];
+//				debugflag = 1;
+//				//ProcessMIDIPacket(new_midi_msg);
+//			}
+//		}
+////
+//		if (debugflag == 1) {
+//			printf("\n");
+//			debugflag = 0;
+//		}
 
 
 		//UsbCheckUnplug();
