@@ -24,6 +24,7 @@ static alt_u32* const glide_en = SYNTH_CONTROLLER_0_BASE + (6*4);
 static alt_u32* const glide_rate = SYNTH_CONTROLLER_0_BASE + (7*4);
 static alt_u32* const arp_en = SYNTH_CONTROLLER_0_BASE + (8*4);
 static alt_u32* const arp_time = SYNTH_CONTROLLER_0_BASE + (9*4);
+static alt_u32* const pingpong = SYNTH_CONTROLLER_0_BASE + (10*4);
 
 static alt_u32* const key_on = SYNTH_CONTROLLER_0_BASE + (32*4);
 static alt_u32* const freq = SYNTH_CONTROLLER_0_BASE + (40*4);
@@ -58,6 +59,7 @@ void initControls()
 	*glide_rate = 0x01;	// Slowest
 	*arp_en = 0;
 	*arp_time = 3600; // ~ 100 bpm
+	*pingpong = 0;
 
 	// Arp time range 1500 to 6000
 
@@ -151,6 +153,12 @@ void ControlHandler(uint8_t control, uint8_t value)
 		else
 			*arp_en = 0x01;
 		break;
+	case 0x21:
+		if (value == 0)
+			*pingpong = 0x00;
+		else
+			*pingpong = 0x01;
+		break;
 	case 0x01: //attack
 		*attack = value + 1;
 		break;
@@ -170,7 +178,7 @@ void ControlHandler(uint8_t control, uint8_t value)
 		*glide_rate = value;
 		break;
 	case 0x07:
-		*arp_time = 6000 - (value * 36);
+		*arp_time = 48000;
 		break;
 	default:
 		break;

@@ -46,6 +46,11 @@ logic KEY3, KEY2, KEY1, KEY0;
 logic ARP3, ARP2, ARP1, ARP0;
 logic PingPongEn;
 
+assign LEDG[0] = ARP3;
+assign LEDG[1] = ARP2;
+assign LEDG[2] = ARP1;
+assign LEDG[3] = ARP0;
+
 wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3; //osc_out4, osc_out5, osc_out6, osc_out7;
 logic [15:0] osc_sum;
 wire reset_ah;
