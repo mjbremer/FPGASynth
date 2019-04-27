@@ -241,6 +241,14 @@
          type = "String";
       }
    }
+   element soc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
    element sysid_qsys_0
    {
       datum _sortIndex
@@ -413,6 +421,11 @@
  <interface
    name="otg_hpi_w"
    internal="otg_hpi_w.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="pingpongen"
+   internal="Synth_Controller_0.PingPongEn"
    type="conduit"
    dir="end" />
  <interface

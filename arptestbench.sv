@@ -6,7 +6,7 @@ timeprecision 1ns;
 
 // These signals are internal because the processor will be 
 // instantiated as a submodule in testbench.
-logic key0, key1, key2, key3, CLK, RESET, Enable;
+logic key0, key1, key2, key3, CLK, RESET, Enable, PingPongEn;
 logic [15:0] countermax; //this tells us how long to stay on each note
 logic out0, out1, out2, out3;
 
@@ -49,17 +49,13 @@ countermax = 4;
 #2 RESET = 0;
 
 Enable = 1'b0;
+PingPongEn = 1'b0;
 
 key0 = 1'b1;
-key1 = 1'b0;
-key2 = 1'b1;
-key3 = 1'b0;
-
-
-#4 key0 = 1'b0;
 key1 = 1'b1;
-key2 = 1'b0;
+key2 = 1'b1;
 key3 = 1'b1;
+
 
 #4 Enable = 1'b1;
 
