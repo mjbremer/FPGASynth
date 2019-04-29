@@ -70,16 +70,15 @@ Initializer init(.INIT(INIT), .INIT_FINISH(INIT_FINISH), .Clk(CLOCK_50), .Reset(
 
 
 
-//Pending expansion of of Arpeggiator for 8 voices
-assign ARP7 = KEY7;
-assign ARP6 = KEY6;
-assign ARP5 = KEY5;
-assign ARP4 = KEY4;
 Arpeggiator arp0(
 						.key0(KEY0),
 						.key1(KEY1),
 						.key2(KEY2),
 						.key3(KEY3),
+						.key4(KEY4),
+						.key5(KEY5),
+						.key6(KEY6),
+						.key7(KEY7),
 						.CLK(AUD_DACLRCK),
 						.RESET(reset_ah),
 						.Enable(ARP_EN),
@@ -88,7 +87,11 @@ Arpeggiator arp0(
 						.out0(ARP0),
 						.out1(ARP1),
 						.out2(ARP2),
-						.out3(ARP3));
+						.out3(ARP3)
+						.out4(ARP4),
+						.out5(ARP5),
+						.out6(ARP6),
+						.out7(ARP7));
 
 Voice voice0(
 			.F_in(FREQ0),
