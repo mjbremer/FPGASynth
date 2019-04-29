@@ -1,11 +1,9 @@
-module(input CLOCK_50, RESET, CLK, 
-		input [15:0] LDATA, RDATA,
-		output [15:0] PAN_LDATA, PAN_RDATA
+module Autopanner (input CLOCK_50, RESET, CLK, 
+		output [15:0] AUTO_PAN
 		);
 		
 wire [11:0] addr;		
 logic [15:0] sine_out;
-logic [31:0] MULTLEFT, MULTRIGHT;
 
 Integrator int0 	(.Clk(CLK),
 						.CLOCK_50(CLOCK_50),
@@ -21,10 +19,7 @@ rom #("sine.mem", 12,16) sine (.Clk(Clk),
 										 .addr(addr),
 										 .data(sine_out));
 										 
-assign MULTLEFT = $signed(sine_out) * $signed(LDATA);
-assign MULTRIGHT = $signed(sine_out) * $signed(RDATA);
-
-assign PAN_LDATA = MULTLEFT[31:16];
-assign PAN_RDATA = MULTRIGHT[31:16];	
+										 
+assign AUTO_PAN = (sine_out >>> 1) + 16'h4000; //this makes a sine wave from x7FFF to x0000	
 										 
 endmodule 

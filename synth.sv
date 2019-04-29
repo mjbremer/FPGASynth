@@ -64,7 +64,7 @@ assign LEDG[6] = ARP1;
 assign LEDG[7] = ARP0;
 
 wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3, osc_out4, osc_out5, osc_out6, osc_out7;
-logic [15:0] osc_sum, PANNING;
+logic [15:0] osc_sum, PANNING, AUTO_PAN;
 wire reset_ah;
 assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
 
@@ -253,18 +253,31 @@ Voice voice7(
 			.out(osc_out7),
 			.glide_en(1'b0)
 				);
+				
+Autopanner auto0	(.CLOCK_50(CLOCK_50),
+						.RESET(reset_ah),
+						.CLK(AUD_DACLRCK), 
+						.AUTO_PAN(AUTO_PAN)
+		);
 			
 			
 always_comb
 	begin
 		osc_sum = osc_out0 + osc_out1 + osc_out2 + osc_out3 + osc_out4 + osc_out5 + osc_out6 + osc_out7;
 		osc_out = osc_sum;
-	end
-			
-
-	assign LDATA = osc_out;
-	assign RDATA = osc_out;
 	
+			
+		case(AUTO_PAN_EN)
+			1'b0: begin
+						LDATA = osc_out * (16'h7FFF - PANNING);
+						RDATA = osc_out * PANNING;
+					end
+			1'b1: begin
+						LDATA = osc_out * (16'h7FFF - AUTO_PAN);
+						RDATA = osc_out * AUTO_PAN;
+					end
+		endcase
+	end
 	
 	logic [15:0] filter_out;
 	
@@ -385,7 +398,7 @@ soc soc0(.clk_clk(CLOCK_50),
 		.arp_time_arp_time(ARP_TIME),
 		.pingpongen_pingpongen(PingPongEn),
 		.panning_panning(PANNING),
-		.auto_pan_en_name(AUTO_PAN_EN)
+		.auto_pan_en_auto_pan_en(AUTO_PAN_EN)
 		 );
 
 audio_interface ai0(.LDATA(LDATA),
