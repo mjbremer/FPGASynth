@@ -265,6 +265,38 @@ always_comb
 	assign LDATA = osc_out;
 	assign RDATA = osc_out;
 	
+	
+	logic [15:0] filter_out;
+	
+//	filter filter0 (
+//						.Clk(DACLRCK),
+//						.Reset(reset_ah),
+//						.Enable(1'b1),
+//						.x(osc_out),
+//						.y(filter_out),
+//						.b0(16'd54),
+//						.b2(16'd54),
+//						.b1(16'd27),
+//						.a0(
+						
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     logic [1:0] hpi_addr;
     logic [15:0] hpi_data_in, hpi_data_out;
     logic hpi_r, hpi_w, hpi_cs, hpi_reset;
@@ -352,8 +384,8 @@ soc soc0(.clk_clk(CLOCK_50),
 		.arp_en_arp_en(ARP_EN),
 		.arp_time_arp_time(ARP_TIME),
 		.pingpongen_pingpongen(PingPongEn),
-		.panning_new_signal(PANNING),
-		.auto_pan_en_new_signal(AUTO_PAN_EN)
+		.panning_panning(PANNING),
+		.auto_pan_en_name(AUTO_PAN_EN)
 		 );
 
 audio_interface ai0(.LDATA(LDATA),

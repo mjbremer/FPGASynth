@@ -29,7 +29,7 @@ module control_interface (
 	output logic ARP_EN, GLIDE_EN,
 	output logic [15:0] ARP_TIME, PANNING,
 	output logic [24:0] GLIDE_RATE,
-	output logic PingPongEn,
+	output logic PINGPONGEN, AUTO_PAN_EN,
 	
 	output logic [6:0] FREQ0, FREQ1, FREQ2, FREQ3,
 	output logic [15:0] AMP1_0, AMP0_0, AMP1_1, AMP0_1, AMP1_2, AMP0_2, AMP1_3, AMP0_3,
@@ -61,8 +61,9 @@ module control_interface (
 	assign GLIDE_RATE = reg_file[7][24:0];
 	assign ARP_EN = reg_file[8][0];
 	assign ARP_TIME = reg_file[9][15:0];
-	assign PingPongEn = reg_file[10][0];
+	assign PINGPONGEN = reg_file[10][0];
 	assign PANNING = reg_file[11][15:0];
+	assign AUTO_PAN_EN = reg_file[12][0];
 	
 	assign KEY0 = reg_file[32][0];
 	assign KEY1 = reg_file[33][0];

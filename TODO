@@ -1,10 +1,7 @@
-Fix Arp Pingpong
+
 Panning - XY vs LFO
 Detune - XY only
 Filters
 Delay/Reverb
-Filter ADSRs + LFOs
-Any other LFOs - Frequency / Amplitude Modulation
-
 FIX
 Find real sampling rate to fix notes

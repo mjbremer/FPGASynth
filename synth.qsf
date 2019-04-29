@@ -556,7 +556,7 @@ set_location_assignment PIN_A14 -to ENETCLK_25
 
 set_global_assignment -name FAMILY "Cyclone IV E"
 set_global_assignment -name DEVICE EP4CE115F29C7
-set_global_assignment -name TOP_LEVEL_ENTITY Arpeggiator
+set_global_assignment -name TOP_LEVEL_ENTITY synth
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "20:16:21  APRIL 12, 2019"
 set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
@@ -585,6 +585,7 @@ set_global_assignment -name EDA_TEST_BENCH_RUN_SIM_FOR "1000 ns" -section_id arp
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME arptestbench -section_id arptestbench
 set_global_assignment -name EDA_TEST_BENCH_FILE testbench.sv -section_id testbench
 set_global_assignment -name EDA_TEST_BENCH_FILE arptestbench.sv -section_id arptestbench
+set_global_assignment -name SYSTEMVERILOG_FILE filter.sv
 set_global_assignment -name SYSTEMVERILOG_FILE Integrator.sv
 set_global_assignment -name SYSTEMVERILOG_FILE arptestbench.sv
 set_global_assignment -name SYSTEMVERILOG_FILE control_interface.sv
