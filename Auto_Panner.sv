@@ -1,4 +1,4 @@
-module Autopanner (input CLOCK_50, RESET, CLK, AUTO_PAN_EN
+module Autopanner (input CLOCK_50, RESET, CLK, AUTO_PAN_EN,
 		input [15:0] PANNER,
 		output [15:0] PAN_OUT
 		);

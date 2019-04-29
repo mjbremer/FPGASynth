@@ -47,6 +47,7 @@ logic [6:0] FREQ0, FREQ1, FREQ2, FREQ3;
 logic [15:0] AMP1_0, AMP0_0, AMP1_1, AMP0_1, AMP1_2, AMP0_2, AMP1_3, AMP0_3;
 logic KEY3, KEY2, KEY1, KEY0;
 logic ARP3, ARP2, ARP1, ARP0;
+logic [31:0] MultL, MultR;
 
 
 logic [6:0] FREQ4, FREQ5, FREQ6, FREQ7;
@@ -276,8 +277,10 @@ always_comb
 	end
 			
 
-	assign LDATA = filter_out * (16'h7FFF - PAN_OUT);
-	assign RDATA = filter_out * PAN_OUT;
+	assign MultL = filter_out * (16'h7FFF - PAN_OUT);
+	assign MultR = filter_out * PAN_OUT;
+	assign LDATA = MultL[31:16];
+	assign RDATA = MultR[31:16];
 	
 	logic [15:0] filter_out;
 	
@@ -401,10 +404,7 @@ soc soc0(.clk_clk(CLOCK_50),
 		.arp_time_arp_time(ARP_TIME),
 		.pingpongen_pingpongen(PingPongEn),
 		.panning_panning(PANNING),
-<<<<<<< HEAD
-		.auto_pan_en_auto_pan_en(AUTO_PAN_EN)
-=======
-		.auto_pan_en_name(AUTO_PAN_EN),
+		.auto_pan_en_auto_pan_en(AUTO_PAN_EN),
 		.filter_en_filter_en(FILTER_EN),
 		.filter_a0_filter_a0(FILTER_A0),
 		.filter_a1_filter_a1(FILTER_A1),
@@ -412,7 +412,6 @@ soc soc0(.clk_clk(CLOCK_50),
 		.filter_b0_filter_b0(FILTER_B0),
 		.filter_b1_filter_b1(FILTER_B1),
 		.filter_b2_filter_b2(FILTER_B2)
->>>>>>> 9d76c6ef1629d63fcaf85f188dbcc74046e10ad7
 		 );
 
 audio_interface ai0(.LDATA(LDATA),
