@@ -52,7 +52,13 @@ logic ARP3, ARP2, ARP1, ARP0;
 logic [6:0] FREQ4, FREQ5, FREQ6, FREQ7;
 logic [15:0] AMP1_4, AMP0_4, AMP1_5, AMP0_5, AMP1_6, AMP0_6, AMP1_7, AMP0_7;
 logic KEY4, KEY5, KEY6, KEY7;
+logic ARP7, ARP6, ARP5, ARP4;
 
+
+logic FILTER_EN;
+logic [15:0] FILTER_A0, FILTER_A1, FILTER_A2, FILTER_B0, FILTER_B1, FILTER_B2;
+	
+	
 
 assign LEDG[0] = ARP7;
 assign LEDG[1] = ARP6;
@@ -64,7 +70,7 @@ assign LEDG[6] = ARP1;
 assign LEDG[7] = ARP0;
 
 wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3, osc_out4, osc_out5, osc_out6, osc_out7;
-logic [15:0] osc_sum, PANNING, AUTO_PAN;
+logic [15:0] osc_sum, PANNING, PAN_OUT;
 wire reset_ah;
 assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
 
@@ -256,8 +262,10 @@ Voice voice7(
 				
 Autopanner auto0	(.CLOCK_50(CLOCK_50),
 						.RESET(reset_ah),
-						.CLK(AUD_DACLRCK), 
-						.AUTO_PAN(AUTO_PAN)
+						.AUTO_PAN_EN(AUTO_PAN_EN),
+						.CLK(AUD_DACLRCK),
+						.PANNER(PANNING),
+						.PAN_OUT(PAN_OUT)
 		);
 			
 			
@@ -265,32 +273,27 @@ always_comb
 	begin
 		osc_sum = osc_out0 + osc_out1 + osc_out2 + osc_out3 + osc_out4 + osc_out5 + osc_out6 + osc_out7;
 		osc_out = osc_sum;
-	
-			
-		case(AUTO_PAN_EN)
-			1'b0: begin
-						LDATA = osc_out * (16'h7FFF - PANNING);
-						RDATA = osc_out * PANNING;
-					end
-			1'b1: begin
-						LDATA = osc_out * (16'h7FFF - AUTO_PAN);
-						RDATA = osc_out * AUTO_PAN;
-					end
-		endcase
 	end
+			
+
+	assign LDATA = filter_out * (16'h7FFF - PAN_OUT);
+	assign RDATA = filter_out * PAN_OUT;
 	
 	logic [15:0] filter_out;
 	
-//	filter filter0 (
-//						.Clk(DACLRCK),
-//						.Reset(reset_ah),
-//						.Enable(1'b1),
-//						.x(osc_out),
-//						.y(filter_out),
-//						.b0(16'd54),
-//						.b2(16'd54),
-//						.b1(16'd27),
-//						.a0(
+	filter filter0 (
+						.Clk(AUD_DACLRCK),
+						.Reset(reset_ah),
+						.Enable(FILTER_EN),
+						.x(osc_out),
+						.y(filter_out),
+						.b0(FILTER_B0),
+						.b2(FILTER_B2),
+						.b1(FILTER_B1),
+						.a0(FILTER_A0),
+						.a1(FILTER_A1),
+						.a2(FILTER_A2)
+						);
 						
 	
 	
@@ -398,7 +401,18 @@ soc soc0(.clk_clk(CLOCK_50),
 		.arp_time_arp_time(ARP_TIME),
 		.pingpongen_pingpongen(PingPongEn),
 		.panning_panning(PANNING),
+<<<<<<< HEAD
 		.auto_pan_en_auto_pan_en(AUTO_PAN_EN)
+=======
+		.auto_pan_en_name(AUTO_PAN_EN),
+		.filter_en_filter_en(FILTER_EN),
+		.filter_a0_filter_a0(FILTER_A0),
+		.filter_a1_filter_a1(FILTER_A1),
+		.filter_a2_filter_a2(FILTER_A2),
+		.filter_b0_filter_b0(FILTER_B0),
+		.filter_b1_filter_b1(FILTER_B1),
+		.filter_b2_filter_b2(FILTER_B2)
+>>>>>>> 9d76c6ef1629d63fcaf85f188dbcc74046e10ad7
 		 );
 
 audio_interface ai0(.LDATA(LDATA),

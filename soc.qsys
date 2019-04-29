@@ -273,6 +273,22 @@
          type = "String";
       }
    }
+   element soc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
+   element soc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
    element sysid_qsys_0
    {
       datum _sortIndex
@@ -412,6 +428,41 @@
    dir="end" />
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
  <interface name="d" internal="Synth_Controller_0.DECAY" type="conduit" dir="end" />
+ <interface
+   name="filter_a0"
+   internal="Synth_Controller_0.FILTER_A0"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="filter_a1"
+   internal="Synth_Controller_0.FILTER_A1"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="filter_a2"
+   internal="Synth_Controller_0.FILTER_A2"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="filter_b0"
+   internal="Synth_Controller_0.FILTER_B0"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="filter_b1"
+   internal="Synth_Controller_0.FILTER_B1"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="filter_b2"
+   internal="Synth_Controller_0.FILTER_B2"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="filter_en"
+   internal="Synth_Controller_0.FILTER_EN"
+   type="conduit"
+   dir="end" />
  <interface
    name="freq0"
    internal="Synth_Controller_0.FREQ0"

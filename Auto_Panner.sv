@@ -1,5 +1,6 @@
-module Autopanner (input CLOCK_50, RESET, CLK, 
-		output [15:0] AUTO_PAN
+module Autopanner (input CLOCK_50, RESET, CLK, AUTO_PAN_EN
+		input [15:0] PANNER,
+		output [15:0] PAN_OUT
 		);
 		
 wire [11:0] addr;		
@@ -19,7 +20,13 @@ rom #("sine.mem", 12,16) sine (.Clk(Clk),
 										 .addr(addr),
 										 .data(sine_out));
 										 
-										 
-assign AUTO_PAN = (sine_out >>> 1) + 16'h4000; //this makes a sine wave from x7FFF to x0000	
+			
+always_comb
+begin		
+		case(AUTO_PAN_EN)
+			1'b0: PAN_OUT = PANNER;
+			1'b1:	PAN_OUT = (sine_out >>> 1) + 16'h4000; //this makes a sine wave from x7FFF to x0000	
+		endcase
+end
 										 
 endmodule 
