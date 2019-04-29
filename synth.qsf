@@ -585,9 +585,6 @@ set_global_assignment -name EDA_TEST_BENCH_RUN_SIM_FOR "1000 ns" -section_id arp
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME arptestbench -section_id arptestbench
 set_global_assignment -name EDA_TEST_BENCH_FILE testbench.sv -section_id testbench
 set_global_assignment -name EDA_TEST_BENCH_FILE arptestbench.sv -section_id arptestbench
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name SYSTEMVERILOG_FILE filter.sv
 set_global_assignment -name SYSTEMVERILOG_FILE Integrator.sv
 set_global_assignment -name SYSTEMVERILOG_FILE arptestbench.sv
@@ -608,4 +605,8 @@ set_global_assignment -name SYSTEMVERILOG_FILE Voice.sv
 set_global_assignment -name SYSTEMVERILOG_FILE Glide.sv
 set_global_assignment -name SYSTEMVERILOG_FILE Arpeggiator.sv
 set_global_assignment -name SYSTEMVERILOG_FILE DualOsc.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Auto_Panner.sv
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

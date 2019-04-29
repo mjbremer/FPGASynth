@@ -29,7 +29,7 @@ output logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7,
 
 logic [15:0] LDATA, RDATA;
 
-logic INIT, INIT_FINISH, adc_full, data_over;
+logic INIT, INIT_FINISH, adc_full, data_over, AUTO_PAN_EN;
 
 
 logic [31:0] ADCDATA;
@@ -52,7 +52,6 @@ logic ARP3, ARP2, ARP1, ARP0;
 logic [6:0] FREQ4, FREQ5, FREQ6, FREQ7;
 logic [15:0] AMP1_4, AMP0_4, AMP1_5, AMP0_5, AMP1_6, AMP0_6, AMP1_7, AMP0_7;
 logic KEY4, KEY5, KEY6, KEY7;
-logic ARP4, ARP5, ARP6, ARP7;
 
 
 assign LEDG[0] = ARP7;
@@ -65,7 +64,7 @@ assign LEDG[6] = ARP1;
 assign LEDG[7] = ARP0;
 
 wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3, osc_out4, osc_out5, osc_out6, osc_out7;
-logic [15:0] osc_sum;
+logic [15:0] osc_sum, PANNING;
 wire reset_ah;
 assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
 
@@ -263,19 +262,22 @@ always_comb
 	end
 			
 
-	assign LDATA = filter_out;
-	assign RDATA = filter_out;
+	assign LDATA = osc_out;
+	assign RDATA = osc_out;
 	
 	
 	logic [15:0] filter_out;
 	
-	filter filter0 (
-						.Clk(DACLRCK),
-						.Reset(reset_ah),
-						.Enable(1'b1),
-						.x(osc_out),
-						.y(filter_out),
-						.a0(
+//	filter filter0 (
+//						.Clk(DACLRCK),
+//						.Reset(reset_ah),
+//						.Enable(1'b1),
+//						.x(osc_out),
+//						.y(filter_out),
+//						.b0(16'd54),
+//						.b2(16'd54),
+//						.b1(16'd27),
+//						.a0(
 						
 	
 	
@@ -381,7 +383,9 @@ soc soc0(.clk_clk(CLOCK_50),
 		.glide_rate_glide_rate(GLIDE_RATE),
 		.arp_en_arp_en(ARP_EN),
 		.arp_time_arp_time(ARP_TIME),
-		.pingpongen_pingpongen(PingPongEn)
+		.pingpongen_pingpongen(PingPongEn),
+		.panning_panning(PANNING),
+		.auto_pan_en_name(AUTO_PAN_EN)
 		 );
 
 audio_interface ai0(.LDATA(LDATA),

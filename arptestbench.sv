@@ -53,7 +53,7 @@ countermax = 2;
 #2 RESET = 0;
 
 Enable = 1'b0;
-PingPongEn = 1'b1;
+PingPongEn = 1'b0;
 
 key0 = 1'b1;
 key1 = 1'b1;
