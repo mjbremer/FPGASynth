@@ -91,7 +91,7 @@ Arpeggiator arp0(
 						.out0(ARP0),
 						.out1(ARP1),
 						.out2(ARP2),
-						.out3(ARP3)
+						.out3(ARP3),
 						.out4(ARP4),
 						.out5(ARP5),
 						.out6(ARP6),
@@ -263,8 +263,37 @@ always_comb
 	end
 			
 
-	assign LDATA = osc_out;
-	assign RDATA = osc_out;
+	assign LDATA = filter_out;
+	assign RDATA = filter_out;
+	
+	
+	logic [15:0] filter_out;
+	
+	filter filter0 (
+						.Clk(DACLRCK),
+						.Reset(reset_ah),
+						.Enable(1'b1),
+						.x(osc_out),
+						.y(filter_out),
+						.a0(
+						
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
     logic [1:0] hpi_addr;
     logic [15:0] hpi_data_in, hpi_data_out;

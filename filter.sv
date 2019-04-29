@@ -1,15 +1,15 @@
 module filter (
 					input logic Clk, Reset, Enable,
-					input logic [15:0] x, a0, a1, a2, b0, b1, b2,
-					output logic [15:0] y
+					input logic signed [15:0] x, a0, a1, a2, b0, b1, b2,
+					output logic signed [15:0] y
 					);
 
 
 					
-reg [15:0] x1,x2, y0,y1,y2;
+reg signed [15:0] x1,x2, y0,y1,y2;
 
 
-logic [31:0] b0x0, b1x1, b2x2,a1y1, a2y2, a0y0;
+logic signed [31:0] b0x0, b1x1, b2x2,a1y1, a2y2, a0y0;
 
 assign b0x0 = b0 * x;
 assign b1x1 = b1 * x1;
