@@ -27,7 +27,7 @@ module control_interface (
 	output logic [15:0]ATTACK,RLEASE,SUSTAIN,DECAY,
 	output logic [1:0] SHAPE1,SHAPE0,
 	output logic ARP_EN, GLIDE_EN,
-	output logic [15:0] ARP_TIME,
+	output logic [15:0] ARP_TIME, PANNING,
 	output logic [24:0] GLIDE_RATE,
 	output logic PingPongEn,
 	
@@ -62,6 +62,7 @@ module control_interface (
 	assign ARP_EN = reg_file[8][0];
 	assign ARP_TIME = reg_file[9][15:0];
 	assign PingPongEn = reg_file[10][0];
+	assign PANNING = reg_file[11][15:0];
 	
 	assign KEY0 = reg_file[32][0];
 	assign KEY1 = reg_file[33][0];

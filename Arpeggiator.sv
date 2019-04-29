@@ -72,6 +72,10 @@ enum logic [3:0] {ResetState, Bypass, Key0, Key1, Key2, Key3, Key4, Key5, Key6, 
 				on1 = key1;
 				on2 = key2;
 				on3 = key3;
+				on4 = key4;
+				on5 = key5;
+				on6 = key6;
+				on7 = key7;
 				if (Enable)
 				begin
 					Next_State = Key0;
