@@ -37,8 +37,10 @@ module control_interface (
 	output logic [6:0] FREQ4, FREQ5, FREQ6, FREQ7,
 	output logic [15:0] AMP1_4, AMP0_4, AMP1_5, AMP0_5, AMP1_6, AMP0_6, AMP1_7, AMP0_7,
 	output logic KEY4, KEY5, KEY6, KEY7,
-		
-
+	
+	output logic FILTER_EN,
+	output logic [15:0] FILTER_A0, FILTER_A1, FILTER_A2, FILTER_B0, FILTER_B1, FILTER_B2,
+	
 	
 	input logic [5:0] AVL_ADDR,
 	input logic [3:0] AVL_BYTE_EN,
@@ -64,6 +66,14 @@ module control_interface (
 	assign PINGPONGEN = reg_file[10][0];
 	assign PANNING = reg_file[11][15:0];
 	assign AUTO_PAN_EN = reg_file[12][0];
+	
+	assign FILTER_EN = reg_file[13][0];
+	assign FILTER_A0 = reg_file[14][15:0];
+	assign FILTER_A1 = reg_file[15][15:0];
+	assign FILTER_A2 = reg_file[16][15:0];
+	assign FILTER_B0 = reg_file[17][15:0];
+	assign FILTER_B1 = reg_file[18][15:0];
+	assign FILTER_B2 = reg_file[19][15:0];
 	
 	assign KEY0 = reg_file[32][0];
 	assign KEY1 = reg_file[33][0];

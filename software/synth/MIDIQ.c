@@ -25,6 +25,16 @@ static alt_u32* const glide_rate = SYNTH_CONTROLLER_0_BASE + (7*4);
 static alt_u32* const arp_en = SYNTH_CONTROLLER_0_BASE + (8*4);
 static alt_u32* const arp_time = SYNTH_CONTROLLER_0_BASE + (9*4);
 static alt_u32* const pingpong = SYNTH_CONTROLLER_0_BASE + (10*4);
+static alt_u32* const panning = SYNTH_CONTROLLER_0_BASE + (11*4);
+static alt_u32* const auto_pan_en = SYNTH_CONTROLLER_0_BASE + (12*4);
+
+static alt_u32* const filter_a0 = SYNTH_CONTROLLER_0_BASE + (13*4);
+static alt_u32* const filter_a1 = SYNTH_CONTROLLER_0_BASE + (14*4);
+static alt_u32* const filter_a2 = SYNTH_CONTROLLER_0_BASE + (15*4);
+static alt_u32* const filter_b0 = SYNTH_CONTROLLER_0_BASE + (16*4);
+static alt_u32* const filter_b1 = SYNTH_CONTROLLER_0_BASE + (17*4);
+static alt_u32* const filter_b2 = SYNTH_CONTROLLER_0_BASE + (18*4);
+
 
 static alt_u32* const key_on = SYNTH_CONTROLLER_0_BASE + (32*4);
 static alt_u32* const freq = SYNTH_CONTROLLER_0_BASE + (40*4);
@@ -60,7 +70,12 @@ void initControls()
 	*arp_en = 0;
 	*arp_time = 3600; // ~ 100 bpm
 	*pingpong = 0;
-
+	*filter_a0 = 0x4000;
+	*filter_a1 = 0x4000;
+	*filter_a2 = 0x4000;
+	*filter_b0 = 0x4000;
+	*filter_b1 = 0x4000;
+	*filter_b2 = 0x4000;
 	// Arp time range 1500 to 6000
 
     mode = SYNTH_MODE_POLY;
