@@ -55,10 +55,14 @@ logic KEY4, KEY5, KEY6, KEY7;
 logic ARP4, ARP5, ARP6, ARP7;
 
 
-assign LEDG[0] = ARP3;
-assign LEDG[1] = ARP2;
-assign LEDG[2] = ARP1;
-assign LEDG[3] = ARP0;
+assign LEDG[0] = ARP7;
+assign LEDG[1] = ARP6;
+assign LEDG[2] = ARP5;
+assign LEDG[3] = ARP4;
+assign LEDG[4] = ARP3;
+assign LEDG[5] = ARP2;
+assign LEDG[6] = ARP1;
+assign LEDG[7] = ARP0;
 
 wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3, osc_out4, osc_out5, osc_out6, osc_out7;
 logic [15:0] osc_sum;
