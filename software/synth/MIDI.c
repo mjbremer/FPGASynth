@@ -62,6 +62,10 @@ void ProcessMIDIPacket(alt_u32 packet)
 			            }
 			            printf("\n");
         	break;
+        case PROGRAM_CHANGE:
+        	program = bytes[2];
+
+        	break;
         default:
             printf("Got unsupported CIN %02x: %s\n", CIN, CIN_names[CIN]);
             for (int i = 0; i < 4; i ++) {

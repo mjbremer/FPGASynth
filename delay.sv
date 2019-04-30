@@ -20,7 +20,7 @@ logic [31:0] mult;
 
 always_comb begin
 if (Enable)
-	out = new_data;
+	out = new_data + in;
 else
 	out = in;
 end
@@ -37,7 +37,7 @@ always_ff @(posedge Clk) begin
 	 end
 	 else begin
 
-		mult = ($signed(data)+$signed(in)) * $signed(feedback);
+		mult = ($signed(in)+($signed(data))) * ($signed(feedback));
 		new_data = mult[31:16];
 		memory[i] = new_data;
 		i = (i + 1) % looptime;

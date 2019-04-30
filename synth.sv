@@ -228,7 +228,7 @@ Voice voice5(
 			.glide_en(1'b0)
 				);
 Voice voice6(
-			.F_in(FREQ3),
+			.F_in(FREQ6),
 			.Clk(AUD_DACLRCK), 
 			.CLOCK_50(CLOCK_50), 
 			.Reset(reset_ah), 
@@ -284,8 +284,8 @@ always_comb
 			
 
 
-	assign MultL = $signed(delay_out) * (16'h7FFF - PAN_OUT);
-	assign MultR = $signed(delay_out) * PAN_OUT;
+	assign MultL = $signed(delay_out) * $signed($signed(16'h7FFF) - $signed(PAN_OUT));
+	assign MultR = $signed(delay_out) * $signed(PAN_OUT);
 	assign LDATA = MultL[31:16];
 	assign RDATA = MultR[31:16];
 	//assign LDATA = delay_out;//MultL[31:16];

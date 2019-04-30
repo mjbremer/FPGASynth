@@ -37,16 +37,16 @@ int main(void)
 {
 
 	alt_u8 toggle = 0;
-	alt_u16 last_bytes[0x10];
-	alt_u16 new_bytes[0x10];
- int debugflag = 0;
+//	alt_u16 last_bytes[0x10];
+//	alt_u16 new_bytes[0x10];
+// int debugflag = 0;
 
 
-	for (int i = 0; i < 0x20; i++)
-	{
-		last_bytes[i] = 0;
-		new_bytes[i] = 0;
-	}
+//	for (int i = 0; i < 0x20; i++)
+//	{
+//		last_bytes[i] = 0;
+//		new_bytes[i] = 0;
+//	}
 	alt_u32 last_midi_msg = 0;
 	alt_u32 new_midi_msg = 0;
 

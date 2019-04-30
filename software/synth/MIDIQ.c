@@ -191,6 +191,8 @@ static voice_t *freeVoicesHead, *freeVoicesTail;
 static voice_t *activeVoicesHead, *activeVoicesTail;
 static midikey_t *waitingHead, *waitingTail;
 
+
+
 void initControls()
 {
 
@@ -207,10 +209,10 @@ void initControls()
 	*glide_rate = 0x01;	// Slowest
 	*arp_en = 0;
 	*arp_time = 3600; // ~ 100 bpm
-	*panning = 0x4000;
+	*panning = 0x0080;
 	*auto_pan_en = 0;
 	*pingpong = 0;
-	*filter_en = 1;
+	*filter_en = 0;
 	*filter_a0 = lpf_table[127][0];
 	*filter_a1 = lpf_table[127][1];
 	*filter_a2 = lpf_table[127][2];
@@ -218,12 +220,13 @@ void initControls()
 	*filter_b1 = lpf_table[127][4];
 	*filter_b2 = lpf_table[127][5];
 	*delay_en = 0;
-	*delay_feedback = 0x7fff;
-	*delay_time = 960;
+	*delay_feedback = 0x4000;
+	*delay_time = 48000;
 	*reverb_en = 0;
-	*reverb_feedback = 0x4000;
+	*reverb_feedback = 0x7fff;
 	*reverb_time = 960;
 	*pan_depth = 0x7FFF;
+	program = 0;
 	// Arp time range 1500 to 6000
 
     mode = SYNTH_MODE_POLY;
@@ -278,6 +281,11 @@ void ControlHandler(uint8_t control, uint8_t value)
 		}
 		break;
 	case 0x16:
+		if (value == 0) {
+			*filter_en = 0;
+		}
+		else
+			*filter_en = 1;
 		break;
 	case 0x17:
 			if (value == 0) {
@@ -327,6 +335,18 @@ void ControlHandler(uint8_t control, uint8_t value)
 		else
 			*pingpong = 0x01;
 		break;
+	case 0x22:
+		if (value == 0)
+			*reverb_en = 0x00;
+		else
+			*reverb_en = 0x01;
+		break;
+	case 0x23:
+		if (value == 0)
+			*delay_en = 0x00;
+		else
+			*delay_en = 0x01;
+		break;
 	case 0x01: //attack
 		*attack = value + 1;
 		break;
@@ -340,16 +360,30 @@ void ControlHandler(uint8_t control, uint8_t value)
 		*release = value + 1;
 		break;
 	case 0x05: //mixing
-		mix = value;
+		if (program == 0)
+			mix = value;
+		else
+			*delay_time = 48000 - (300 * (0x7f-value));
 		break;
 	case 0x06: //glide
-		*glide_rate = value;
+		if (program == 0)
+			*glide_rate = value;
+		else
+			*delay_feedback = value << 8;
 		break;
 	case 0x07: //arpeggiator
-		*arp_time = 1500 + value*35;
+		if (program == 0)
+			*arp_time = 1500 + value*35;
+		else
+			*reverb_feedback = 0x7fff - (value << 8);
 		break;
 	case 0x08: //panning depth
-		*pan_depth = value*255;
+
+		if (program == 0)
+			*pan_depth = value*255;
+		else
+			*panning = (60 * value) + 1;
+		break;
 	default:
 		break;
 	}

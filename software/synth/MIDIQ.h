@@ -51,6 +51,9 @@ typedef struct midikey_t {
 
 
 
+
+int program;
+
 void removeVoice(voice_t ** head, voice_t ** tail, voice_t * v);
 void initControls();
 void ControlHandler(uint8_t control, uint8_t value);
