@@ -6,10 +6,10 @@ module filter (
 
 
 					
-reg signed [15:0] x1,x2,y1,y2;
+reg signed [15:0] x1,x2,y2,y1,y0;
 
 
-logic signed [31:0] b0x0, b1x1, b2x2,a1y1, a2y2, a0y0, y0;
+logic signed [31:0] b0x0, b1x1, b2x2,a1y1, a2y2, a0y0;
 
 assign b0x0 = b0 * x;
 assign b1x1 = b1 * x1;
@@ -23,7 +23,10 @@ always_comb
 begin
 	y0 = b0x0[31:16] + b1x1[31:16] + b2x2[31:16] + a1y1[31:16] + a2y2[31:16];
 	
-	y = a0y0[31:16];
+	if (Enable)
+		y = a0y0[31:16];
+	else
+		y = x;
 end
 
 

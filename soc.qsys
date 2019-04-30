@@ -289,6 +289,14 @@
          type = "String";
       }
    }
+   element soc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
    element sysid_qsys_0
    {
       datum _sortIndex
@@ -428,6 +436,21 @@
    dir="end" />
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
  <interface name="d" internal="Synth_Controller_0.DECAY" type="conduit" dir="end" />
+ <interface
+   name="delay_en"
+   internal="Synth_Controller_0.DELAY_EN"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="delay_feedback"
+   internal="Synth_Controller_0.DELAY_FEEDBACK"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="delay_time"
+   internal="Synth_Controller_0.DELAY_TIME"
+   type="conduit"
+   dir="end" />
  <interface
    name="filter_a0"
    internal="Synth_Controller_0.FILTER_A0"

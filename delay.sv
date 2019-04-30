@@ -13,14 +13,21 @@ reg [15:0] memory [0:48000];
 logic [15:0] data, new_data;
 
 logic [31:0] mult;
-assign mult = data * feedback;
+//assign mult = data * feedback;
+//
+//assign new_data = in + mult[31:16];
 
-assign new_data = in + mult[31:16];
 
-assign out = new_data;
+always_comb begin
+if (Enable)
+	out = new_data;
+else
+	out = in;
+end
+
 integer i;
 
-always @(posedge Clk) begin
+always_ff @(posedge Clk) begin
 	//memory[12'h025] <= 16'hDEAD;
     // Place data from RAM
 	 if (Reset)
@@ -29,9 +36,12 @@ always @(posedge Clk) begin
 		i = 0;
 	 end
 	 else begin
-		data = memory[i];
+
+		mult = ($signed(data)+$signed(in)) * $signed(feedback);
+		new_data = mult[31:16];
 		memory[i] = new_data;
 		i = (i + 1) % looptime;
+		data = memory[i];
 	 end
 end        
 endmodule

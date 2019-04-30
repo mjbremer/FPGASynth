@@ -41,6 +41,9 @@ module control_interface (
 	output logic FILTER_EN,
 	output logic [15:0] FILTER_A0, FILTER_A1, FILTER_A2, FILTER_B0, FILTER_B1, FILTER_B2,
 	
+	output logic DELAY_EN,
+	output logic [15:0] DELAY_FEEDBACK,
+	output logic [31:0] DELAY_TIME,
 	
 	input logic [5:0] AVL_ADDR,
 	input logic [3:0] AVL_BYTE_EN,
@@ -74,6 +77,10 @@ module control_interface (
 	assign FILTER_B0 = reg_file[17][15:0];
 	assign FILTER_B1 = reg_file[18][15:0];
 	assign FILTER_B2 = reg_file[19][15:0];
+	
+	assign DELAY_EN = reg_file[20][0];
+	assign DELAY_FEEDBACK = reg_file[21][15:0];
+	assign DELAY_TIME = reg_file[22];
 	
 	assign KEY0 = reg_file[32][0];
 	assign KEY1 = reg_file[33][0];
