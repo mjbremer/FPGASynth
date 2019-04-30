@@ -23,13 +23,13 @@ coslist  = [math.cos(w) for w in wlist]
 
 alphalist = [sin / (2*Q) for sin in sinelist]
 
-a0list = [1 + alpha for alpha in alphalist]
+a0list = [1/(1 + alpha) for alpha in alphalist]
 a1list = [-1*(-2 * cos) for cos in coslist]
 a2list = [-1*(1 - alpha) for alpha in alphalist]
 
-b0list = [(1-cos)/2 for cos in coslist]
-b1list = [1-cos for cos in coslist]
-b2list = [(1-cos)/2 for cos in coslist]
+b0list = [ 2**1 * (1-cos)/2 for cos in coslist]
+b1list = [2**1 * 1-cos for cos in coslist]
+b2list = [2**1 * (1-cos)/2 for cos in coslist]
 
 
 
