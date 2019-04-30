@@ -39,6 +39,10 @@ static alt_u32* const filter_b2 = SYNTH_CONTROLLER_0_BASE + (19*4);
 static alt_u32* const delay_en = SYNTH_CONTROLLER_0_BASE + (20*4);
 static alt_u32* const delay_feedback = SYNTH_CONTROLLER_0_BASE + (21*4);
 static alt_u32* const delay_time = SYNTH_CONTROLLER_0_BASE + (22*4);
+static alt_u32* const reverb_en = SYNTH_CONTROLLER_0_BASE + (23*4);
+static alt_u32* const reverb_feedback = SYNTH_CONTROLLER_0_BASE + (24*4);
+static alt_u32* const reverb_time = SYNTH_CONTROLLER_0_BASE + (25*4);
+static alt_u32* const pan_depth = SYNTH_CONTROLLER_0_BASE + (26*4);
 
 static alt_u32* const key_on = SYNTH_CONTROLLER_0_BASE + (32*4);
 static alt_u32* const freq = SYNTH_CONTROLLER_0_BASE + (40*4);
@@ -216,6 +220,10 @@ void initControls()
 	*delay_en = 1;
 	*delay_feedback = 0x7fff;
 	*delay_time = 960;
+	*reverb_en = 0;
+	*reverb_feedback = 0x4000;
+	*reverb_time = 960;
+	*pan_depth = 0x7FFF;
 	// Arp time range 1500 to 6000
 
     mode = SYNTH_MODE_POLY;
@@ -338,10 +346,10 @@ void ControlHandler(uint8_t control, uint8_t value)
 		*glide_rate = value;
 		break;
 	case 0x07: //arpeggiator
-		*arp_time = 24000 + value*187;
+		*arp_time = 1500 + value*35;
 		break;
 	case 0x08: //panning depth
-		*pan_depth
+		*pan_depth = value*255;
 	default:
 		break;
 	}
