@@ -57,6 +57,10 @@ void ProcessMIDIPacket(alt_u32 packet)
         	break;
         case PITCHBEND_CHANGE:
 			PitchbendHandler(Pitch);
+			            for (int i = 0; i < 4; i ++) {
+			                printf("%02x", bytes[i]);
+			            }
+			            printf("\n");
         	break;
         default:
             printf("Got unsupported CIN %02x: %s\n", CIN, CIN_names[CIN]);

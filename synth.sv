@@ -277,26 +277,26 @@ always_comb
 	end
 			
 
-	assign MultL = filter_out * (16'h7FFF - PAN_OUT);
-	assign MultR = filter_out * PAN_OUT;
+	assign MultL = $signed(osc_out) * (16'h7FFF - PAN_OUT);
+	assign MultR = $signed(osc_out) * PAN_OUT;
 	assign LDATA = MultL[31:16];
 	assign RDATA = MultR[31:16];
 	
 	logic [15:0] filter_out;
 	
-	filter filter0 (
-						.Clk(AUD_DACLRCK),
-						.Reset(reset_ah),
-						.Enable(FILTER_EN),
-						.x(osc_out),
-						.y(filter_out),
-						.b0(FILTER_B0),
-						.b2(FILTER_B2),
-						.b1(FILTER_B1),
-						.a0(FILTER_A0),
-						.a1(FILTER_A1),
-						.a2(FILTER_A2)
-						);
+//	filter filter0 (
+//						.Clk(AUD_DACLRCK),
+//						.Reset(reset_ah),
+//						.Enable(FILTER_EN),
+//						.x(osc_out),
+//						.y(filter_out),
+//						.b0(FILTER_B0),
+//						.b2(FILTER_B2),
+//						.b1(FILTER_B1),
+//						.a0(FILTER_A0),
+//						.a1(FILTER_A1),
+//						.a2(FILTER_A2)
+//						);
 						
 	
 	
