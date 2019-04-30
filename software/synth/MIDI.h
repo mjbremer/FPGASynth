@@ -26,6 +26,6 @@
 #define SINGLE_BYTE         (0xF)
 
 
-void ProcessMIDIPacket();
+void ProcessMIDIPacket(alt_u32 packet);
 
 #endif /* MIDI_H_ */

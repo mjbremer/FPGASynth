@@ -32,7 +32,7 @@ always_ff @(posedge Clk)
 begin
 
 	y2 <= y1;
-	y1 <= y;
+	y1 <= y0;
 	x2 <= x1;
 	x1 <= x;
 
