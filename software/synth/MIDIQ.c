@@ -198,6 +198,8 @@ void initControls()
 	*glide_rate = 0x01;	// Slowest
 	*arp_en = 0;
 	*arp_time = 3600; // ~ 100 bpm
+	*panning = 0x4000;
+	*auto_pan_en = 0;
 	*pingpong = 0;
 	*filter_a0 = lpf_table[69][0];
 	*filter_a1 = lpf_table[69][1];
@@ -261,6 +263,11 @@ void ControlHandler(uint8_t control, uint8_t value)
 	case 0x16:
 		break;
 	case 0x17:
+			if (value == 0) {
+				*auto_pan_en = 0;
+			}
+			else
+				*auto_pan_en = 1;
 		break;
 
 	case 0x18:
@@ -328,6 +335,7 @@ void ControlHandler(uint8_t control, uint8_t value)
 		break;
 	}
 }
+
 
 
 void InitVoice(voice_t * v, uint8_t note, uint8_t vel)
@@ -677,6 +685,11 @@ int CountWaiting()
         count++;
     }
     return count;
+}
+
+void PitchbendHandler(uint16_t Pitch)
+{
+	*panning = Pitch;
 }
 
 #if DEBUG

@@ -5,6 +5,7 @@
 
 # 
 # Synth_Controller "Synth_Controller" v1.0
+
 #  2019.04.29.16:23:07
 # Controls the Synthesizer
 # 
@@ -800,7 +801,7 @@ set_interface_property AUTO_PAN_EN PORT_NAME_MAP ""
 set_interface_property AUTO_PAN_EN CMSIS_SVD_VARIABLES ""
 set_interface_property AUTO_PAN_EN SVD_ADDRESS_GROUP ""
 
-add_interface_port AUTO_PAN_EN AUTO_PAN_EN name Output 1
+add_interface_port AUTO_PAN_EN AUTO_PAN_EN auto_pan_en Output 1
 
 
 # 

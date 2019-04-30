@@ -47,6 +47,7 @@ logic [6:0] FREQ0, FREQ1, FREQ2, FREQ3;
 logic [15:0] AMP1_0, AMP0_0, AMP1_1, AMP0_1, AMP1_2, AMP0_2, AMP1_3, AMP0_3;
 logic KEY3, KEY2, KEY1, KEY0;
 logic ARP3, ARP2, ARP1, ARP0;
+logic [31:0] MultL, MultR;
 
 
 logic [6:0] FREQ4, FREQ5, FREQ6, FREQ7;
@@ -70,7 +71,7 @@ assign LEDG[6] = ARP1;
 assign LEDG[7] = ARP0;
 
 wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3, osc_out4, osc_out5, osc_out6, osc_out7;
-logic [15:0] osc_sum, PANNING;
+logic [15:0] osc_sum, PANNING, PAN_OUT;
 wire reset_ah;
 assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
 
@@ -259,6 +260,14 @@ Voice voice7(
 			.out(osc_out7),
 			.glide_en(1'b0)
 				);
+				
+Autopanner auto0	(.CLOCK_50(CLOCK_50),
+						.RESET(reset_ah),
+						.AUTO_PAN_EN(AUTO_PAN_EN),
+						.CLK(AUD_DACLRCK),
+						.PANNER(PANNING),
+						.PAN_OUT(PAN_OUT)
+		);
 			
 			
 always_comb
@@ -268,9 +277,10 @@ always_comb
 	end
 			
 
-	assign LDATA = filter_out;
-	assign RDATA = filter_out;
-	
+	assign MultL = filter_out * (16'h7FFF - PAN_OUT);
+	assign MultR = filter_out * PAN_OUT;
+	assign LDATA = MultL[31:16];
+	assign RDATA = MultR[31:16];
 	
 	logic [15:0] filter_out;
 	
@@ -394,7 +404,7 @@ soc soc0(.clk_clk(CLOCK_50),
 		.arp_time_arp_time(ARP_TIME),
 		.pingpongen_pingpongen(PingPongEn),
 		.panning_panning(PANNING),
-		.auto_pan_en_name(AUTO_PAN_EN),
+		.auto_pan_en_auto_pan_en(AUTO_PAN_EN),
 		.filter_en_filter_en(FILTER_EN),
 		.filter_a0_filter_a0(FILTER_A0),
 		.filter_a1_filter_a1(FILTER_A1),
