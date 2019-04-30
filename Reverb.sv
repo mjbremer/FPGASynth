@@ -1,4 +1,4 @@
-module delay (
+module reverb (
 					input logic Clk, Reset, Enable,
 					input logic [15:0] in,
 					output logic [15:0] out,
@@ -6,7 +6,7 @@ module delay (
 					input logic [31:0] looptime
 			);
 			
-reg [15:0] memory [0:48000];
+reg [15:0] memory [0:960];
 
 
 

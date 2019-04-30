@@ -28,13 +28,17 @@ static alt_u32* const pingpong = SYNTH_CONTROLLER_0_BASE + (10*4);
 static alt_u32* const panning = SYNTH_CONTROLLER_0_BASE + (11*4);
 static alt_u32* const auto_pan_en = SYNTH_CONTROLLER_0_BASE + (12*4);
 
-static alt_u32* const filter_a0 = SYNTH_CONTROLLER_0_BASE + (13*4);
-static alt_u32* const filter_a1 = SYNTH_CONTROLLER_0_BASE + (14*4);
-static alt_u32* const filter_a2 = SYNTH_CONTROLLER_0_BASE + (15*4);
-static alt_u32* const filter_b0 = SYNTH_CONTROLLER_0_BASE + (16*4);
-static alt_u32* const filter_b1 = SYNTH_CONTROLLER_0_BASE + (17*4);
-static alt_u32* const filter_b2 = SYNTH_CONTROLLER_0_BASE + (18*4);
+static alt_u32* const filter_en = SYNTH_CONTROLLER_0_BASE + (13*4);
+static alt_u32* const filter_a0 = SYNTH_CONTROLLER_0_BASE + (14*4);
+static alt_u32* const filter_a1 = SYNTH_CONTROLLER_0_BASE + (15*4);
+static alt_u32* const filter_a2 = SYNTH_CONTROLLER_0_BASE + (16*4);
+static alt_u32* const filter_b0 = SYNTH_CONTROLLER_0_BASE + (17*4);
+static alt_u32* const filter_b1 = SYNTH_CONTROLLER_0_BASE + (18*4);
+static alt_u32* const filter_b2 = SYNTH_CONTROLLER_0_BASE + (19*4);
 
+static alt_u32* const delay_en = SYNTH_CONTROLLER_0_BASE + (20*4);
+static alt_u32* const delay_feedback = SYNTH_CONTROLLER_0_BASE + (21*4);
+static alt_u32* const delay_time = SYNTH_CONTROLLER_0_BASE + (22*4);
 
 static alt_u32* const key_on = SYNTH_CONTROLLER_0_BASE + (32*4);
 static alt_u32* const freq = SYNTH_CONTROLLER_0_BASE + (40*4);
@@ -202,12 +206,16 @@ void initControls()
 	*panning = 0x4000;
 	*auto_pan_en = 0;
 	*pingpong = 0;
+	*filter_en = 0;
 	*filter_a0 = lpf_table[49][0];
 	*filter_a1 = lpf_table[49][1];
 	*filter_a2 = lpf_table[49][2];
 	*filter_b0 = lpf_table[49][3];
 	*filter_b1 = lpf_table[49][4];
 	*filter_b2 = lpf_table[49][5];
+	*delay_en = 1;
+	*delay_feedback = 0x7fff;
+	*delay_time = 960;
 	// Arp time range 1500 to 6000
 
     mode = SYNTH_MODE_POLY;
@@ -323,15 +331,17 @@ void ControlHandler(uint8_t control, uint8_t value)
 	case 0x04: // release
 		*release = value + 1;
 		break;
-	case 0x05:
+	case 0x05: //mixing
 		mix = value;
 		break;
-	case 0x06:
+	case 0x06: //glide
 		*glide_rate = value;
 		break;
-	case 0x07:
-		*arp_time = 48000;
+	case 0x07: //arpeggiator
+		*arp_time = 24000 + value*187;
 		break;
+	case 0x08: //panning depth
+		*pan_depth
 	default:
 		break;
 	}
