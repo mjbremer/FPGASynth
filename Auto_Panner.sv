@@ -25,7 +25,7 @@ rom #("sine.mem", 12,16) sine (.Clk(CLK),
 always_comb
 begin		
 
-	math = (sine_out >>> 1) + 16'h4000; //this makes a sine wave from x7FFF to x0000
+	math = ($signed(sine_out) >>> 1) + 16'h4000; //this makes a sine wave from x7FFF to x0000
 
 		case(AUTO_PAN_EN)
 			1'b0: PAN_OUT = PANNER;

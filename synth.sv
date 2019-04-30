@@ -277,43 +277,25 @@ always_comb
 	end
 			
 
+
 	assign MultL = $signed(osc_out) * (16'h7FFF - PAN_OUT);
 	assign MultR = $signed(osc_out) * PAN_OUT;
 	assign LDATA = MultL[31:16];
 	assign RDATA = MultR[31:16];
+	//assign LDATA = delay_out;//MultL[31:16];
+	//assign RDATA = delay_out;//MultR[31:16];
 	
-	logic [15:0] filter_out;
+	logic [15:0] delay_out;
 	
-//	filter filter0 (
-//						.Clk(AUD_DACLRCK),
-//						.Reset(reset_ah),
-//						.Enable(FILTER_EN),
-//						.x(osc_out),
-//						.y(filter_out),
-//						.b0(FILTER_B0),
-//						.b2(FILTER_B2),
-//						.b1(FILTER_B1),
-//						.a0(FILTER_A0),
-//						.a1(FILTER_A1),
-//						.a2(FILTER_A2)
-//						);
-						
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	delay d0(
+				.Clk(AUD_DACLRCK),
+				.Reset(reset_ah),
+				.Enable(1'b1),
+				.in(osc_out),
+				.out(delay_out),
+				.feedback(16'h4000),
+				.looptime(32'd48000)
+				);
 	
 	
     logic [1:0] hpi_addr;

@@ -4,7 +4,7 @@ from binascii import hexlify
 
 
 def f(x):
-    return int((2**12) * x)
+    return int((2**13) * x)
 
 
 def g(x):
@@ -24,8 +24,8 @@ coslist  = [math.cos(w) for w in wlist]
 alphalist = [sin / (2*Q) for sin in sinelist]
 
 a0list = [1 + alpha for alpha in alphalist]
-a1list = [-2 * cos for cos in coslist]
-a2list = [1 - alpha for alpha in alphalist]
+a1list = [-1*(-2 * cos) for cos in coslist]
+a2list = [-1*(1 - alpha) for alpha in alphalist]
 
 b0list = [(1-cos)/2 for cos in coslist]
 b1list = [1-cos for cos in coslist]

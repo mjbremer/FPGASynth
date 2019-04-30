@@ -37,7 +37,7 @@ void ProcessMIDIPacket(alt_u32 packet)
     alt_u8 CIN = bytes[0];
     alt_u8 note = bytes[2];
     alt_u8 velocity = bytes[3];
-    alt_u16 Pitch = ((bytes[2]<<8) | bytes[3]);
+   // alt_u16 Pitch = ((bytes[2]<<8) | bytes[3]);
 
     switch(CIN) {
         case NOTE_ON:
@@ -55,13 +55,13 @@ void ProcessMIDIPacket(alt_u32 packet)
 //            }
             printf("\n");
         	break;
-        case PITCHBEND_CHANGE:
-			PitchbendHandler(Pitch);
-			            for (int i = 0; i < 4; i ++) {
-			                printf("%02x", bytes[i]);
-			            }
-			            printf("\n");
-        	break;
+//        case PITCHBEND_CHANGE:
+//			PitchbendHandler(Pitch);
+//			            for (int i = 0; i < 4; i ++) {
+//			                printf("%02x", bytes[i]);
+//			            }
+//			            printf("\n");
+//        	break;
         default:
             printf("Got unsupported CIN %02x: %s\n", CIN, CIN_names[CIN]);
             for (int i = 0; i < 4; i ++) {
