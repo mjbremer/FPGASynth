@@ -297,6 +297,14 @@
          type = "String";
       }
    }
+   element soc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone IV E";
+         type = "String";
+      }
+   }
    element sysid_qsys_0
    {
       datum _sortIndex
@@ -612,6 +620,11 @@
    type="conduit"
    dir="end" />
  <interface
+   name="panning_depth"
+   internal="Synth_Controller_0.panning_depth"
+   type="conduit"
+   dir="end" />
+ <interface
    name="pingpongen"
    internal="Synth_Controller_0.PINGPONGEN"
    type="conduit"
@@ -622,6 +635,21 @@
    type="conduit"
    dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
+ <interface
+   name="reverb_en"
+   internal="Synth_Controller_0.reverb_en"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="reverb_feedback"
+   internal="Synth_Controller_0.reverb_feedback"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="reverb_time"
+   internal="Synth_Controller_0.reverb_time"
+   type="conduit"
+   dir="end" />
  <interface
    name="s"
    internal="Synth_Controller_0.SUSTAIN"

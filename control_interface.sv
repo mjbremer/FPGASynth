@@ -27,7 +27,7 @@ module control_interface (
 	output logic [15:0]ATTACK,RLEASE,SUSTAIN,DECAY,
 	output logic [1:0] SHAPE1,SHAPE0,
 	output logic ARP_EN, GLIDE_EN,
-	output logic [15:0] ARP_TIME, PANNING,
+	output logic [15:0] ARP_TIME, PANNING, PAN_DEPTH, REVERB_FEEDBACK,
 	output logic [24:0] GLIDE_RATE,
 	output logic PINGPONGEN, AUTO_PAN_EN,
 	
@@ -41,9 +41,9 @@ module control_interface (
 	output logic FILTER_EN,
 	output logic [15:0] FILTER_A0, FILTER_A1, FILTER_A2, FILTER_B0, FILTER_B1, FILTER_B2,
 	
-	output logic DELAY_EN,
+	output logic DELAY_EN, REVERB_EN,
 	output logic [15:0] DELAY_FEEDBACK,
-	output logic [31:0] DELAY_TIME,
+	output logic [31:0] DELAY_TIME, REVERB_TIME,
 	
 	input logic [5:0] AVL_ADDR,
 	input logic [3:0] AVL_BYTE_EN,
@@ -81,6 +81,10 @@ module control_interface (
 	assign DELAY_EN = reg_file[20][0];
 	assign DELAY_FEEDBACK = reg_file[21][15:0];
 	assign DELAY_TIME = reg_file[22];
+	assign REVERB_EN = reg_file[23][0];
+	assign REVERB_FEEDBACK = reg_file[24][15:0];
+	assign REVERB_TIME = reg_file[25][31:0];
+	assign PAN_DEPTH = reg_file[26][15:0];
 	
 	assign KEY0 = reg_file[32][0];
 	assign KEY1 = reg_file[33][0];

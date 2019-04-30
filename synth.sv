@@ -75,10 +75,11 @@ assign LEDG[6] = ARP1;
 assign LEDG[7] = ARP0;
 
 wire [15:0] osc_out, osc_out0, osc_out1, osc_out2, osc_out3, osc_out4, osc_out5, osc_out6, osc_out7;
-logic [15:0] osc_sum, PANNING, PAN_OUT;
+logic [15:0] osc_sum, PANNING, PAN_OUT, PAN_DEPTH, REVERB_FEEDBACK;
 wire reset_ah;
 assign reset_ah = ~KEY[3]; // USE LAST KEY AS RESET
-
+logic REVERB_EN;
+logic [31:0] REVERB_TIME;
 
 Initializer init(.INIT(INIT), .INIT_FINISH(INIT_FINISH), .Clk(CLOCK_50), .Reset(reset_ah));
 
@@ -270,7 +271,8 @@ Autopanner auto0	(.CLOCK_50(CLOCK_50),
 						.AUTO_PAN_EN(AUTO_PAN_EN),
 						.CLK(AUD_DACLRCK),
 						.PANNER(PANNING),
-						.PAN_OUT(PAN_OUT)
+						.PAN_OUT(PAN_OUT),
+						.PAN_DEPTH(PAN_DEPTH)
 		);
 			
 			
@@ -281,10 +283,13 @@ always_comb
 	end
 			
 
-//	assign MultL = filter_out * (16'h7FFF - PAN_OUT);
-//	assign MultR = filter_out * PAN_OUT;
-	assign LDATA = filter_out1;//MultL[31:16];
-	assign RDATA = filter_out1;//MultR[31:16];
+
+	assign MultL = $signed(delay_out) * (16'h7FFF - PAN_OUT);
+	assign MultR = $signed(delay_out) * PAN_OUT;
+	assign LDATA = MultL[31:16];
+	assign RDATA = MultR[31:16];
+	//assign LDATA = delay_out;//MultL[31:16];
+	//assign RDATA = delay_out;//MultR[31:16];
 	
 	logic [15:0] delay_out;
 	
@@ -292,21 +297,31 @@ always_comb
 				.Clk(AUD_DACLRCK),
 				.Reset(reset_ah),
 				.Enable(DELAY_EN),
-				.in(osc_out),
+				.in(reverb_out),
 				.out(delay_out),
 				.feedback(DELAY_FEEDBACK),
 				.looptime(DELAY_TIME)
 				);
 				
-
+	reverb reverb0(
+				.Clk(AUD_DACLRCK),
+				.Reset(reset_ah),
+				.Enable(REVERB_EN),
+				.in(filter_out1),
+				.out(reverb_out),
+				.feedback(REVERB_FEEDBACK),
+				.looptime(REVERB_TIME)
+				);
+				
+//filter, reverb, delay, panning,     reverb_en, reverv_feedback, rev_time, panning_depth
 	
-	logic [15:0] filter_out1, filter_out2, filter_out3;
+	logic [15:0] filter_out1, filter_out2, filter_out3, reverb_out;
 	
 	filter filter0 (
 						.Clk(AUD_DACLRCK),
 						.Reset(reset_ah),
 						.Enable(FILTER_EN),
-						.x(delay_out),
+						.x(osc_out),
 						.y(filter_out1),
 						.b0(FILTER_B0),
 						.b2(FILTER_B2),
@@ -316,49 +331,6 @@ always_comb
 						.a2(FILTER_A2)
 						);
 						
-//	filter filter1 (
-//						.Clk(AUD_DACLRCK),
-//						.Reset(reset_ah),
-//						.Enable(FILTER_EN),
-//						.x(filter_out1),
-//						.y(filter_out2),
-//						.b0(FILTER_B0),
-//						.b2(FILTER_B2),
-//						.b1(FILTER_B1),
-//						.a0(FILTER_A0),
-//						.a1(FILTER_A1),
-//						.a2(FILTER_A2)
-//						);
-//	filter filter2 (
-//						.Clk(AUD_DACLRCK),
-//						.Reset(reset_ah),
-//						.Enable(FILTER_EN),
-//						.x(filter_out2),
-//						.y(filter_out3),
-//						.b0(FILTER_B0),
-//						.b2(FILTER_B2),
-//						.b1(FILTER_B1),
-//						.a0(FILTER_A0),
-//						.a1(FILTER_A1),
-//						.a2(FILTER_A2)
-//						);
-//						
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
     logic [1:0] hpi_addr;
@@ -459,7 +431,11 @@ soc soc0(.clk_clk(CLOCK_50),
 		.filter_b2_filter_b2(FILTER_B2),
 		.delay_en_delay_en(DELAY_EN),
 		.delay_feedback_delay_feedback(DELAY_FEEDBACK),
-		.delay_time_delay_time(DELAY_TIME)
+		.delay_time_delay_time(DELAY_TIME),
+		.panning_depth_panning_depth(PAN_DEPTH),
+		.reverb_en_reverb_en(REVERB_EN),
+		.reverb_feedback_reverb_feedback(REVERB_FEEDBACK),
+		.reverb_time_reverb_time(REVERB_TIME)
 		 );
 
 audio_interface ai0(.LDATA(LDATA),

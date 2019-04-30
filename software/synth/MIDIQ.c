@@ -331,15 +331,17 @@ void ControlHandler(uint8_t control, uint8_t value)
 	case 0x04: // release
 		*release = value + 1;
 		break;
-	case 0x05:
+	case 0x05: //mixing
 		mix = value;
 		break;
-	case 0x06:
+	case 0x06: //glide
 		*glide_rate = value;
 		break;
-	case 0x07:
-		*arp_time = 48000;
+	case 0x07: //arpeggiator
+		*arp_time = 24000 + value*187;
 		break;
+	case 0x08: //panning depth
+		*pan_depth
 	default:
 		break;
 	}
