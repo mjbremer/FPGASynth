@@ -277,27 +277,68 @@ always_comb
 	end
 			
 
-	assign MultL = filter_out * (16'h7FFF - PAN_OUT);
-	assign MultR = filter_out * PAN_OUT;
-	assign LDATA = MultL[31:16];
-	assign RDATA = MultR[31:16];
+//	assign MultL = filter_out * (16'h7FFF - PAN_OUT);
+//	assign MultR = filter_out * PAN_OUT;
+	assign LDATA = delay_out;//MultL[31:16];
+	assign RDATA = delay_out;//MultR[31:16];
 	
-	logic [15:0] filter_out;
+	logic [15:0] delay_out;
 	
-	filter filter0 (
-						.Clk(AUD_DACLRCK),
-						.Reset(reset_ah),
-						.Enable(FILTER_EN),
-						.x(osc_out),
-						.y(filter_out),
-						.b0(FILTER_B0),
-						.b2(FILTER_B2),
-						.b1(FILTER_B1),
-						.a0(FILTER_A0),
-						.a1(FILTER_A1),
-						.a2(FILTER_A2)
-						);
-						
+	delay d0(
+				.Clk(AUD_DACLRCK),
+				.Reset(reset_ah),
+				.Enable(1'b1),
+				.in(osc_out),
+				.out(delay_out),
+				.feedback(16'h4000),
+				.looptime(32'd48000)
+				);
+				
+
+	
+//	logic [15:0] filter_out1, filter_out2, filter_out3;
+//	
+//	filter filter0 (
+//						.Clk(AUD_DACLRCK),
+//						.Reset(reset_ah),
+//						.Enable(FILTER_EN),
+//						.x(osc_out),
+//						.y(filter_out1),
+//						.b0(FILTER_B0),
+//						.b2(FILTER_B2),
+//						.b1(FILTER_B1),
+//						.a0(FILTER_A0),
+//						.a1(FILTER_A1),
+//						.a2(FILTER_A2)
+//						);
+//						
+//	filter filter1 (
+//						.Clk(AUD_DACLRCK),
+//						.Reset(reset_ah),
+//						.Enable(FILTER_EN),
+//						.x(filter_out1),
+//						.y(filter_out2),
+//						.b0(FILTER_B0),
+//						.b2(FILTER_B2),
+//						.b1(FILTER_B1),
+//						.a0(FILTER_A0),
+//						.a1(FILTER_A1),
+//						.a2(FILTER_A2)
+//						);
+//	filter filter2 (
+//						.Clk(AUD_DACLRCK),
+//						.Reset(reset_ah),
+//						.Enable(FILTER_EN),
+//						.x(filter_out2),
+//						.y(filter_out3),
+//						.b0(FILTER_B0),
+//						.b2(FILTER_B2),
+//						.b1(FILTER_B1),
+//						.a0(FILTER_A0),
+//						.a1(FILTER_A1),
+//						.a2(FILTER_A2)
+//						);
+//						
 	
 	
 	
@@ -404,7 +445,7 @@ soc soc0(.clk_clk(CLOCK_50),
 		.arp_time_arp_time(ARP_TIME),
 		.pingpongen_pingpongen(PingPongEn),
 		.panning_panning(PANNING),
-		.auto_pan_en_auto_pan_en(AUTO_PAN_EN),
+		.auto_pan_en_name(AUTO_PAN_EN),
 		.filter_en_filter_en(FILTER_EN),
 		.filter_a0_filter_a0(FILTER_A0),
 		.filter_a1_filter_a1(FILTER_A1),
